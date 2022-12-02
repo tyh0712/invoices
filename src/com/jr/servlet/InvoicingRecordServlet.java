@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,8 +47,8 @@ public class InvoicingRecordServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-        response.setContentType("text/html;charset=UTF-8");
         response.setContentType("text/html;charset=utf-8");
+        doGet(request, response);
     }
 
     @Override
@@ -53,7 +57,12 @@ public class InvoicingRecordServlet extends HttpServlet {
     }
 
     public void invoiceList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        InvoicingRecordBizImpl irbi=new InvoicingRecordBizImpl();
+        int enterpriseId=Integer.parseInt(request.getParameter("enterpriseId"));
+        List<InvoicingRecord> list=irbi.getIRList(enterpriseId);
+        HttpSession session=request.getSession();
+        session.setAttribute("invoiceList",list);
+//        response.sendRedirect("invoice-list.jsp");
     }
 
     public void invoice(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -61,23 +70,47 @@ public class InvoicingRecordServlet extends HttpServlet {
         InvoicingRecord ir=new InvoicingRecord();
         int iid=Integer.parseInt(request.getParameter("iid"));
         ir.setIid(iid);
-
+        double amount=Double.parseDouble(request.getParameter("amount"));
+        int enterpriseId=Integer.parseInt(request.getParameter("enterpriseId"));
+        int uid=Integer.parseInt(request.getParameter("uid"));
+        Timestamp creatorTime=new Timestamp(System.currentTimeMillis());
+        String category=request.getParameter("category");
+        String type=request.getParameter("type");
+        String status=request.getParameter("status");
+        int bid=Integer.parseInt(request.getParameter("bid"));
+        int aid=Integer.parseInt(request.getParameter("aid"));
+        int eid=Integer.parseInt(request.getParameter("eid"));
+        String uplinkAddress=request.getParameter("uplinkAddress");
+        ir.setIid(iid);
+        ir.setAmount(amount);
+        ir.getUser().setEnterpriseId(enterpriseId);
+        ir.getUser().setUid(uid);
+        ir.setCreatorTime(creatorTime);
+        ir.setCategory(category);
+        ir.setType(type);
+        ir.setStatus(status);
+        ir.getBaseData().setBid(bid);
+        ir.getAddress().setAid(aid);
+        ir.getEmail().setEid(eid);
+        ir.setUplinkAddress(uplinkAddress);
+        boolean boo=irbi.invoicingIR(ir);
+        if (boo) {
+//            response.sendRedirect("invoice-open.jsp");
+        }else{
+//            response.sendRedirect("invoice-open.jsp");
+        }
     }
 
     public void refund(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         InvoicingRecordBizImpl irbi=new InvoicingRecordBizImpl();
         InvoicingRecord ir=new InvoicingRecord();
         int iid=Integer.parseInt(request.getParameter("iid"));
-        double amount=Double.parseDouble(request.getParameter("amount"));
-        int enterpriseId=Integer.parseInt("enterpriseId");
-        int uid=Integer.parseInt(request.getParameter("uid"));
-
         ir.setIid(iid);
         boolean boo=irbi.refundIR(ir.getIid());
         if (boo){
-            response.sendRedirect("is?i=4");
+//            response.sendRedirect("invoice-open.jsp");
         }else{
-            response.sendRedirect("is?i=4");
+//            response.sendRedirect("invoice-open.jsp");
         }
 
     }
@@ -90,8 +123,7 @@ public class InvoicingRecordServlet extends HttpServlet {
         ir.setIid(iid);
         List<InvoicingRecord> list=irbi.detailIR(ir.getIid());
         HttpSession session=request.getSession();
-        session.setAttribute("list",list);
-        response.sendRedirect("index.jsp");
-        System.out.println(list);
+        session.setAttribute("detailList",list);
+//        response.sendRedirect("invoice-detail.jsp");
     }
 }
