@@ -86,11 +86,11 @@ public class InvoicingRecord {
         this.user = user;
     }
 
-    public Date getCreatorId() {
+    public Date getCreatorTime() {
         return creatorTime;
     }
 
-    public void setCreatorId(Date creatorId) {
+    public void setCreatorTime(Date creatorId) {
         this.creatorTime = creatorId;
     }
 
