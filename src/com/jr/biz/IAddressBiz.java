@@ -20,10 +20,10 @@ public interface IAddressBiz {
     //使用queryAddByEId()
 
     //修改
-    public boolean modifyAddress(int aid);
+    boolean modifyAddress(Address address);
 
     //修改默认地址
-    public boolean modifyDeAddByEId(int aid);
+    boolean modifyDeAddByEId(int aid, int enterpriseId);
 
     //添加
     public boolean addAddress(Address address);
@@ -32,5 +32,5 @@ public interface IAddressBiz {
     public List<Address> queryAddByEId(int enterpriseId);
 
     //详情 查看该发票使用的地址
-    public Address queryAddByIId(int iid);
+    public Address queryAddByIId(int aid);
 }
