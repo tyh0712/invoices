@@ -31,10 +31,9 @@ public class EmailDaoImpl implements IEmailDao {
         Email email = null;
         try {
             con = DBHelper.getcon();
-            String sql = "select email_detail from email where enterprise_id=? and default_status=?";
+            String sql = "select email_detail from email where enterprise_id=? and default_status='A' ";
             ps = con.prepareStatement(sql);
             ps.setInt(1,enterpriseId);
-            ps.setString(2,defaultStatus);
             rs = ps.executeQuery();
             if (rs.next()){
                 email = new Email();
@@ -54,17 +53,29 @@ public class EmailDaoImpl implements IEmailDao {
     }
 
     @Override
-    public int updateDefaultEmailByEId(Email email) {
+    public int updateDefaultEmailByEId(int eid, int enterpriseId) {
+        UniversalMethod um=new UniversalMethod();
+
+        List<Email> list=selectEmailByEId(enterpriseId);
+        String sql1="UPDATE email SET default_status='A' WHERE id=?";
+        int i1=um.upd(sql1,eid);
+        String sql2="UPDATE email SET default_status='B' WHERE id=?";
+        int i2=um.upd(sql2,list.get(0).getEid());
+        int i3=0;
+        if (i1!=0 && i2!=0){
+            i3=1;
+        }
+        return i3;
+    }
+
+    public int updateDefaultEmailDetailByEId(Email email) {
         int num = 0;
         try {
             con = DBHelper.getcon();
-            String sql = "update email set default_status=? where id=? ";
+            String sql = "update email set  email_detail=? where id=? ";
             ps = con.prepareStatement(sql);
-            ps.setString(1,email.getDefaultStatus());
+            ps.setString(1,email.getEmailDetail());
             ps.setInt(2,email.getEid());
-            if (email.getDefaultStatus().equals("B")){
-                email.setDefaultStatus("A");
-            }
             num = ps.executeUpdate();
         } catch (IOException e) {
             e.printStackTrace();
@@ -104,13 +115,15 @@ public class EmailDaoImpl implements IEmailDao {
     @Override
     public List<Email> selectEmailByEId(int enterpriseId) {
         List<Email> list = new ArrayList<>();
+        Email email;
         try {
             con = DBHelper.getcon();
-            String sql = "select * from email order by default_status='A'";
+            String sql = "select * from email where enterprise_id=? order by default_status";
             ps = con.prepareStatement(sql);
+            ps.setInt(1,enterpriseId);
             rs = ps.executeQuery();
             while (rs.next()){
-                Email email = new Email();
+                email=new Email();
                 email.setEid(rs.getInt(1));
                 email.setEnterpriseId(rs.getInt(2));
                 email.setEmailDetail(rs.getString(3));
@@ -154,13 +167,5 @@ public class EmailDaoImpl implements IEmailDao {
         return email;
     }
 
-    public static void main(String[] args) {
-        EmailDaoImpl edi = new EmailDaoImpl();
-        Email email = edi.selectEmailByIId(1);
-        Email email1 = edi.selectDefaultEmailByEId(1,"A");
-        List<Email> list = edi.selectEmailByEId(1);
-        System.out.println(email);
-        System.out.println(list);
-        System.out.println(email1);
-    }
+
 }
