@@ -32,16 +32,6 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://D:/apache-tomcat-8.5.38/lib/servlet-api.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="library" name="lib" level="project" />
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
           <root url="jar://D:/Program Files (x86)/apache-tomcat-8.5.38/lib/servlet-api.jar!/" />
         </CLASSES>
         <JAVADOC />

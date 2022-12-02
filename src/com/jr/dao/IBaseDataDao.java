@@ -21,7 +21,7 @@ public interface IBaseDataDao {
     //根据主键修改（除去抬头和税号）
     //传入：int 发票基础信息表主键
     //返回：int 受影响行数
-    public int updateBD(int bid);
+    public int updateBD(BaseData baseData);
 
     //根据主键（来自开表记录表）查询全部
     //使用方法selectBDByEId()

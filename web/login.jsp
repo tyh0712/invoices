@@ -51,13 +51,13 @@
             </div>
         </div>
         <div class="am-u-sm-10 login-am-center">
-            <form class="am-form">
+            <form class="am-form" method="get">
                 <fieldset>
                     <div class="am-form-group">
-                        <input type="email" class="" id="doc-ipt-email-1" placeholder="请输入账号">
+                        <input type="email" name="account" class="" id="doc-ipt-email-1" placeholder="请输入账号">
                     </div>
                     <div class="am-form-group">
-                        <input type="password" class="" id="doc-ipt-pwd-1" placeholder="请输入密码">
+                        <input type="password" name="password" class="" id="doc-ipt-pwd-1" placeholder="请输入密码">
                     </div>
                     <a href="invoice-list.jsp" class="loginBtn">
                         <div>登 录</div>

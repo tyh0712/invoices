@@ -21,14 +21,14 @@ public interface IAddressDao {
     //使用selectAddByEId()方法
 
     //根据主键修改
-    //传入：int 邮寄地址表主键
+    //传入：Address 邮寄地址表
     //返回：int 受影响行数
-    public int updateAddress(int aid);
+    int updateAddress(Address address);
 
     //根据主键修改是否为默认邮寄地址（默认，并修改原默认为非默认）
     //传入：int 邮寄地址表主键
     //返回：int 受影响行数
-    public int updateDefaultAddByEId(int aid);
+    int updateDefaultAddByEId(int aid, int enterpriseId);
 
     //添加
     //传入：Address对象

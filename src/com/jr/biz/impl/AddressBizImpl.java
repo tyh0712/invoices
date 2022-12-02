@@ -1,6 +1,7 @@
 package com.jr.biz.impl;
 
 import com.jr.biz.IAddressBiz;
+import com.jr.dao.impl.AddressDaoImpl;
 import com.jr.entry.Address;
 
 import java.util.List;
@@ -13,33 +14,62 @@ import java.util.List;
  */
 public class AddressBizImpl implements IAddressBiz {
 
+    AddressDaoImpl adi=new AddressDaoImpl();
+
     @Override
     public Address queryDeAddByEId(int enterpriseId, String defaultStatus) {
-        return null;
+
+        return adi.selectDefaultAddByEId(enterpriseId,defaultStatus);
+
     }
 
     @Override
-    public boolean modifyAddress(int aid) {
-        return false;
+    public boolean modifyAddress(Address address) {
+
+        int i=adi.updateAddress(address);
+        if (i!=0){
+            return true;
+        }else {
+            return false;
+        }
+
     }
 
     @Override
-    public boolean modifyDeAddByEId(int aid) {
-        return false;
+    public boolean modifyDeAddByEId(int aid, int enterpriseId) {
+
+        int i = adi.updateDefaultAddByEId(aid,enterpriseId);
+        if (i!=0){
+            return true;
+        }else {
+            return false;
+        }
+
     }
 
     @Override
     public boolean addAddress(Address address) {
-        return false;
+
+        int i = adi.insertAddress(address);
+        if (i!=0){
+            return true;
+        }else {
+            return false;
+        }
+
     }
 
     @Override
     public List<Address> queryAddByEId(int enterpriseId) {
-        return null;
+
+        return adi.selectAddByEId(enterpriseId);
+
     }
 
     @Override
-    public Address queryAddByIId(int iid) {
-        return null;
+    public Address queryAddByIId(int aid) {
+
+        return adi.selectAddByIId(aid);
+
     }
 }

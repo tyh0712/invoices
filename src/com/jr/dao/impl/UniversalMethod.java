@@ -15,10 +15,8 @@ import java.sql.SQLException;
  * @version: 1.0
  */
 public class UniversalMethod {
-    Connection con;
-    PreparedStatement ps;
-    ResultSet rs;
-
+    Connection con=null;
+    PreparedStatement ps=null;
 
     public int upd(String sql, Object... objs) {
         int num = 0;
@@ -40,6 +38,5 @@ public class UniversalMethod {
         }
         return num;
     }
-
 }
 
