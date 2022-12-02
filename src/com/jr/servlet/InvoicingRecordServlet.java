@@ -1,11 +1,17 @@
 package com.jr.servlet;
 
+import com.jr.biz.impl.InvoicingRecordBizImpl;
+import com.jr.entry.InvoicingRecord;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Auther:唐一涵
@@ -19,6 +25,7 @@ public class InvoicingRecordServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=UTF-8");
         response.setContentType("text/html;charset=utf-8");
         int i = Integer.parseInt(request.getParameter("i"));
         if (i==1){
@@ -36,6 +43,7 @@ public class InvoicingRecordServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=UTF-8");
         response.setContentType("text/html;charset=utf-8");
     }
 
@@ -49,14 +57,41 @@ public class InvoicingRecordServlet extends HttpServlet {
     }
 
     public void invoice(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        InvoicingRecordBizImpl irbi=new InvoicingRecordBizImpl();
+        InvoicingRecord ir=new InvoicingRecord();
+        int iid=Integer.parseInt(request.getParameter("iid"));
+        ir.setIid(iid);
 
     }
 
     public void refund(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        InvoicingRecordBizImpl irbi=new InvoicingRecordBizImpl();
+        InvoicingRecord ir=new InvoicingRecord();
+        int iid=Integer.parseInt(request.getParameter("iid"));
+        double amount=Double.parseDouble(request.getParameter("amount"));
+        int enterpriseId=Integer.parseInt("enterpriseId");
+        int uid=Integer.parseInt(request.getParameter("uid"));
+
+        ir.setIid(iid);
+        boolean boo=irbi.refundIR(ir.getIid());
+        if (boo){
+            response.sendRedirect("is?i=4");
+        }else{
+            response.sendRedirect("is?i=4");
+        }
 
     }
 
     public void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        System.out.println(request.getParameter("iid"));
+        InvoicingRecordBizImpl irbi=new InvoicingRecordBizImpl();
+        InvoicingRecord ir=new InvoicingRecord();
+        int iid=Integer.parseInt(request.getParameter("iid"));
+        ir.setIid(iid);
+        List<InvoicingRecord> list=irbi.detailIR(ir.getIid());
+        HttpSession session=request.getSession();
+        session.setAttribute("list",list);
+        response.sendRedirect("index.jsp");
+        System.out.println(list);
     }
 }

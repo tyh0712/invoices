@@ -46,6 +46,19 @@ public class UserServlet extends HttpServlet {
     }
 
     public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String account = request.getParameter("account");
+        String password = request.getParameter("password");
+        UserBizImpl ubi = new UserBizImpl();
+        User user = new User();
+        user.setAccount(account);
+        user.setPassword(password);
+        User user1 = ubi.login(user);
+        if (user1 != null){
+            HttpSession session = request.getSession();
+            session.setAttribute("eid",user1.getEnterpriseId());
+            response.sendRedirect("invoice-list.jsp");
+        }else {
+            response.sendRedirect("login.jsp");
+        }
     }
 }

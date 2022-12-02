@@ -48,13 +48,4 @@ public class UserDaoImpl implements IUserDao {
         }
         return u;
     }
-//
-//    public static void main(String[] args) {
-//        UserDaoImpl udi = new UserDaoImpl();
-//        User user = new User();
-//        user.setAccount("sixwa12138");
-//        user.setPassword("a123456A");
-//        User u = udi.selectUser(user);
-//        System.out.println(u);
-//    }
 }

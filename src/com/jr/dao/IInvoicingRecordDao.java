@@ -30,5 +30,5 @@ public interface IInvoicingRecordDao {
     //详情 根据发票id查询全部
     //传入：int 开票记录表主键
     //返回：InvoicingRecord对象 全部信息
-    public InvoicingRecord selectIRByIId(int iid);
+    public List<InvoicingRecord> selectIRByIId(int iid);
 }
