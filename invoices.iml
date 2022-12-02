@@ -32,7 +32,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://D:/apache-tomcat-8.5.38/lib/servlet-api.jar!/" />
+          <root url="jar://D:/Program Files (x86)/apache-tomcat-8.5.38/lib/servlet-api.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -42,6 +42,15 @@
       <library>
         <CLASSES>
           <root url="jar://E:/Program Files (x86)/apache-tomcat-8.5.83/lib/servlet-api.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://D:/apache-tomcat-8.5.38/lib/servlet-api.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

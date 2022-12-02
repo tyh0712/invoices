@@ -15,10 +15,8 @@ import java.sql.SQLException;
  * @version: 1.0
  */
 public class UniversalMethod {
-    Connection con;
-    PreparedStatement ps;
-    ResultSet rs;
-
+    Connection con=null;
+    PreparedStatement ps=null;
 
     public int upd(String sql, Object... objs) {
         int num = 0;
@@ -39,24 +37,6 @@ public class UniversalMethod {
             DBHelper.close(null,ps,con);
         }
         return num;
-    }
-
-    public  ResultSet queryMethod(String sql, Object... objs) {
-        try {
-            con = DBHelper.getcon();
-            ps = con.prepareStatement(sql);
-            for (int i=0;i<objs.length;i++){
-                ps.setObject(i+1,objs[i]);
-            }
-            rs = ps.executeQuery();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return rs;
     }
 }
 

@@ -18,7 +18,7 @@ public interface IBaseDataBiz {
     //使用queryBDByEId()
 
     //修改
-    public boolean modify(int bid);
+    public boolean modify(BaseData baseData);
 
     //详情
     //使用queryBDByEId()

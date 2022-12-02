@@ -1,6 +1,7 @@
 package com.jr.biz.impl;
 
 import com.jr.biz.IUserBiz;
+import com.jr.dao.impl.UserDaoImpl;
 import com.jr.entry.User;
 
 /**
@@ -10,8 +11,10 @@ import com.jr.entry.User;
  * @version: 1.0
  */
 public class UserBizImpl implements IUserBiz {
+    UserDaoImpl udi = new UserDaoImpl();
+
     @Override
     public User login(User user) {
-        return null;
+        return udi.selectUser(user);
     }
 }

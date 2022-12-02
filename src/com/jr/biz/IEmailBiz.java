@@ -20,7 +20,7 @@ public interface IEmailBiz {
     //queryEmailByEId()
 
     //修改
-    public boolean modifyEmail(int eid);
+    public boolean modifyEmail(Email email);
 
     //添加
     public boolean addEmail(Email email);
