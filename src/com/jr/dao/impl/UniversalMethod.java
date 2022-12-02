@@ -41,22 +41,6 @@ public class UniversalMethod {
         return num;
     }
 
-    public  ResultSet queryMethod(String sql, Object... objs) {
-        try {
-            con = DBHelper.getcon();
-            ps = con.prepareStatement(sql);
-            for (int i=0;i<objs.length;i++){
-                ps.setObject(i+1,objs[i]);
-            }
-            rs = ps.executeQuery();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return rs;
-    }
+
 }
 

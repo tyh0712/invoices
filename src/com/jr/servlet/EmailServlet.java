@@ -19,7 +19,7 @@ public class EmailServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-        response.setContentType("utf-8");
+        response.setContentType("text/html;charset=UTF-8");
         int e = Integer.parseInt(request.getParameter("e"));
         if (e==1){
             titleAndAddress(request,response);
@@ -36,7 +36,7 @@ public class EmailServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-        response.setContentType("utf-8");
+        response.setContentType("text/html;charset=UTF-8");
     }
 
     @Override

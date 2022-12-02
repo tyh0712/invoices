@@ -15,7 +15,7 @@ public class InvoicingRecord {
     private double amount;//发票金额
     //开票企业ID  申请人ID
     private User user;
-    private Date creatorId;//申请时间
+    private Date creatorTime;//申请时间
     private String category;//发票种类  A普通增值税发票  B专用增值税发票
     private String type;//发票类型  A电子发票 B纸质发票
     private String status;//处理状态  A已开票 B已作废
@@ -25,11 +25,11 @@ public class InvoicingRecord {
     private String uplinkAddress;//上链地址
 
     //有参
-    public InvoicingRecord(int iid, double amount, User user, Date creatorId, String category, String type, String status, BaseData baseData, Address address, Email email, String uplinkAddress) {
+    public InvoicingRecord(int iid, double amount, User user, Date creatorTime, String category, String type, String status, BaseData baseData, Address address, Email email, String uplinkAddress) {
         this.iid = iid;
         this.amount = amount;
         this.user = user;
-        this.creatorId = creatorId;
+        this.creatorTime = creatorTime;
         this.category = category;
         this.type = type;
         this.status = status;
@@ -50,7 +50,7 @@ public class InvoicingRecord {
                 "iid=" + iid +
                 ", amount=" + amount +
                 ", user=" + user +
-                ", creatorId=" + creatorId +
+                ", creatorTime=" + creatorTime +
                 ", category='" + category + '\'' +
                 ", type='" + type + '\'' +
                 ", status='" + status + '\'' +
@@ -86,12 +86,12 @@ public class InvoicingRecord {
         this.user = user;
     }
 
-    public Date getCreatorId() {
-        return creatorId;
+    public Date getCreatorITime() {
+        return creatorTime;
     }
 
-    public void setCreatorId(Date creatorId) {
-        this.creatorId = creatorId;
+    public void setCreatorTime(Date creatorTime) {
+        this.creatorTime = creatorTime;
     }
 
     public String getCategory() {
