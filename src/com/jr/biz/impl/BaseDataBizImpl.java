@@ -1,6 +1,7 @@
 package com.jr.biz.impl;
 
 import com.jr.biz.IBaseDataBiz;
+import com.jr.dao.impl.BaseDataDaoImpl;
 import com.jr.entry.BaseData;
 
 /**
@@ -10,14 +11,15 @@ import com.jr.entry.BaseData;
  * @version: 1.0
  */
 public class BaseDataBizImpl implements IBaseDataBiz {
+    BaseDataDaoImpl bdi = new BaseDataDaoImpl();
 
     @Override
     public BaseData queryBDByEId(int enterpriseId) {
-        return null;
+        return bdi.selectBDByEId(enterpriseId);
     }
 
     @Override
-    public boolean modify(int bid) {
-        return false;
+    public boolean modify(BaseData baseData) {
+        return bdi.updateBD(baseData)==1?true:false;
     }
 }

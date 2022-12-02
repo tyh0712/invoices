@@ -1,5 +1,9 @@
 package com.jr.servlet;
 
+import com.google.gson.Gson;
+import com.jr.dao.impl.BaseDataDaoImpl;
+import com.jr.entry.BaseData;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +23,7 @@ public class BaseDataServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-        response.setContentType("utf-8");
+        response.setContentType("text/html;charset=utf-8");
         int b = Integer.parseInt(request.getParameter("b"));
         if (b==1){
             titleAndAddress(request,response);
@@ -34,7 +38,7 @@ public class BaseDataServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-        response.setContentType("utf-8");
+        response.setContentType("text/html;charset=utf-8");
     }
 
     @Override
