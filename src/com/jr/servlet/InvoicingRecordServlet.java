@@ -31,8 +31,7 @@ public class InvoicingRecordServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=UTF-8");
         response.setContentType("text/html;charset=utf-8");
-        String str=request.getParameter("str");
-        int i = Integer.parseInt(str);
+        int i = Integer.parseInt(request.getParameter("i"));
         if (i==1){
             invoiceList(request,response);
         }else if (i==2){
