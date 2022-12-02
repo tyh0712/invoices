@@ -1,11 +1,16 @@
 package com.jr.servlet;
 
+import com.jr.biz.impl.InvoicingRecordBizImpl;
+import com.jr.entry.InvoicingRecord;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @Auther:唐一涵
@@ -19,7 +24,7 @@ public class InvoicingRecordServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-        response.setContentType("utf-8");
+        response.setContentType("text/html;charset=UTF-8");
         int i = Integer.parseInt(request.getParameter("i"));
         if (i==1){
             invoiceList(request,response);
@@ -36,7 +41,7 @@ public class InvoicingRecordServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-        response.setContentType("utf-8");
+        response.setContentType("text/html;charset=UTF-8");
     }
 
     @Override
@@ -57,6 +62,15 @@ public class InvoicingRecordServlet extends HttpServlet {
     }
 
     public void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        InvoicingRecordBizImpl irbi=new InvoicingRecordBizImpl();
+        InvoicingRecord ir=new InvoicingRecord();
 
+        int iid=Integer.parseInt(request.getParameter("iid"));
+        ir.getUser().setEnterpriseId(iid);
+        List<InvoicingRecord> list=irbi.detailIR(ir.getUser().getEnterpriseId());
+        HttpSession session=request.getSession();
+        session.setAttribute("list",list);
+        response.sendRedirect("invoice-detail.jsp");
+        System.out.println(list);
     }
 }
