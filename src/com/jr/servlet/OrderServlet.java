@@ -1,11 +1,17 @@
 package com.jr.servlet;
 
+import com.google.gson.Gson;
+import com.jr.biz.impl.OrderBizImpl;
+import com.jr.entry.Order;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Auther:唐一涵
@@ -15,6 +21,7 @@ import java.io.IOException;
  */
 @WebServlet("/os")
 public class OrderServlet extends HttpServlet {
+    OrderBizImpl orderBiz = new OrderBizImpl();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
@@ -45,7 +52,14 @@ public class OrderServlet extends HttpServlet {
     }
 
     public void totalAmount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf-8");
 
+        int enterpriseId = Integer.parseInt(request.getParameter("enterpriseId"));
+        String invoicingStatus = request.getParameter("invoicingStatus");
+        List<Double> list = orderBiz.getAmount(enterpriseId,invoicingStatus);
+        response.getWriter().println(new Gson().toJson(list));
     }
 
     public void invoice(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -53,10 +67,24 @@ public class OrderServlet extends HttpServlet {
     }
 
     public void refund(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf-8");
 
+        int invoicingRecordId = Integer.parseInt(request.getParameter("invoicingRecordId"));
+        boolean boo = orderBiz.refundOrder(invoicingRecordId);
+        if (boo){
+            //退票成功此处应该无变化
+        }
     }
 
     public void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf-8");
 
+        int invoicingRecordId = Integer.parseInt(request.getParameter("invoicingRecordId"));
+        List<Order> list = orderBiz.detailOrder(invoicingRecordId);
+        response.getWriter().println(new Gson().toJson(list));
     }
 }
