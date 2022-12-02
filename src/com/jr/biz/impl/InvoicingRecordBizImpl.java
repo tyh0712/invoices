@@ -1,6 +1,7 @@
 package com.jr.biz.impl;
 
 import com.jr.biz.IInvoicingRecordBiz;
+import com.jr.dao.impl.InvoicingRecordDaoImpl;
 import com.jr.entry.InvoicingRecord;
 
 import java.util.List;
@@ -12,24 +13,24 @@ import java.util.List;
  * @version: 1.0
  */
 public class InvoicingRecordBizImpl implements IInvoicingRecordBiz {
-
+    InvoicingRecordDaoImpl irdi=new InvoicingRecordDaoImpl();
     @Override
     public List<InvoicingRecord> getIRList(int enterpriseId) {
-        return null;
+        return irdi.selectIRByEId(enterpriseId);
     }
 
     @Override
     public boolean invoicingIR(InvoicingRecord invoicingRecord) {
-        return false;
+        return irdi.insertIR(invoicingRecord)==1?true:false;
     }
 
     @Override
     public boolean refundIR(int iid) {
-        return false;
+        return irdi.updateIRStatus(iid)==1?true:false;
     }
 
     @Override
-    public InvoicingRecord detailIR(int iid) {
-        return null;
+    public List<InvoicingRecord> detailIR(int iid) {
+        return irdi.selectIRByIId(iid);
     }
 }
