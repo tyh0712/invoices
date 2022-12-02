@@ -19,7 +19,8 @@ public class AddressServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-        response.setContentType("utf-8");
+        response.setContentType("text/html;charset=utf-8");
+
         int a = Integer.parseInt(request.getParameter("a"));
         if (a==1){
             titleAndAddress(request,response);
@@ -36,7 +37,7 @@ public class AddressServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-        response.setContentType("utf-8");
+        response.setContentType("text/html;charset=utf-8");
     }
 
     @Override

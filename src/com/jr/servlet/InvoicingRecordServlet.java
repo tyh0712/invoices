@@ -19,7 +19,7 @@ public class InvoicingRecordServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-        response.setContentType("utf-8");
+        response.setContentType("text/html;charset=utf-8");
         int i = Integer.parseInt(request.getParameter("i"));
         if (i==1){
             invoiceList(request,response);
@@ -36,7 +36,7 @@ public class InvoicingRecordServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-        response.setContentType("utf-8");
+        response.setContentType("text/html;charset=utf-8");
     }
 
     @Override

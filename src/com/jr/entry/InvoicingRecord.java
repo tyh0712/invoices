@@ -86,7 +86,7 @@ public class InvoicingRecord {
         this.user = user;
     }
 
-    public Date getCreatorITime() {
+    public Date getCreatorTime() {
         return creatorTime;
     }
 
