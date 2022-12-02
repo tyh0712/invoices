@@ -1,10 +1,8 @@
 package com.jr.dao.impl;
 
-import com.jr.biz.IEmailBiz;
 import com.jr.dao.IEmailDao;
 import com.jr.entry.Email;
 import com.jr.util.DBHelper;
-import sun.security.x509.EDIPartyName;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -166,6 +164,4 @@ public class EmailDaoImpl implements IEmailDao {
         }
         return email;
     }
-
-
 }

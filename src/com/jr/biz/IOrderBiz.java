@@ -14,10 +14,11 @@ import java.util.List;
 public interface IOrderBiz {
 
     //统计信息  可开票金额 = 总计可开票金额 – 历史已开票金额
-    public double getAmount(int enterpriseId,String invoicingStatus);
+    public List<Double> getAmount(int enterpriseId,String invoicingStatus);
 
     //开票  invoicing
-    public List<Order> invoicingOrder(String invoicingStatus);
+//    public List<Order> invoicingOrder(String invoicingStatus);
+    List<Order> invoicingOrder(String invoicingStatus, Object... objs);
 
     //退票 实现其中开票状态的修改  refund
     public boolean refundOrder(int invoicingRecordId);

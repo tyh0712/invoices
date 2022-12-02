@@ -69,14 +69,51 @@ public class OrderDaoImpl implements IOrderDao {
     }
 
     @Override
-    public List<Order> selectOrderByStatus(String invoicingStatus) {
+    public List<Order> selectOrderByStatus(String invoicingStatus, Object... objs) {
         Order order;
         List<Order> list = new ArrayList<>();
         try {
             con = DBHelper.getcon();
-            String sql = "select * from `order` where invoicing_status=?";
+            String str1=null;
+            String str2=null;
+            String str3=null;
+            String str4="invoicing_status=?";
+            String str5=null;
+            for (int i=0;i<objs.length;i++) {
+                if (objs[i] instanceof String) {
+                    str1 = "no=?";
+                }
+                else if (objs[i] instanceof Double) {
+                    str2 = "total_amount=?";
+                }
+                else if (objs[i] instanceof Timestamp) {
+                    str3 = "create_time=?";
+                }
+            }
+            if (str1==null){
+                str5=str4+" AND "+str2+" AND "+str3;
+                if (str2==null){
+                    str5=str4+" AND "+str3;
+                    if (str3==null){
+                        str5=str4;
+                    }
+                }
+            }else if (str2==null){
+                str5=str4+" AND "+str1+" AND "+str3;
+                if (str3==null){
+                    str5=str4+" AND "+str1;
+                }
+            }else if (str3==null){
+                str5=str4+" AND "+str1+" AND "+str2;
+            }else {
+                str5=str4+" AND "+str1+" AND "+str2+" AND "+str3;
+            }
+            String sql="select * from `order` where "+str5+"";
             ps = con.prepareStatement(sql);
             ps.setString(1,invoicingStatus);
+            for (int i=0;i<objs.length;i++){
+                ps.setObject(i+2,objs[i]);
+            }
             rs = ps.executeQuery();
             while (rs.next()){
                 order = new Order();

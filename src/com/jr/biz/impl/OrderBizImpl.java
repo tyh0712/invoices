@@ -4,6 +4,7 @@ import com.jr.biz.IOrderBiz;
 import com.jr.dao.impl.OrderDaoImpl;
 import com.jr.entry.Order;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,15 +17,20 @@ public class OrderBizImpl implements IOrderBiz {
     OrderDaoImpl odi = new OrderDaoImpl();
 
     @Override
-    public double getAmount(int enterpriseId, String invoicingStatus) {
+    public List<Double> getAmount(int enterpriseId, String invoicingStatus) {
         double allcount =  odi.selectTotalAmountByEId(enterpriseId);
         double usecount = odi.selectTotalAmountByEIdAndStatus(enterpriseId,invoicingStatus);
-        return (allcount - usecount);
+        List<Double> list = new ArrayList<>();
+        double newcount = allcount-usecount;
+        list.add(allcount);
+        list.add(usecount);
+        list.add(newcount);
+        return list;
     }
 
     @Override
-    public List<Order> invoicingOrder(String invoicingStatus) {
-        return odi.selectOrderByStatus(invoicingStatus);
+    public List<Order> invoicingOrder(String invoicingStatus,Object...objs) {
+        return odi.selectOrderByStatus(invoicingStatus,objs);
     }
 
     @Override

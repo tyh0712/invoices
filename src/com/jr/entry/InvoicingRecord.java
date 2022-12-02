@@ -50,6 +50,7 @@ public class InvoicingRecord {
                 "iid=" + iid +
                 ", amount=" + amount +
                 ", user=" + user +
+                ", creatorId=" + creatorTime +
                 ", creatorTime=" + creatorTime +
                 ", category='" + category + '\'' +
                 ", type='" + type + '\'' +
@@ -89,7 +90,6 @@ public class InvoicingRecord {
     public Date getCreatorTime() {
         return creatorTime;
     }
-
     public void setCreatorTime(Date creatorTime) {
         this.creatorTime = creatorTime;
     }
@@ -149,4 +149,6 @@ public class InvoicingRecord {
     public void setUplinkAddress(String uplinkAddress) {
         this.uplinkAddress = uplinkAddress;
     }
+
+
 }
