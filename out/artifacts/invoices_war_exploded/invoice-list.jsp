@@ -7,7 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -261,102 +260,102 @@
                             </tr>
                             </thead>
                             <tbody id="doc-modal-list">
-                            <tr data-id="2">
-                                <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                                <td class="am-hide-sm-only">百度科技有限公司</td>
-                                <td class="am-hide-sm-only">1,000,000.00</td>
-                                <td class="am-hide-sm-only">F64A3FA774552D72</td>
-                                <td class="am-hide-sm-only">
+                                <tr data-id="2">
+                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
+                                    <td class="am-hide-sm-only">百度科技有限公司</td>
+                                    <td class="am-hide-sm-only">1,000,000.00</td>
+                                    <td class="am-hide-sm-only">F64A3FA774552D72</td>
+                                    <td class="am-hide-sm-only">
                                             <span class="ele-dot-status ele-dot-status-success"><span>
                                                     <span class="ele-dot-text"> 已开票</span>
-                                <td>
-                                    <div class="am-btn-toolbar">
-                                        <div class="am-btn-group am-btn-group-xs">
-                                            <a href="invoice-detail.jsp"><span class="am-text-secondary"
-                                                                                style="cursor:pointer"><span></span>
+                                    <td>
+                                        <div class="am-btn-toolbar">
+                                            <div class="am-btn-group am-btn-group-xs">
+                                                <a href="invoice-detail.jsp"><span class="am-text-secondary"
+                                                                                   style="cursor:pointer"><span></span>
                                                             详情</span></a>
-                                            <span class="am-text-secondary am-icon"
-                                                  style="cursor:pointer"><span></span>
+                                                <span class="am-text-secondary am-icon"
+                                                      style="cursor:pointer"><span></span>
                                                         退票</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr data-id="2">
-                                <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                                <td class="am-hide-sm-only">百度科技有限公司</td>
-                                <td class="am-hide-sm-only">1,000,000.00</td>
-                                <td class="am-hide-sm-only">F64A3FA774552D72</td>
-                                <td class="am-hide-sm-only">
+                                    </td>
+                                </tr>
+                                <tr data-id="2">
+                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
+                                    <td class="am-hide-sm-only">百度科技有限公司</td>
+                                    <td class="am-hide-sm-only">1,000,000.00</td>
+                                    <td class="am-hide-sm-only">F64A3FA774552D72</td>
+                                    <td class="am-hide-sm-only">
                                             <span class="ele-dot-status ele-dot-status-error"><span>
                                                     <span class="ele-dot-text">已作废</span>
-                                <td>
-                                    <div class="am-btn-toolbar">
-                                        <div class="am-btn-group am-btn-group-xs">
-                                            <a href="invoice-detail.jsp"><span class="am-text-secondary"
-                                                                                style="cursor:pointer"><span></span>
+                                    <td>
+                                        <div class="am-btn-toolbar">
+                                            <div class="am-btn-group am-btn-group-xs">
+                                                <a href="invoice-detail.jsp"><span class="am-text-secondary"
+                                                                                   style="cursor:pointer"><span></span>
                                                             详情</span></a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr data-id="2">
-                                <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                                <td class="am-hide-sm-only">百度科技有限公司</td>
-                                <td class="am-hide-sm-only">1,000,000.00</td>
-                                <td class="am-hide-sm-only">F64A3FA774552D72</td>
-                                <td class="am-hide-sm-only">
+                                    </td>
+                                </tr>
+                                <tr data-id="2">
+                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
+                                    <td class="am-hide-sm-only">百度科技有限公司</td>
+                                    <td class="am-hide-sm-only">1,000,000.00</td>
+                                    <td class="am-hide-sm-only">F64A3FA774552D72</td>
+                                    <td class="am-hide-sm-only">
                                             <span class="ele-dot-status ele-dot-status-error"><span>
                                                     <span class="ele-dot-text">已作废</span>
-                                <td>
-                                    <div class="am-btn-toolbar">
-                                        <div class="am-btn-group am-btn-group-xs">
-                                            <a href="invoice-detail.jsp"><span class="am-text-secondary"
-                                                                                style="cursor:pointer"><span></span>
+                                    <td>
+                                        <div class="am-btn-toolbar">
+                                            <div class="am-btn-group am-btn-group-xs">
+                                                <a href="invoice-detail.jsp"><span class="am-text-secondary"
+                                                                                   style="cursor:pointer"><span></span>
                                                             详情</span></a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr data-id="2">
-                                <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                                <td class="am-hide-sm-only">百度科技有限公司</td>
-                                <td class="am-hide-sm-only">1,000,000.00</td>
-                                <td class="am-hide-sm-only">F64A3FA774552D72</td>
-                                <td class="am-hide-sm-only">
+                                    </td>
+                                </tr>
+                                <tr data-id="2">
+                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
+                                    <td class="am-hide-sm-only">百度科技有限公司</td>
+                                    <td class="am-hide-sm-only">1,000,000.00</td>
+                                    <td class="am-hide-sm-only">F64A3FA774552D72</td>
+                                    <td class="am-hide-sm-only">
                                             <span class="ele-dot-status ele-dot-status-error"><span>
                                                     <span class="ele-dot-text">已作废</span>
-                                <td>
-                                    <div class="am-btn-toolbar">
-                                        <div class="am-btn-group am-btn-group-xs">
-                                            <a href="invoice-detail.jsp"><span class="am-text-secondary"
-                                                                                style="cursor:pointer"><span></span>
+                                    <td>
+                                        <div class="am-btn-toolbar">
+                                            <div class="am-btn-group am-btn-group-xs">
+                                                <a href="invoice-detail.jsp"><span class="am-text-secondary"
+                                                                                   style="cursor:pointer"><span></span>
                                                             详情</span></a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr data-id="2">
-                                <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                                <td class="am-hide-sm-only">百度科技有限公司</td>
-                                <td class="am-hide-sm-only">1,000,000.00</td>
-                                <td class="am-hide-sm-only">F64A3FA774552D72</td>
-                                <td class="am-hide-sm-only">
+                                    </td>
+                                </tr>
+                                <tr data-id="2">
+                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
+                                    <td class="am-hide-sm-only">百度科技有限公司</td>
+                                    <td class="am-hide-sm-only">1,000,000.00</td>
+                                    <td class="am-hide-sm-only">F64A3FA774552D72</td>
+                                    <td class="am-hide-sm-only">
                                             <span class="ele-dot-status ele-dot-status-success"><span>
                                                     <span class="ele-dot-text">已开票</span>
-                                <td>
-                                    <div class="am-btn-toolbar">
-                                        <div class="am-btn-group am-btn-group-xs">
-                                            <a href="invoice-detail.jsp"><span class="am-text-secondary"
-                                                                                style="cursor:pointer"><span></span>
+                                    <td>
+                                        <div class="am-btn-toolbar">
+                                            <div class="am-btn-group am-btn-group-xs">
+                                                <a href="invoice-detail.jsp"><span class="am-text-secondary"
+                                                                                   style="cursor:pointer"><span></span>
                                                             详情</span></a>
-                                            <span class="am-text-secondary am-icon"
-                                                  style="cursor:pointer"><span></span>
+                                                <span class="am-text-secondary am-icon"
+                                                      style="cursor:pointer"><span></span>
                                                         退票</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="am-cf">

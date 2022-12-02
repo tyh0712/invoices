@@ -25,7 +25,7 @@ public class InvoicingRecord {
     private String uplinkAddress;//上链地址
 
     //有参
-    public InvoicingRecord(int iid, double amount, User user, Date creatorId, String category, String type, String status, BaseData baseData, Address address, Email email, String uplinkAddress) {
+    public InvoicingRecord(int iid, double amount, User user, Date creatorTime, String category, String type, String status, BaseData baseData, Address address, Email email, String uplinkAddress) {
         this.iid = iid;
         this.amount = amount;
         this.user = user;
@@ -50,6 +50,7 @@ public class InvoicingRecord {
                 "iid=" + iid +
                 ", amount=" + amount +
                 ", user=" + user +
+                ", creatorId=" + creatorTime +
                 ", creatorTime=" + creatorTime +
                 ", category='" + category + '\'' +
                 ", type='" + type + '\'' +
@@ -89,8 +90,7 @@ public class InvoicingRecord {
     public Date getCreatorTime() {
         return creatorTime;
     }
-
-    public void setCreatorTime(Date creatorId) {
+    public void setCreatorTime(Date creatorTime) {
         this.creatorTime = creatorTime;
     }
 
@@ -149,4 +149,6 @@ public class InvoicingRecord {
     public void setUplinkAddress(String uplinkAddress) {
         this.uplinkAddress = uplinkAddress;
     }
+
+
 }

@@ -1,7 +1,7 @@
 package com.jr.servlet;
 
 import com.google.gson.Gson;
-import com.jr.dao.impl.BaseDataDaoImpl;
+import com.jr.biz.impl.BaseDataBizImpl;
 import com.jr.entry.BaseData;
 
 import javax.servlet.ServletException;
@@ -26,11 +26,9 @@ public class BaseDataServlet extends HttpServlet {
         response.setContentType("text/html;charset=utf-8");
         int b = Integer.parseInt(request.getParameter("b"));
         if (b==1){
-            titleAndAddress(request,response);
+            queryBaseData(request,response);
         }else if (b==2){
-            message(request,response);
-        }else if (b==3){
-            detail(request,response);
+            messageUpdate(request,response);
         }
     }
 
@@ -46,15 +44,31 @@ public class BaseDataServlet extends HttpServlet {
         super.service(request, response);
     }
 
-    public void titleAndAddress(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    public void queryBaseData(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int eid = Integer.parseInt(request.getParameter("eid"));
+        BaseDataBizImpl bbi = new BaseDataBizImpl();
+        BaseData baseData = bbi.queryBDByEId(eid);
+        response.getWriter().print(new Gson().toJson(baseData));
     }
 
-    public void message(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-    public void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    public void messageUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int bid = Integer.parseInt(request.getParameter("bid"));
+        String bankName = request.getParameter("bankName");
+        String bankAccount = request.getParameter("bankAccount");
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
+        BaseDataBizImpl bbi = new BaseDataBizImpl();
+        BaseData baseData = new BaseData();
+        baseData.setBid(bid);
+        baseData.setBankName(bankName);
+        baseData.setBankAccount(bankAccount);
+        baseData.setPhone(phone);
+        baseData.setAddress(address);
+        boolean boo = bbi.modify(baseData);
+        if (boo){
+            System.out.println("success");
+        }else {
+            response.getWriter().print("failure");
+        }
     }
 }

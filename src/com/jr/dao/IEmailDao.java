@@ -23,7 +23,7 @@ public interface IEmailDao {
     //根据主键修改是否为默认电子邮件（默认，并修改原默认为非默认）
     //传入：int 电子邮件表主键
     //返回：int 受影响行数
-    public int updateDefaultEmailByEId(int eid);
+    public int updateDefaultEmailByEId(Email email);
 
     //添加
     //传入：Email对象
@@ -38,5 +38,5 @@ public interface IEmailDao {
     //根据主键（开票记录表）查询电子邮箱
     //传入：int 开票记录表主键
     //返回：Email对象
-    public Email selectEmailByIId(int iid);
+    public Email selectEmailByIId(int eid);
 }
