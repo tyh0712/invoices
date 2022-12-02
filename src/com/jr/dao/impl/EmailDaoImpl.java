@@ -151,14 +151,4 @@ public class EmailDaoImpl implements IEmailDao {
         }
         return email;
     }
-
-    public static void main(String[] args) {
-        EmailDaoImpl edi = new EmailDaoImpl();
-        Email email = edi.selectEmailByIId(1);
-        Email email1 = edi.selectDefaultEmailByEId(1,"A");
-        List<Email> list = edi.selectEmailByEId(1);
-        System.out.println(email);
-        System.out.println(list);
-        System.out.println(email1);
-    }
 }
