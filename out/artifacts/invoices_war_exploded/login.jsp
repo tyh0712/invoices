@@ -28,7 +28,7 @@
             font-size: 18px
         }
 
-        .loginBtn > div {
+        .loginBtn > div >button{
             width: 100%;
             height: 40px;
             text-align: center;
@@ -51,7 +51,8 @@
             </div>
         </div>
         <div class="am-u-sm-10 login-am-center">
-            <form class="am-form" method="get">
+            <form action="us" name="myform" class="am-form" method="get">
+                <input type="hidden" name="u" value="1">
                 <fieldset>
                     <div class="am-form-group">
                         <input type="email" name="account" class="" id="doc-ipt-email-1" placeholder="请输入账号">
@@ -59,9 +60,11 @@
                     <div class="am-form-group">
                         <input type="password" name="password" class="" id="doc-ipt-pwd-1" placeholder="请输入密码">
                     </div>
-                    <div>
-                        <input type="submit" class="loginBtn" value="登 录">
-                    </div>
+                    <a class="loginBtn">
+                        <div>
+                            <button type="submit">登 录</button>
+                        </div>
+                    </a>
                 </fieldset>
             </form>
         </div>
