@@ -15,8 +15,8 @@ import java.sql.SQLException;
  * @version: 1.0
  */
 public class UniversalMethod {
-    Connection con;
-    PreparedStatement ps;
+    Connection con=null;
+    PreparedStatement ps=null;
 
     public int upd(String sql, Object... objs) {
         int num = 0;
