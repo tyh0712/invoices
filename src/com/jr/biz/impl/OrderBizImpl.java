@@ -23,8 +23,8 @@ public class OrderBizImpl implements IOrderBiz {
     }
 
     @Override
-    public List<Order> invoicingOrder(String invoicingStatus) {
-        return odi.selectOrderByStatus(invoicingStatus);
+    public List<Order> invoicingOrder(String invoicingStatus,Object...objs) {
+        return odi.selectOrderByStatus(invoicingStatus,objs);
     }
 
     @Override
