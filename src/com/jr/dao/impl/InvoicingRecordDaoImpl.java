@@ -1,7 +1,6 @@
 package com.jr.dao.impl;
 
 import com.jr.dao.IInvoicingRecordDao;
-import com.jr.entry.BaseData;
 import com.jr.entry.InvoicingRecord;
 import com.jr.util.DBHelper;
 
