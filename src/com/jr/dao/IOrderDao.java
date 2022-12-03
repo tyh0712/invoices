@@ -26,7 +26,8 @@ public interface IOrderDao {
     //传入：String 开票状态
     //返回：List<Order> 没开票的订单集合
 //    public List<Order> selectOrderByStatus(String invoicingStatus);
-    List<Order> selectOrderByStatus(String invoicingStatus, Object... objs);
+//    List<Order> selectOrderByStatus(String invoicingStatus, Object... objs);
+    List<Order> selectOrderByStatus(int judge, String invoicingStatus, Object... objs);
 
     //根据开票记录表主键修改开票状态为（未开票）
     //传入：int 开票记录表主键
