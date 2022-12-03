@@ -27,7 +27,7 @@
         <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
             <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
                 <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
-                    <span class="tpl-header-list-user-nick">禁言小张</span><span class="tpl-header-list-user-ico"> <img
+                    <span class="tpl-header-list-user-nick" name="userName"></span><span class="tpl-header-list-user-ico"> <img
                         src="img/user01.png"></span>
                 </a>
                 <ul class="am-dropdown-content">
@@ -94,7 +94,7 @@
         <div class="am-g" style="height: 100px;">
             <div class="am-u-sm-6" style="padding-left: 0;">
                 <div class="tpl-portlet-components">
-                    <div class="tpl-block " id="resultDiv">
+                    <div class="tpl-block " id="resultDiv1">
                         <div class="am-g tpl-amazeui-form">
                             <div class="am-u-sm-12 am-u-md-3">
                                 <div class="am-u-sm-12" style="text-align: center;font-weight: bold;">
@@ -132,7 +132,7 @@
             </div>
             <div class="am-u-sm-6">
                 <div class="tpl-portlet-components">
-                    <div class="tpl-block " id="resultDiv">
+                    <div class="tpl-block " id="resultDiv2">
                         <div></div>
                         <div class="am-g tpl-amazeui-form">
                             <div class="am-u-sm-12 am-u-md-6">
@@ -150,12 +150,12 @@
                         <div class="am-g tpl-amazeui-form" style="font-size: 14px;color: #666;margin-bottom: 5px;">
                             <div class="am-u-sm-12 am-u-md-6">
                                 <div class="am-u-sm-12">
-                                    <span style="color: #333;">抬头（默认）：</span> <span>百度科技有限公司</span>
+                                    <span style="color: #333;">抬头（默认）：</span> <span name="title1"></span>
                                 </div>
                             </div>
                             <div class="am-u-sm-12 am-u-md-6">
                                 <div class="am-u-sm-12">
-                                    <span style="color: #333;">税号：</span> <span>91110000802100XXXX</span>
+                                    <span style="color: #333;">税号：</span> <span name="taxNo1"></span>
                                 </div>
                             </div>
                         </div>
@@ -183,7 +183,7 @@
         <div class="am-g" style="height: 100px;">
             <div class="am-u-sm-12" style="padding-left: 0;">
                 <div class="tpl-portlet-components">
-                    <div class="tpl-block " id="resultDiv">
+                    <div class="tpl-block " id="resultDiv3">
                         <div class="am-g tpl-amazeui-form">
 
                             <div class="am-u-sm-6 am-u-md-3">
@@ -395,6 +395,7 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/amazeui.min.js"></script>
 <script src="js/app.js"></script>
+<script src="js/jquery-1.8.3.js"></script>
 <script>
     // 退票二次确认
     $(function () {
@@ -419,6 +420,19 @@
                 }
             });
         });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        var eid = ${sessionScope.eid};
+        var userName1 = "${sessionScope.userName}";
+        $.get("bs","b=1&eid="+eid,function (baseData1) {
+            eval("var baseData=" + baseData1);
+            var title = baseData.title;
+            $("[name=title1]").text(title);
+            $("[name=taxNo1]").text(baseData.taxNo);
+        });
+        $("[name=userName]").text(userName1);
     });
 </script>
 </body>
