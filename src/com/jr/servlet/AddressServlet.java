@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -29,7 +28,6 @@ public class AddressServlet extends HttpServlet {
 
         int a = Integer.parseInt(request.getParameter("a"));
         if (a==1){
-            System.out.println("i=1");
             titleAndAddress(request,response);
         }else if (a==2){
             showAll(request,response);
@@ -65,7 +63,6 @@ public class AddressServlet extends HttpServlet {
     public void titleAndAddress(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         int enterpriseId=Integer.parseInt(request.getParameter("enterpriseId"));
-        System.out.println(enterpriseId);
         Address address=abi.queryDeAddByEId(enterpriseId,"A");
         response.getWriter().print(new Gson().toJson(address));
 
