@@ -19,8 +19,11 @@ public interface IEmailBiz {
     //查询
     //queryEmailByEId()
 
-    //修改
-    public boolean modifyEmail(Email email);
+    //修改默认值
+    public boolean modifyEmailStatus(int eid,int enterpriseId);
+
+    //修改邮箱
+    public boolean modifyEmailDetail(Email email);
 
     //添加
     public boolean addEmail(Email email);
@@ -29,5 +32,5 @@ public interface IEmailBiz {
     public List<Email> queryEmailByEId(int enterpriseId);
 
     //详情
-    public Email queryEmailByIId(int iid);
+    public Email queryEmailByIId(int eid);
 }

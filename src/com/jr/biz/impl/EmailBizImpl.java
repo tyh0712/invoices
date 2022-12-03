@@ -21,8 +21,17 @@ public class EmailBizImpl implements IEmailBiz {
     }
 
     @Override
-    public boolean modifyEmail(Email email) {
-        return edi.updateDefaultEmailByEId(email)==0?false:true;
+    public boolean modifyEmailStatus(int eid, int enterpriseId) {
+        int i = edi.updateDefaultEmailByEId(eid,enterpriseId);
+        if (i!=0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public boolean modifyEmailDetail(Email email) {
+        return edi.updateDefaultEmailDetailByEId(email)==0?false:true;
     }
 
 
@@ -37,7 +46,7 @@ public class EmailBizImpl implements IEmailBiz {
     }
 
     @Override
-    public Email queryEmailByIId(int iid) {
-        return edi.selectEmailByIId(iid);
+    public Email queryEmailByIId(int eid) {
+        return edi.selectEmailByIId(eid);
     }
 }
