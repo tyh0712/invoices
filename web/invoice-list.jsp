@@ -94,7 +94,7 @@
         <div class="am-g" style="height: 100px;">
             <div class="am-u-sm-6" style="padding-left: 0;">
                 <div class="tpl-portlet-components">
-                    <div class="tpl-block " id="resultDiv">
+                    <div class="tpl-block " id="resultDiv1">
                         <div class="am-g tpl-amazeui-form">
                             <div class="am-u-sm-12 am-u-md-3">
                                 <div class="am-u-sm-12" style="text-align: center;font-weight: bold;">
@@ -132,7 +132,7 @@
             </div>
             <div class="am-u-sm-6">
                 <div class="tpl-portlet-components">
-                    <div class="tpl-block " id="resultDiv">
+                    <div class="tpl-block " id="resultDiv2">
                         <div></div>
                         <div class="am-g tpl-amazeui-form">
                             <div class="am-u-sm-12 am-u-md-6">
@@ -162,7 +162,7 @@
                         <div class="am-g tpl-amazeui-form" style="font-size: 14px;color: #666;margin-bottom: 5px;">
                             <div class="am-u-sm-12 am-u-md-6">
                                 <div class="am-u-sm-12">
-                                    <span style="color: #333;">邮寄地址（默认）：</span> <span>北京市海淀区百度大厦</span>
+                                    <span style="color: #333;">邮寄地址（默认）：</span><span id="deAddress"> </span>
                                 </div>
                             </div>
                         </div>
@@ -183,7 +183,7 @@
         <div class="am-g" style="height: 100px;">
             <div class="am-u-sm-12" style="padding-left: 0;">
                 <div class="tpl-portlet-components">
-                    <div class="tpl-block " id="resultDiv">
+                    <div class="tpl-block " id="resultDiv3">
                         <div class="am-g tpl-amazeui-form">
 
                             <div class="am-u-sm-6 am-u-md-3">
@@ -395,6 +395,7 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/amazeui.min.js"></script>
 <script src="js/app.js"></script>
+<script src="js/jquery-1.8.3.js"></script>
 <script>
     // 退票二次确认
     $(function () {
@@ -419,8 +420,13 @@
                 }
             });
         });
-        $(document)
     });
+    $(function () {
+        var post=$.post("as","a=1&enterpriseId="+${sessionScope.eid},function (address) {
+            eval("var address="+address);
+            $("[id=deAddress]").text(address.area+""+address.addressDetail);
+        });
+    })
 </script>
 </body>
 
