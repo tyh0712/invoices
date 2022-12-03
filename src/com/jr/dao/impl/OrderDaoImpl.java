@@ -7,6 +7,7 @@ import com.jr.util.DBHelper;
 
 import java.io.IOException;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Date;
 
@@ -76,13 +77,14 @@ public class OrderDaoImpl implements IOrderDao {
             Map<Integer,String> str=new TreeMap<>();
             Map<Integer,Object> objs1=new TreeMap<>();
             String str1=null;
+            String str4="invoicing_status=?";
             int x=0;
             for (int i=0;i<objs.length;i++) {
                 if (objs[i] instanceof String) {
                     str.put(i+1,"no=?");
                     objs1.put(i+1,objs[i]);
                 }
-                else if (objs[i] instanceof Timestamp) {
+                else if (objs[i] instanceof Date) {
                     str.put(i+1,"create_time=?");
                     objs1.put(i+1,objs[i]);
                 }
@@ -112,14 +114,18 @@ public class OrderDaoImpl implements IOrderDao {
                     }
                 }
             }
-            for (int i=1;i<=str.size();i++){
-                if (i==1){
-                    str1=str.get(1);
-                }else {
-                    str1=str1+" AND "+str.get(i);
+            if (str.size()==0){
+                str1=str4;
+            }else {
+                for (int i=1;i<=str.size();i++){
+                    if (i==1){
+                        str1=str4+" AND "+str.get(1);
+                    }else {
+                        str1=str1+" AND "+str.get(i);
+                    }
                 }
             }
-            String sql="select * from `order` where invoicing_status=? AND "+str1+"";
+            String sql="select * from `order` where "+str1+"";
             ps = con.prepareStatement(sql);
             ps.setString(1,invoicingStatus);
             for (int i=1;i<=objs1.size();i++){

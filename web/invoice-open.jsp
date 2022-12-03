@@ -102,7 +102,7 @@
                 <span class="am-input-group-btn">
                   <span style="font-size: 14px;margin-right: 8px;margin-left: 8px">订单编号</span>
                 </span>
-                            <input type="text" class="am-form-field" placeholder="&nbsp;&nbsp;请输入订单编号"
+                            <input id="orderno" type="text" class="am-form-field" placeholder="&nbsp;&nbsp;请输入订单编号"
                                    style="border: 1px solid #c2cad8;width: 68%;border-radius: 3px;">
                         </div>
                     </div>
@@ -111,7 +111,7 @@
                 <span class="am-input-group-btn">
                   <span style="font-size: 14px;margin-right: 8px;margin-left: 8px;">生成日期</span>
                 </span>
-                            <input type="text" class="am-form-field" data-am-datepicker placeholder="&nbsp;&nbsp;请选择日期"
+                            <input id="orderdate" type="text" class="am-form-field" data-am-datepicker placeholder="&nbsp;&nbsp;请选择日期"
                                    style="border: 1px solid #c2cad8;width: 68%;border-radius: 3px;">
                         </div>
                     </div>
@@ -120,12 +120,12 @@
                 <span class="am-input-group-btn">
                   <span style="font-size: 14px;margin-right: 8px;margin-left: 8px">凭证金额</span>
                 </span>
-                            <input type="text" class="am-form-field" placeholder="&nbsp;&nbsp;最低金额(万)"
+                            <input id="ordermin" type="text" class="am-form-field" placeholder="&nbsp;&nbsp;最低金额(万)"
                                    style="border: 1px solid #c2cad8;width: 32%;border-radius: 3px;">
                             <div class="am-form-field"
                                  style="width: 0%; border-radius: 3px;border: none;margin-left: 10px;">~
                             </div>
-                            <input type="text" class="am-form-field" placeholder="&nbsp;&nbsp;最高金额(万)"
+                            <input id="ordermax" type="text" class="am-form-field" placeholder="&nbsp;&nbsp;最高金额(万)"
                                    style="border: 1px solid #c2cad8;width: 32%;border-radius: 3px;margin-left: 20px;">
                         </div>
                     </div>
@@ -144,52 +144,13 @@
                                     <input type="checkbox" class="tpl-table-fz-check">
                                 </th>
                                 <th class="table-title">订单编号</th>
-
                                 <th class="table-author am-hide-sm-only">订单金额（元）</th>
                                 <th class="table-date am-hide-sm-only">生成时间</th>
                             </tr>
                             </thead>
                             <tbody id="doc-modal-list1">
-                            <tr data-id="2">
-                                <td>
-                                    <input type="checkbox">
-                                </td>
-                                <td class="am-hide-sm-only">D20220328000001</td>
-                                <td class="am-hide-sm-only">1,000,000.00</td>
-                                <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                            </tr>
-                            <tr data-id="2">
-                                <td>
-                                    <input type="checkbox">
-                                </td>
-                                <td class="am-hide-sm-only">D20220328000002</td>
-                                <td class="am-hide-sm-only">1,000,000.00</td>
-                                <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                            </tr>
-                            <tr data-id="2">
-                                <td>
-                                    <input type="checkbox">
-                                </td>
-                                <td class="am-hide-sm-only">D20220328000003</td>
-                                <td class="am-hide-sm-only">1,000,000.00</td>
-                                <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                            </tr>
-                            <tr data-id="2">
-                                <td>
-                                    <input type="checkbox">
-                                </td>
-                                <td class="am-hide-sm-only">D20220328000004</td>
-                                <td class="am-hide-sm-only">1,000,000.00</td>
-                                <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                            </tr>
-                            <tr data-id="2">
-                                <td>
-                                    <input type="checkbox">
-                                </td>
-                                <td class="am-hide-sm-only">D20220328000005</td>
-                                <td class="am-hide-sm-only">1,000,000.00</td>
-                                <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                            </tr>
+
+
                             </tbody>
                         </table>
                         <div class="am-cf">
@@ -577,11 +538,107 @@
         </div>
     </div>
 </div>
-<script src="js/jquery.min.js">
-</script>
+<script src="js/jquery.min.js"></script>
 <script src="js/amazeui.min.js"></script>
 <script src="js/app.js"></script>
-<script>
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var orderno;
+        var orderdate;
+        var ordermin;
+        var ordermax;
+        $("[id='orderno']").blur(function () {
+            orderno=$(this).val();
+            $.get("os","o=2&orderno="+orderno+"&orderdate="+orderdate+"&ordermin="+ordermin+"&ordermax="+ordermax,function (orderlist) {
+                eval("var orderlist="+orderlist);
+                $("#doc-modal-list1").empty();
+                for (var i=0;i<orderlist.length;i++){
+                    var obj = "<tr data-id='2'>\n" +
+                        "    <td>\n" +
+                        "        <input type='checkbox'>\n" +
+                        "    </td>\n" +
+                        "    <td class='am-hide-sm-only'>"+orderlist[i].no +"</td>\n" +
+                        "    <td class='am-hide-sm-only'>"+orderlist[i].totalAmount+"</td>\n" +
+                        "    <td class='am-hide-sm-only'>"+orderlist[i].createTime+"</td>\n" +
+                        "</tr>";
+                    $(obj).appendTo($("#doc-modal-list1"));
+                }
+            });
+        });
+        $("[id='orderdate']").blur(function () {
+            orderdate=$(this).val();
+            $.get("os","o=2&orderno="+orderno+"&orderdate="+orderdate+"&ordermin="+ordermin+"&ordermax="+ordermax,function (orderlist) {
+                eval("var orderlist="+orderlist);
+                $("#doc-modal-list1").empty();
+                for (var i=0;i<orderlist.length;i++){
+                    var obj = "<tr data-id='2'>\n" +
+                        "    <td>\n" +
+                        "        <input type='checkbox'>\n" +
+                        "    </td>\n" +
+                        "    <td class='am-hide-sm-only'>"+orderlist[i].no +"</td>\n" +
+                        "    <td class='am-hide-sm-only'>"+orderlist[i].totalAmount+"</td>\n" +
+                        "    <td class='am-hide-sm-only'>"+orderlist[i].createTime+"</td>\n" +
+                        "</tr>";
+                    $(obj).appendTo($("#doc-modal-list1"));
+                }
+            });
+        });
+        $("[id='ordermin']").blur(function () {
+            ordermin=$(this).val();
+            $.get("os","o=2&orderno="+orderno+"&orderdate="+orderdate+"&ordermin="+ordermin+"&ordermax="+ordermax,function (orderlist) {
+                eval("var orderlist="+orderlist);
+                $("#doc-modal-list1").empty();
+                for (var i=0;i<orderlist.length;i++){
+                    var obj = "<tr data-id='2'>\n" +
+                        "    <td>\n" +
+                        "        <input type='checkbox'>\n" +
+                        "    </td>\n" +
+                        "    <td class='am-hide-sm-only'>"+orderlist[i].no +"</td>\n" +
+                        "    <td class='am-hide-sm-only'>"+orderlist[i].totalAmount+"</td>\n" +
+                        "    <td class='am-hide-sm-only'>"+orderlist[i].createTime+"</td>\n" +
+                        "</tr>";
+                    $(obj).appendTo($("#doc-modal-list1"));
+                }
+            });
+        });
+        $("[id='ordermax']").blur(function () {
+            ordermax=$(this).val();
+            $.get("os","o=2&orderno="+orderno+"&orderdate="+orderdate+"&ordermin="+ordermin+"&ordermax="+ordermax,function (orderlist) {
+                eval("var orderlist="+orderlist);
+                $("#doc-modal-list1").empty();
+                for (var i=0;i<orderlist.length;i++){
+                    var obj = "<tr data-id='2'>\n" +
+                        "    <td>\n" +
+                        "        <input type='checkbox'>\n" +
+                        "    </td>\n" +
+                        "    <td class='am-hide-sm-only'>"+orderlist[i].no +"</td>\n" +
+                        "    <td class='am-hide-sm-only'>"+orderlist[i].totalAmount+"</td>\n" +
+                        "    <td class='am-hide-sm-only'>"+orderlist[i].createTime+"</td>\n" +
+                        "</tr>";
+                    $(obj).appendTo($("#doc-modal-list1"));
+                }
+            });
+        });
+
+        $.get("os","o=2&orderno="+orderno+"&orderdate="+orderdate+"&ordermin="+ordermin+"&ordermax="+ordermax,function (orderlist) {
+            eval("var orderlist="+orderlist);
+            for (var i=0;i<orderlist.length;i++){
+                var obj = "<tr data-id='2'>\n" +
+                    "    <td>\n" +
+                    "        <input type='checkbox'>\n" +
+                    "    </td>\n" +
+                    "    <td class='am-hide-sm-only'>"+orderlist[i].no +"</td>\n" +
+                    "    <td class='am-hide-sm-only'>"+orderlist[i].totalAmount+"</td>\n" +
+                    "    <td class='am-hide-sm-only'>"+orderlist[i].createTime+"</td>\n" +
+                    "</tr>";
+                $(obj).appendTo($("#doc-modal-list1"));
+            }
+        });
+    });
+
+
+
     var baseinfoDiv = document.getElementById('baseinfoDiv')
     var showDiv = document.getElementById('showDiv')
     var resultDiv = document.getElementById('resultDiv')

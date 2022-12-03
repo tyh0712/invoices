@@ -81,7 +81,7 @@
                 <div class="am-g">
                     <div class="am-u-sm-12">
                         <div><span style="font-size: 16px;margin-left: 7px;">合计开票金额：</span> <span
-                                style="color: red;font-size: 22px;font-weight: bold;">10,000,000.00元</span></div>
+                                style="color: red;font-size: 22px;font-weight: bold;" name="sum"></span></div>
                         <form class="am-form">
                             <table class="am-table am-table-striped am-table-hover table-main">
                                 <thead>
@@ -93,36 +93,36 @@
                                 </tr>
                                 </thead>
                                 <tbody id="doc-modal-list">
-                                <tr data-id="2">
-                                    <td class="am-hide-sm-only">D20220328000001</td>
-                                    <td class="am-hide-sm-only">百度科技有限公司</td>
-                                    <td class="am-hide-sm-only">1,000,000.00</td>
-                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                                </tr>
-                                <tr data-id="2">
-                                    <td class="am-hide-sm-only">D20220328000002</td>
-                                    <td class="am-hide-sm-only">百度科技有限公司</td>
-                                    <td class="am-hide-sm-only">1,000,000.00</td>
-                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                                </tr>
-                                <tr data-id="2">
-                                    <td class="am-hide-sm-only">D20220328000003</td>
-                                    <td class="am-hide-sm-only">百度科技有限公司</td>
-                                    <td class="am-hide-sm-only">1,000,000.00</td>
-                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                                </tr>
-                                <tr data-id="2">
-                                    <td class="am-hide-sm-only">D20220328000004</td>
-                                    <td class="am-hide-sm-only">百度科技有限公司</td>
-                                    <td class="am-hide-sm-only">1,000,000.00</td>
-                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                                </tr>
-                                <tr data-id="2">
-                                    <td class="am-hide-sm-only">D20220328000005</td>
-                                    <td class="am-hide-sm-only">百度科技有限公司</td>
-                                    <td class="am-hide-sm-only">1,000,000.00</td>
-                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                                </tr>
+<%--                                <tr data-id="2">--%>
+<%--                                    <td class="am-hide-sm-only">D20220328000001</td>--%>
+<%--                                    <td class="am-hide-sm-only">百度科技有限公司</td>--%>
+<%--                                    <td class="am-hide-sm-only">1,000,000.00</td>--%>
+<%--                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>--%>
+<%--                                </tr>--%>
+<%--                                <tr data-id="2">--%>
+<%--                                    <td class="am-hide-sm-only">D20220328000002</td>--%>
+<%--                                    <td class="am-hide-sm-only">百度科技有限公司</td>--%>
+<%--                                    <td class="am-hide-sm-only">1,000,000.00</td>--%>
+<%--                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>--%>
+<%--                                </tr>--%>
+<%--                                <tr data-id="2">--%>
+<%--                                    <td class="am-hide-sm-only">D20220328000003</td>--%>
+<%--                                    <td class="am-hide-sm-only">百度科技有限公司</td>--%>
+<%--                                    <td class="am-hide-sm-only">1,000,000.00</td>--%>
+<%--                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>--%>
+<%--                                </tr>--%>
+<%--                                <tr data-id="2">--%>
+<%--                                    <td class="am-hide-sm-only">D20220328000004</td>--%>
+<%--                                    <td class="am-hide-sm-only">百度科技有限公司</td>--%>
+<%--                                    <td class="am-hide-sm-only">1,000,000.00</td>--%>
+<%--                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>--%>
+<%--                                </tr>--%>
+<%--                                <tr data-id="2">--%>
+<%--                                    <td class="am-hide-sm-only">D20220328000005</td>--%>
+<%--                                    <td class="am-hide-sm-only">百度科技有限公司</td>--%>
+<%--                                    <td class="am-hide-sm-only">1,000,000.00</td>--%>
+<%--                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>--%>
+<%--                                </tr>--%>
                                 </tbody>
                             </table>
                         </form>
@@ -214,7 +214,25 @@
 <script src="js/amazeui.min.js"></script>
 <script src="js/app.js"></script>
 <script>
-
+    $(document).ready(function () {
+        <%--var iid = ${requestScope.iid};--%>
+        var iid = 1;
+        var sum = 0.00;
+        $.get("os","o=4&invoicingRecordId="+iid,function (list1) {
+            eval("var orderlist="+list1);
+            for (var i=0;i<orderlist.length;i++){
+                var obj = "<tr data-id=\"2\">\n" +
+                    "    <td class=\"am-hide-sm-only\">"+orderlist[i].no+"</td>\n" +
+                    "    <td class=\"am-hide-sm-only\">百度科技有限公司</td>\n" +
+                    "    <td class=\"am-hide-sm-only\">"+orderlist[i].totalAmount+"</td>\n" +
+                    "    <td class=\"am-hide-sm-only\">"+orderlist[i].createTime+"</td>\n" +
+                    "</tr>";
+                $(obj).appendTo($("#doc-modal-list"));
+                sum += orderlist[i].totalAmount;
+            }
+            $("[name=sum]").text(sum+"元");
+        });
+    });
 </script>
 </body>
 
