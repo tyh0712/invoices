@@ -25,7 +25,6 @@ public class InvoicingRecordDaoImpl implements IInvoicingRecordDao {
     UniversalMethod um=new UniversalMethod();
     @Override
     public List<InvoicingRecord> selectIRByEId(int enterpriseId) {
-        System.out.println("selectIRByEId");
         ArrayList<InvoicingRecord> list=new ArrayList<>();
         try {
             con= DBHelper.getcon();
@@ -34,7 +33,6 @@ public class InvoicingRecordDaoImpl implements IInvoicingRecordDao {
             ps.setInt(1,enterpriseId);
             rs=ps.executeQuery();
             while (rs.next()){
-                System.out.println(rs==null);
                 InvoicingRecord ir=new InvoicingRecord();
                 ir.setCreatorTime(rs.getDate(1));
                 BaseData baseData = new BaseData();
@@ -112,7 +110,6 @@ public class InvoicingRecordDaoImpl implements IInvoicingRecordDao {
         BaseData baseData=new BaseData();
         Address address=new Address();
         Email email=new Email();
-        System.out.println("selectIRByIId");
         ArrayList<InvoicingRecord> list=new ArrayList<>();
         try {
             con=DBHelper.getcon();
@@ -121,7 +118,6 @@ public class InvoicingRecordDaoImpl implements IInvoicingRecordDao {
             ps.setInt(1,iid);
             rs=ps.executeQuery();
             while (rs.next()){
-                System.out.println(rs==null);
                 ir.setIid(rs.getInt(1));
                 ir.setAmount(rs.getDouble(2));
                 user.setUid(rs.getInt(3));
@@ -149,8 +145,6 @@ public class InvoicingRecordDaoImpl implements IInvoicingRecordDao {
         } finally {
             DBHelper.close(rs,ps,con);
         }
-        System.out.println(list);
-        System.out.println(list==null);
         return list;
     }
 }
