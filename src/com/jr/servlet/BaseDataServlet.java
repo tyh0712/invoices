@@ -46,6 +46,7 @@ public class BaseDataServlet extends HttpServlet {
     }
 
     public void queryBaseData(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("bs 1");
         int eid = Integer.parseInt(request.getParameter("eid"));
         BaseDataBizImpl bbi = new BaseDataBizImpl();
         BaseData baseData = bbi.queryBDByEId(eid);
@@ -69,7 +70,7 @@ public class BaseDataServlet extends HttpServlet {
         baseData.setAddress(address);
         boolean boo = bbi.modify(baseData);
         if (boo){
-            System.out.println("success");
+            queryBaseData(request,response);
         }else {
             response.getWriter().print("failure");
         }

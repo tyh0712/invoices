@@ -328,19 +328,17 @@
             var phone = $("[name=phone2]").val();
             var address = $("[name=address2]").val();
 
-            $.get("bs","b=2&bid="+bid+"&bankName="+bankName+"&bankAccount="+bankAccount+"&phone="+phone+"&address="+address);
-
-            $.get("bs","b=1&eid="+eid,function (baseData1) {
-                eval("var baseData=" + baseData1);
+            $.get("bs","b=2&eid="+eid+"&bid="+bid+"&bankName="+bankName+"&bankAccount="+bankAccount+"&phone="+phone+"&address="+address,function (baseData1) {
                 $("[name=bankName1]").empty();
                 $("[name=bankAccount1]").empty();
                 $("[name=phone1]").empty();
                 $("[name=address1]").empty();
 
-                $("[name=bankName1]").text(baseData.bankName);
-                $("[name=bankAccount1]").text(baseData.bankAccount);
-                $("[name=phone1]").text(baseData.phone);
-                $("[name=address1]").text(baseData.address);
+                eval("var baseData3=" + baseData1);
+                $("[name=bankName1]").text(baseData3.bankName);
+                $("[name=bankAccount1]").text(baseData3.bankAccount);
+                $("[name=phone1]").text(baseData3.phone);
+                $("[name=address1]").text(baseData3.address);
             });
         });
     });

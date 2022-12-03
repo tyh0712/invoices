@@ -306,9 +306,7 @@
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
                                             <label for="user-name" class="am-u-sm-3 am-form-label star"> 抬头</label>
-                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                                百度科技有限公司
-                                            </div>
+                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="title1"></div>
                                         </div>
                                     </form>
                                 </div>
@@ -316,9 +314,7 @@
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
                                             <label for="user-name" class="am-u-sm-3 am-form-label">税号</label>
-                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                                91110000802100XXXX
-                                            </div>
+                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="taxNo1"></div>
                                         </div>
                                     </form>
                                 </div>
@@ -326,9 +322,7 @@
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
                                             <label for="user-name" class="am-u-sm-3 am-form-label star"> 开户银行</label>
-                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                                中国工商银行
-                                            </div>
+                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="bankName1"></div>
                                         </div>
                                     </form>
                                 </div>
@@ -336,9 +330,7 @@
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
                                             <label for="user-name" class="am-u-sm-3 am-form-label">开户账号</label>
-                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                                2134566876756453
-                                            </div>
+                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="bankAccount1"></div>
                                         </div>
                                     </form>
                                 </div>
@@ -346,9 +338,7 @@
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
                                             <label for="user-name" class="am-u-sm-3 am-form-label star"> 注册固定电话</label>
-                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                                13888888888
-                                            </div>
+                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="phone1"></div>
                                         </div>
                                     </form>
                                 </div>
@@ -356,9 +346,7 @@
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
                                             <label for="user-name" class="am-u-sm-3 am-form-label">注册场所地址</label>
-                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                                南京市建邺区
-                                            </div>
+                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="address1"></div>
                                         </div>
                                     </form>
                                 </div>
@@ -638,9 +626,12 @@
         var eid = ${sessionScope.eid};
         $.get("bs","b=1&eid="+eid,function (baseData1) {
             eval("var baseData=" + baseData1);
-            var title = baseData.title;
-            $("[name=title1]").text(title);
+            $("[name=title1]").text(baseData.title);
             $("[name=taxNo1]").text(baseData.taxNo);
+            $("[name=bankName1]").text(baseData.bankName);
+            $("[name=bankAccount1]").text(baseData.bankAccount);
+            $("[name=phone1]").text(baseData.phone);
+            $("[name=address1]").text(baseData.address);
         });
 
         //右上角用户名

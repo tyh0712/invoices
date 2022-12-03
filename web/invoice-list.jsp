@@ -443,8 +443,7 @@
         var eid = ${sessionScope.eid};
         $.get("bs","b=1&eid="+eid,function (baseData1) {
             eval("var baseData=" + baseData1);
-            var title = baseData.title;
-            $("[name=title1]").text(title);
+            $("[name=title1]").text(baseData.title);
             $("[name=taxNo1]").text(baseData.taxNo);
         });
 
