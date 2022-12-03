@@ -45,14 +45,14 @@ public class OrderDaoImpl implements IOrderDao {
     }
 
     @Override
-    public double selectTotalAmountByEIdAndStatus(int enterpriseId, String invoicingStatus) {
+    public double selectTotalAmountByEIdAndStatus(int enterpriseId) {
         int count = 0;
         try {
             con = DBHelper.getcon();
             String sql = "select total_amount from `order` where enterprise_id=? and invoicing_status=?";
             ps = con.prepareStatement(sql);
             ps.setInt(1,enterpriseId);
-            ps.setString(2,invoicingStatus);
+            ps.setString(2,"A");
             rs = ps.executeQuery();
             while (rs.next()){
                 count += rs.getDouble(1);
