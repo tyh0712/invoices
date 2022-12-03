@@ -158,7 +158,7 @@
                     </div>
                     <div class="am-u-sm-12 am-u-md-6">
                         <form class="am-form am-form-horizontal">
-                            <div class="am-form-group">
+                            <div class="am-form-group" id="addAndEmail">
                                 <label class="am-u-sm-3 am-form-label">邮箱</label>
                                 <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
                                     123456789@qq.com
@@ -176,13 +176,12 @@
         </div>
     </div>
 </div>
-
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
 <script src="js/jquery.min.js"></script>
 <script src="js/amazeui.min.js"></script>
 <script src="js/app.js"></script>
-<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
 <script>
-    var eid = ${sessionScope.eid};
+    var enterpriseId = ${sessionScope.enterpriseId};
     $(document).ready(function () {
         //右上角用户名
         var userName1 = "${sessionScope.userName}";
@@ -190,7 +189,7 @@
 
         //抬头信息 抬头、税号
         var baseData = null;
-        $.get("bs","b=1&eid="+eid,function (baseData1) {
+        $.get("bs","b=1&enterpriseId="+enterpriseId,function (baseData1) {
             eval("baseData=" + baseData1);
             $("[name=title1]").text(baseData.title);
             $("[name=taxNo1]").text(baseData.taxNo);
@@ -212,6 +211,32 @@
                 sum += orderlist[i].totalAmount;
             }
             $("[name=sum]").text(sum+"元");
+        });
+
+        //邮寄地址信息addAndEmail
+        $(function () {
+            <%--var aid = ${requestScope.aid};--%>
+            <%--var eid = ${requestScope.eid};--%>
+            var aid=1;
+            var eid=null;
+            if (eid==null){
+                $.get("as","a=7&aid="+aid,function (address) {
+                    eval("var address="+address);
+                    $("#addAndEmail").empty();
+                    $('<label class="am-u-sm-3 am-form-label">邮寄地址' +
+                        '</label><div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">'
+                        +address.area+''+address.addressDetail+'</div>').appendTo($("#addAndEmail"));
+                });
+            }
+            if (aid==null) {
+                $.get("es", "e=4&eid=" + eid, function (email) {
+                    eval("var email=" + email);
+                    $("#addAndEmail").empty();
+                    $('<label class="am-u-sm-3 am-form-label">邮箱' +
+                        '</label><div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">'
+                        + emailDetail + '</div>').appendTo($("#addAndEmail"));
+                });
+            }
         });
     });
 </script>

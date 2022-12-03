@@ -390,11 +390,11 @@
         </div>
     </div>
 </div>
-
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
 <script src="js/jquery.min.js"></script>
 <script src="js/amazeui.min.js"></script>
 <script src="js/app.js"></script>
-<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+
 <script>
     // 退票二次确认
     $(function () {
@@ -421,15 +421,15 @@
         });
     });
 
-    var eid = ${sessionScope.eid};
+    var enterpriseId = ${sessionScope.enterpriseId};
     $(function () {
-        $.get("as","a=1&enterpriseId="+eid,function (address) {
+        $.get("as","a=1&enterpriseId="+enterpriseId,function (address) {
             eval("var address="+address);
             $("[name=deAddress]").text(address.area+""+address.addressDetail);
         });
     });
     $(function () {
-        $.get("os","o=1&invoicingRecordId="+eid,function (count) {
+        $.get("os","o=1&enterpriseId="+enterpriseId,function (count) {
             eval("var getamount=" + count);
             $("#divallcount").text(getamount[0]+"元");
             $("#divusecont").text(getamount[1]+"元");
@@ -437,7 +437,7 @@
         });
     });
     $(function () {
-        $.get("es","e=1&enterpriseId="+eid,function (email11) {
+        $.get("es","e=1&enterpriseId="+enterpriseId,function (email11) {
             eval("var email="+email11);
             $("[name=email1]").text(email.emailDetail);
         });
@@ -449,8 +449,8 @@
 <script>
     $(document).ready(function () {
         //发票抬头及地址信息  抬头、税号
-        var eid = ${sessionScope.eid};
-        $.get("bs","b=1&eid="+eid,function (baseData1) {
+        var enterpriseId = ${sessionScope.enterpriseId};
+        $.get("bs","b=1&enterpriseId="+enterpriseId,function (baseData1) {
             eval("var baseData=" + baseData1);
             $("[name=title1]").text(baseData.title);
             $("[name=taxNo1]").text(baseData.taxNo);

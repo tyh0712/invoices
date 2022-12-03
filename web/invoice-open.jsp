@@ -341,8 +341,8 @@
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
                                             <label class="am-u-sm-3 am-form-label star"> 邮寄地址</label>
-                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                                江苏省南京市建邺区庐山路88号金融城2期
+                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" id="deAddress">
+
                                             </div>
                                         </div>
                                     </form>
@@ -472,52 +472,13 @@
                         </tr>
                         </thead>
                         <tbody id="doc-modal-list3">
-                        <tr data-id="2">
-                            <td>
-                                <label class="am-radio">
-                                    <input type="radio" name="radio1" value="" data-am-ucheck checked>
-                                </label>
-                            </td>
-                            <td class="am-hide-sm-only">南京市建邺区河西大街99号</td>
-                        </tr>
-                        <tr data-id="2">
-                            <td>
-                                <label class="am-radio">
-                                    <input type="radio" name="radio1" value="" data-am-ucheck>
-                                </label>
-                            </td>
-                            <td class="am-hide-sm-only">南京市建邺区河西大街99号</td>
-                        </tr>
-                        <tr data-id="2">
-                            <td>
-                                <label class="am-radio">
-                                    <input type="radio" name="radio1" value="" data-am-ucheck>
-                                </label>
-                            </td>
-                            <td class="am-hide-sm-only">南京市建邺区河西大街99号</td>
-                        </tr>
-                        <tr data-id="2">
-                            <td>
-                                <label class="am-radio">
-                                    <input type="radio" name="radio1" value="" data-am-ucheck>
-                                </label>
-                            </td>
-                            <td class="am-hide-sm-only">南京市建邺区河西大街99号</td>
-                        </tr>
-                        <tr data-id="2">
-                            <td>
-                                <label class="am-radio">
-                                    <input type="radio" name="radio1" value="" data-am-ucheck>
-                                </label>
-                            </td>
-                            <td class="am-hide-sm-only">南京市建邺区河西大街99号</td>
-                        </tr>
+
                         </tbody>
                     </table>
                 </form>
                 <div class="am-modal-footer" style="border-top: 1px solid #dedede;">
                     <span class="am-modal-btn" data-am-modal-cancel>取消</span>
-                    <span class="am-modal-btn" data-am-modal-confirm>确定</span>
+                    <span id="chooseAdd" onclick="chooseAdd()" class="am-modal-btn" data-am-modal-confirm>确定</span>
                 </div>
             </div>
         </div>
@@ -681,8 +642,8 @@
 
     $(document).ready(function () {
         //抬头信息  抬头、税号
-        var eid = ${sessionScope.eid};
-        $.get("bs","b=1&eid="+eid,function (baseData1) {
+        var enterpriseId = ${sessionScope.enterpriseId};
+        $.get("bs","b=1&enterpriseId="+enterpriseId,function (baseData1) {
             eval("var baseData=" + baseData1);
             $("[name=title1]").text(baseData.title);
             $("[name=taxNo1]").text(baseData.taxNo);
@@ -695,7 +656,21 @@
         //右上角用户名
         var userName1 = "${sessionScope.userName}";
         $("[name=userName]").text(userName1);
-    })
+
+
+        //返回选择的邮寄地址
+        $.get("as","a=6&enterpriseId="+enterpriseId,function (list) {
+            eval("var list="+list);
+            $('<span id="showAdd">'+list[0].area+''+list[0].addressDetail+'</span>').appendTo($("#deAddress"));
+            for (var i=0;i<list.length;i++){
+                $('<tr data-id="2"><td><label class="am-radio"><input type="radio" name="addressCho" id="'+i+'" value="'+list[i].area+''+list[i].addressDetail+'" data-am-ucheck checked></label></td><td class="am-hide-sm-only"><label class="am-radio" for="'+i+'">'+list[i].area+''+list[i].addressDetail+'</label></td></tr>').appendTo($("#doc-modal-list3"));
+            }
+        });
+    });
+     function chooseAdd() {
+             $("#deAddress").empty();
+             $('<span>'+$('[name="addressCho"]:checked').val()+'</span>').appendTo($("#deAddress"));
+    }
 </script>
 </body>
 

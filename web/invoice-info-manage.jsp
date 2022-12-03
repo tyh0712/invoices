@@ -261,10 +261,10 @@
 <script>
 
     var bid = 0;
-    var eid = ${sessionScope.eid};
+    var enterpriseId = ${sessionScope.enterpriseId};
     $(document).ready(function () {
         //发票信息管理  序号、抬头、税号、开户银行、开户账号、注册固定电话、注册场所地址
-        $.get("bs","b=1&eid="+eid,function (baseData1) {
+        $.get("bs","b=1&enterpriseId="+enterpriseId,function (baseData1) {
             eval("var baseData=" + baseData1);
             $("[name=bid1]").text(baseData.bid);
             bid = baseData.bid;
@@ -328,7 +328,7 @@
             var phone = $("[name=phone2]").val();
             var address = $("[name=address2]").val();
 
-            $.get("bs","b=2&eid="+eid+"&bid="+bid+"&bankName="+bankName+"&bankAccount="+bankAccount+"&phone="+phone+"&address="+address,function (baseData1) {
+            $.get("bs","b=2&enterpriseId="+enterpriseId+"&bid="+bid+"&bankName="+bankName+"&bankAccount="+bankAccount+"&phone="+phone+"&address="+address,function (baseData1) {
                 $("[name=bankName1]").empty();
                 $("[name=bankAccount1]").empty();
                 $("[name=phone1]").empty();
@@ -403,7 +403,7 @@
     // 邮寄地址
     function add_address() {
 
-        $.get("as","a=2&enterpriseId="+eid,function (list) {
+        $.get("as","a=2&enterpriseId="+enterpriseId,function (list) {
             eval("var list="+list);
             var i=list.length - 1;
             var Tbody = document.querySelector('#table_id_address tbody')
@@ -427,7 +427,7 @@
 
 
     $(function () {
-        $.get("as","a=2&enterpriseId="+eid,function (list) {
+        $.get("as","a=2&enterpriseId="+enterpriseId,function (list) {
             eval("var list="+list);
             for (var i=0;i<list.length;i++){
                 var Tbody = document.querySelector('#table_id_address tbody')
@@ -457,7 +457,7 @@
     function setDefault() {
         var td = event.srcElement;
         var key = td.parentElement.parentElement.parentElement.innerText.split("\n")[0].trim();
-        $.get("as", "a=4&aid=" + key + "&enterpriseId=" + eid, function (list) {
+        $.get("as", "a=4&aid=" + key + "&enterpriseId=" + enterpriseId, function (list) {
             $("#doc-modal-list2").empty();
             eval("var list=" + list);
             for (var i = 0; i < list.length; i++) {
@@ -493,7 +493,7 @@
         $("#Type" + key).attr("disabled", true);
         $("#defaultV" + key).attr("disabled", true);
         var div1 = $("#operate" + key);
-        $.get("as","a=5&enterpriseId="+eid+"&addressee="+$("#Name"+key).val()+ "&phone="+$("#No"+key).val()+ "&area="+$("#Type"+key).val()+ "&addressDetail="+$("#defaultV"+key).val(),function (str) {
+        $.get("as","a=5&enterpriseId="+enterpriseId+"&addressee="+$("#Name"+key).val()+ "&phone="+$("#No"+key).val()+ "&area="+$("#Type"+key).val()+ "&addressDetail="+$("#defaultV"+key).val(),function (str) {
             eval("var str="+str);
         });
         div1[0].innerHTML = '<a style="cursor:pointer;color:#007bff;"  onclick="editAddress()">编辑</a>&nbsp;&nbsp;<a style="cursor:pointer;color:#007bff;">设为默认</a>';

@@ -60,7 +60,7 @@ public class OrderServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
-        int enterpriseId = Integer.parseInt(request.getParameter("invoicingRecordId"));
+        int enterpriseId = Integer.parseInt(request.getParameter("enterpriseId"));
         List<Double> list = orderBiz.getAmount(enterpriseId);
         response.getWriter().println(new Gson().toJson(list));
     }
