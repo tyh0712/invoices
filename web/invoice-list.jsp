@@ -421,6 +421,7 @@
                 }
             });
         });
+        $(document)
     });
 
     var eid = ${sessionScope.eid};

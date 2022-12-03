@@ -18,7 +18,8 @@ public interface IOrderBiz {
 
     //开票  invoicing
 //    public List<Order> invoicingOrder(String invoicingStatus);
-    List<Order> invoicingOrder(String invoicingStatus, Object... objs);
+//    List<Order> invoicingOrder(String invoicingStatus, Object... objs);
+    List<Order> invoicingOrder(int judge, String invoicingStatus, Object... objs);
 
     //退票 实现其中开票状态的修改  refund
     public boolean refundOrder(int invoicingRecordId);
