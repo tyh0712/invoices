@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="css/amazeui.min.css"/>
     <link rel="stylesheet" href="css/admin.css">
     <link rel="stylesheet" href="css/app.css">
+
 </head>
 <body data-type="generalComponents">
 <header class="am-topbar am-topbar-inverse admin-header">
@@ -94,12 +95,12 @@
         <div class="am-g" style="height: 100px;">
             <div class="am-u-sm-6" style="padding-left: 0;">
                 <div class="tpl-portlet-components">
-                    <div class="tpl-block " id="resultDiv">
+                    <div class="tpl-block " id="resultDiv1">
                         <div class="am-g tpl-amazeui-form">
                             <div class="am-u-sm-12 am-u-md-3">
                                 <div class="am-u-sm-12" style="text-align: center;font-weight: bold;">
                                     <div>可开票金额</div>
-                                    <div style="color: red;font-size: 20px;">10,000,0.00元</div>
+                                    <div id="divnewcount" style="color: red;font-size: 20px;"></div>
                                 </div>
                             </div>
                             <div class="am-u-sm-12 am-u-md-1">
@@ -110,7 +111,7 @@
                             <div class="am-u-sm-12 am-u-md-3">
                                 <div class="am-u-sm-12" style="text-align: center;font-weight: bold;">
                                     <div>总计可开票金额</div>
-                                    <div style="color: red;font-size: 20px;">20,000,0.00元</div>
+                                    <div id="divallcount" style="color: red;font-size: 20px;"></div>
                                 </div>
                             </div>
                             <div class="am-u-sm-12 am-u-md-1">
@@ -121,7 +122,7 @@
                             <div class="am-u-sm-12 am-u-md-3">
                                 <div class="am-u-sm-12" style="text-align: center;font-weight: bold;">
                                     <div>历史已开票</div>
-                                    <div style="color: red;font-size: 20px;">10,000,0.00元</div>
+                                    <div id="divusecont" style="color: red;font-size: 20px;"></div>
                                 </div>
                             </div>
                         </div>
@@ -132,7 +133,7 @@
             </div>
             <div class="am-u-sm-6">
                 <div class="tpl-portlet-components">
-                    <div class="tpl-block " id="resultDiv">
+                    <div class="tpl-block " id="resultDiv2">
                         <div></div>
                         <div class="am-g tpl-amazeui-form">
                             <div class="am-u-sm-12 am-u-md-6">
@@ -183,7 +184,7 @@
         <div class="am-g" style="height: 100px;">
             <div class="am-u-sm-12" style="padding-left: 0;">
                 <div class="tpl-portlet-components">
-                    <div class="tpl-block " id="resultDiv">
+                    <div class="tpl-block " id="resultDiv3">
                         <div class="am-g tpl-amazeui-form">
 
                             <div class="am-u-sm-6 am-u-md-3">
@@ -395,6 +396,7 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/amazeui.min.js"></script>
 <script src="js/app.js"></script>
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
 <script>
     // 退票二次确认
     $(function () {
@@ -419,6 +421,14 @@
                 }
             });
         });
+    });
+
+    var eid = ${sessionScope.eid};
+    $.get("os","o=1&invoicingRecordId="+eid,function (count) {
+        eval("var getamount=" + count);
+        $("#divallcount").text(getamount[0]+"元");
+        $("#divusecont").text(getamount[1]+"元");
+        $("#divnewcount").text(getamount[2]+"元");
     });
 </script>
 </body>
