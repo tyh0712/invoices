@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Date;
 
 /**
  * @Auther:唐一涵
@@ -184,7 +185,6 @@ public class OrderDaoImpl implements IOrderDao {
                 order.setInvoicingRecord(invoicingRecord);
                 order.setCreateTime(rs.getTimestamp(8));
                 list.add(order);
-                System.out.println(order);
             }
         } catch (IOException e) {
             e.printStackTrace();
