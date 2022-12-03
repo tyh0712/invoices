@@ -28,7 +28,6 @@ public class OrderServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
         int o = Integer.parseInt(request.getParameter("o"));
-        System.out.println(o);
         if (o==1){
             totalAmount(request,response);
         }else if (o==2){
@@ -57,7 +56,6 @@ public class OrderServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
         int enterpriseId = Integer.parseInt(request.getParameter("invoicingRecordId"));
-        System.out.println(enterpriseId);
         List<Double> list = orderBiz.getAmount(enterpriseId);
         response.getWriter().println(new Gson().toJson(list));
     }
