@@ -51,6 +51,7 @@ public class AddressBizImpl implements IAddressBiz {
     public boolean addAddress(Address address) {
 
         int i = adi.insertAddress(address);
+        System.out.println(i);
         if (i!=0){
             return true;
         }else {

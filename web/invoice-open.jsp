@@ -244,7 +244,7 @@
                             <div class="am-u-sm-12 am-u-md-6">
                                 <form class="am-form am-form-horizontal">
                                     <div class="am-form-group">
-                                        <label for="user-name" class="am-u-sm-3 am-form-label star"> 发票种类</label>
+                                        <label class="am-u-sm-3 am-form-label star"> 发票种类</label>
                                         <div class="am-u-sm-3" style="margin-top: 4px;font-size: 16px;"
                                              onclick="selectCategory('ordinary')">
                                             <label class="am-radio">
@@ -264,7 +264,7 @@
                             <div class="am-u-sm-12 am-u-md-6">
                                 <form class="am-form am-form-horizontal">
                                     <div class="am-form-group">
-                                        <label for="user-name" class="am-u-sm-3 am-form-label star"> 发票类型</label>
+                                        <label class="am-u-sm-3 am-form-label star"> 发票类型</label>
                                         <div class="am-u-sm-3" style="margin-top: 4px;font-size: 16px;"
                                              onclick="selectType('ele')">
                                             <label class="am-radio">
@@ -287,7 +287,7 @@
                                 <div class="am-u-sm-12 am-u-md-6">
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
-                                            <label for="user-name" class="am-u-sm-3 am-form-label star"> 抬头</label>
+                                            <label class="am-u-sm-3 am-form-label star"> 抬头</label>
                                             <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
                                                 百度科技有限公司
                                             </div>
@@ -297,7 +297,7 @@
                                 <div class="am-u-sm-12 am-u-md-6">
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
-                                            <label for="user-name" class="am-u-sm-3 am-form-label">税号</label>
+                                            <label class="am-u-sm-3 am-form-label">税号</label>
                                             <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
                                                 91110000802100XXXX
                                             </div>
@@ -309,7 +309,7 @@
                                 <div class="am-u-sm-12 am-u-md-6">
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
-                                            <label for="user-name" class="am-u-sm-3 am-form-label star"> 抬头</label>
+                                            <label class="am-u-sm-3 am-form-label star"> 抬头</label>
                                             <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
                                                 百度科技有限公司
                                             </div>
@@ -319,7 +319,7 @@
                                 <div class="am-u-sm-12 am-u-md-6">
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
-                                            <label for="user-name" class="am-u-sm-3 am-form-label">税号</label>
+                                            <label class="am-u-sm-3 am-form-label">税号</label>
                                             <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
                                                 91110000802100XXXX
                                             </div>
@@ -329,7 +329,7 @@
                                 <div class="am-u-sm-12 am-u-md-6">
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
-                                            <label for="user-name" class="am-u-sm-3 am-form-label star"> 开户银行</label>
+                                            <label class="am-u-sm-3 am-form-label star"> 开户银行</label>
                                             <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
                                                 中国工商银行
                                             </div>
@@ -339,7 +339,7 @@
                                 <div class="am-u-sm-12 am-u-md-6">
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
-                                            <label for="user-name" class="am-u-sm-3 am-form-label">开户账号</label>
+                                            <label class="am-u-sm-3 am-form-label">开户账号</label>
                                             <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
                                                 2134566876756453
                                             </div>
@@ -349,7 +349,7 @@
                                 <div class="am-u-sm-12 am-u-md-6">
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
-                                            <label for="user-name" class="am-u-sm-3 am-form-label star"> 注册固定电话</label>
+                                            <label class="am-u-sm-3 am-form-label star"> 注册固定电话</label>
                                             <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
                                                 13888888888
                                             </div>
@@ -359,7 +359,7 @@
                                 <div class="am-u-sm-12 am-u-md-6">
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
-                                            <label for="user-name" class="am-u-sm-3 am-form-label">注册场所地址</label>
+                                            <label class="am-u-sm-3 am-form-label">注册场所地址</label>
                                             <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
                                                 南京市建邺区
                                             </div>
@@ -372,7 +372,7 @@
                                 <div class="am-u-sm-12 am-u-md-6">
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
-                                            <label for="user-name" class="am-u-sm-3 am-form-label star"> 邮箱</label>
+                                            <label class="am-u-sm-3 am-form-label star"> 邮箱</label>
                                             <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
                                                 123456789@qq.com
                                             </div>
@@ -382,7 +382,7 @@
                                 <div class="am-u-sm-12 am-u-md-6">
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
-                                            <label for="user-name" class="am-u-sm-3 am-form-label"></label>
+                                            <label class="am-u-sm-3 am-form-label"></label>
                                             <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
                                                 <span id="selectEmail" style="color: #23abf0;cursor: pointer;">选择</span>
                                             </div>
@@ -394,7 +394,7 @@
                                 <div class="am-u-sm-12 am-u-md-6">
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
-                                            <label for="user-name" class="am-u-sm-3 am-form-label star"> 邮寄地址</label>
+                                            <label class="am-u-sm-3 am-form-label star"> 邮寄地址</label>
                                             <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
                                                 江苏省南京市建邺区庐山路88号金融城2期
                                             </div>
@@ -404,7 +404,7 @@
                                 <div class="am-u-sm-12 am-u-md-6">
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
-                                            <label for="user-name" class="am-u-sm-3 am-form-label"></label>
+                                            <label class="am-u-sm-3 am-form-label"></label>
                                             <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
                                                 <span id="selectAddress"
                                                       style="color: #23abf0;cursor: pointer;">选择</span>
@@ -577,27 +577,28 @@
         </div>
     </div>
 </div>
-<script src="js/jquery.min.js">
-</script>
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+<script src="js/jquery.min.js"></script>
 <script src="js/amazeui.min.js"></script>
 <script src="js/app.js"></script>
 <script>
-    var baseinfoDiv = document.getElementById('baseinfoDiv')
-    var showDiv = document.getElementById('showDiv')
-    var resultDiv = document.getElementById('resultDiv')
-    resultDiv.style.display = 'none';
+    var eid = ${sessionScope.eid};
+    var baseinfoDiv = document.getElementById("baseinfoDiv")
+    var showDiv = document.getElementById("showDiv")
+    var resultDiv = document.getElementById("resultDiv")
+    resultDiv.style.display = "none";
     // 提交按钮
     $(function () {
-        $('#submitBtn').on('click', function () {
-            baseinfoDiv.style.display = 'none';
-            showDiv.style.display = 'none';
-            resultDiv.style.display = 'block';
+        $("#submitBtn").on("click", function () {
+            baseinfoDiv.style.display = "none";
+            showDiv.style.display = "none";
+            resultDiv.style.display = "block";
         });
     });
     // 邮寄地址选择按钮
     $(function () {
-        $('#selectAddress').on('click', function () {
-            $('#my-address').modal(
+        $("#selectAddress").on("click", function () {
+            $("#my-address").modal(
                 {
                     relatedTarget: this,
                     onCancel: function (e) {
@@ -607,8 +608,8 @@
     });
     // 邮箱选择按钮
     $(function () {
-        $('#selectEmail').on('click', function () {
-            $('#my-email').modal(
+        $("#selectEmail").on("click", function () {
+            $("#my-email").modal(
                 {
                     relatedTarget: this,
                     onCancel: function (e) {

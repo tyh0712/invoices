@@ -111,7 +111,7 @@
                                                 <th class="table-date am-hide-sm-only">操作</th>
                                             </tr>
                                             </thead>
-                                            <tbody id="doc-modal-list">
+                                            <tbody id="doc-modal-list1">
                                             <tr data-id="2">
                                                 <td class="am-hide-sm-only">
                                                     <span>1</span>
@@ -198,7 +198,7 @@
                                                 <th class="table-date am-hide-sm-only">操作</th>
                                             </tr>
                                             </thead>
-                                            <tbody id="doc-modal-list">
+                                            <tbody id="doc-modal-list2">
 
                                             </tbody>
                                         </table>
@@ -231,7 +231,7 @@
                                                 <th class="table-date am-hide-sm-only">操作</th>
                                             </tr>
                                             </thead>
-                                            <tbody id="doc-modal-list">
+                                            <tbody id="doc-modal-list3">
 
                                             </tbody>
                                         </table>
@@ -257,8 +257,10 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/amazeui.min.js"></script>
 <script src="js/app.js"></script>
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
 <script>
 
+    var eid = ${sessionScope.eid};
     //   发票
     var cancelBtn = document.getElementById('cancelBtn');
     cancelBtn.style.display = "none";
@@ -357,27 +359,107 @@
         $("#Type" + key).attr("disabled", false);
         $("#defaultV" + key).attr("disabled", false);
         var div1 = $("#operate" + key);
-        div1[0].innerHTML = '<a style="cursor:pointer;color:#007bff;"  onclick="saveInterfaceParam();">保存</a>&nbsp;&nbsp;<a style="cursor:pointer;color:#007bff;"  onclick="saveInterfaceParam();">取消</a>';
+        $(".table-bordered  tr:not(:first)").remove();
+        div1[0].innerHTML = "<a style='cursor:pointer;color:#007bff;'  onclick='saveInterfaceParam();'>保存</a>&nbsp;&nbsp;<a style='cursor:pointer;color:#007bff;'  onclick='saveInterfaceParam();'>取消</a>";
     }
 
     // 邮寄地址
     function add_address() {
-        var Table = document.getElementById("table_id_address");
-        var rowsNum = Table.rows.length - 1;
-        NewRow = Table.insertRow(); //添加行
-        ID = NewRow.insertCell(); //添加列
-        Name = NewRow.insertCell();
-        NO = NewRow.insertCell();
-        Type = NewRow.insertCell();
-        defaultV = NewRow.insertCell();
-        operate = NewRow.insertCell();
-        //属性赋值
-        ID.innerHTML = rowsNum + 1;
-        Name.innerHTML = "<input id=Name" + (rowsNum + 1) + " style='width: 120px;' type='text' />";
-        NO.innerHTML = "<input id=No" + (rowsNum + 1) + "  style='width: 120px;' type='text' />";
-        Type.innerHTML = "<input id=Type" + (rowsNum + 1) + "  style='width: 120px;' type='text' />";
-        defaultV.innerHTML = "<input id=defaultV" + (rowsNum + 1) + "  style='width: 120px;' type='text' />";
-        operate.innerHTML = '<div id=operate' + (rowsNum + 1) + '><a style="cursor:pointer;color:#007bff;"  onclick="saveAddress();">保存</a>&nbsp;&nbsp;<a style="cursor:pointer;color:#007bff;"  onclick="saveAddress();">取消</a></div>';
+
+        $.get("as","a=2&enterpriseId="+eid,function (list) {
+            eval("var list="+list);
+            var i=list.length - 1;
+            var Tbody = document.querySelector('#table_id_address tbody')
+            var rowsNum = Tbody.rows.length;
+            NewRow = Tbody.insertRow(); //添加行
+            ID = NewRow.insertCell(); //添加列
+            Name = NewRow.insertCell();
+            NO = NewRow.insertCell();
+            Type = NewRow.insertCell();
+            defaultV = NewRow.insertCell();
+            operate = NewRow.insertCell();
+            //属性赋值
+            ID.innerHTML = list[i].aid+1;
+            Name.innerHTML = "<input id=Name" + (list[i].aid+1) + " style='width: 120px;' type='text' />";
+            NO.innerHTML = "<input id=No" + (list[i].aid+1) + "  style='width: 120px;' type='text' />";
+            Type.innerHTML = "<input id=Type" + (list[i].aid+1) + "  style='width: 120px;' type='text' />";
+            defaultV.innerHTML = "<input id=defaultV" + (list[i].aid+1) + "  style='width: 120px;' type='text' />";
+            operate.innerHTML = '<div id=operate' + (list[i].aid+1) + '><a style="cursor:pointer;color:#007bff;"  onclick="saveNewAddress()">保存</a>&nbsp;&nbsp;<a style="cursor:pointer;color:#007bff;"  onclick="saveNewAddress()">取消</a></div>';
+        });
+    }
+
+
+    $(function () {
+        $.get("as","a=2&enterpriseId="+eid,function (list) {
+            eval("var list="+list);
+            for (var i=0;i<list.length;i++){
+                var Tbody = document.querySelector('#table_id_address tbody')
+                var rowsNum = Tbody.rows.length;
+                NewRow = Tbody.insertRow(); //添加行
+                ID = NewRow.insertCell(); //添加列
+                Name = NewRow.insertCell();
+                NO = NewRow.insertCell();
+                Type = NewRow.insertCell();
+                defaultV = NewRow.insertCell();
+                operate = NewRow.insertCell();
+                //属性赋值
+                ID.innerHTML = list[i].aid;
+                Name.innerHTML = "<input id=Name" + (list[i].aid) + " value='"+list[i].addressee+"'  style='width: 120px;' type='text' disabled='disabled'/>";
+                NO.innerHTML = "<input id=No" + (list[i].aid) + " value='"+list[i].phone+"'  style='width: 120px;' type='text' /disabled='disabled'>";
+                Type.innerHTML = "<input id=Type" + (list[i].aid) + " value='"+list[i].area+"'  style='width: 120px;' type='text' disabled='disabled'/>";
+                defaultV.innerHTML = "<input id=defaultV" + (list[i].aid) + " value='"+list[i].addressDetail+"'  style='width: 120px;' type='text' disabled='disabled'/>";
+                if (list[i].defaultStatus=="A"){
+                    operate.innerHTML = "<div id=operate" + (list[i].aid) + "><a style='cursor:pointer;color:#007bff;'  onclick='editAddress()'>编辑&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"background-color: rgba(230, 247, 255, 1);border: 1px solid;color: #1890FF;padding:3px 5px;border-radius: 3px;\">默认</span></div>";
+                }else {
+                    operate.innerHTML = "<div id=operate" + (list[i].aid) + "><a style='cursor:pointer;color:#007bff;'  onclick='editAddress()'>编辑</a>&nbsp;&nbsp;<a style='cursor:pointer;color:#007bff;'  onclick='setDefault()'>设为默认</a></div>";
+                }
+            }
+        });
+    });
+
+    function setDefault() {
+        var td = event.srcElement;
+        var key = td.parentElement.parentElement.parentElement.innerText.split("\n")[0].trim();
+        $.get("as", "a=4&aid=" + key + "&enterpriseId=" + eid, function (list) {
+            $("#doc-modal-list2").empty();
+            eval("var list=" + list);
+            for (var i = 0; i < list.length; i++) {
+                var Tbody = document.querySelector('#table_id_address tbody')
+                var rowsNum = Tbody.rows.length;
+                NewRow = Tbody.insertRow(); //添加行
+                ID = NewRow.insertCell(); //添加列
+                Name = NewRow.insertCell();
+                NO = NewRow.insertCell();
+                Type = NewRow.insertCell();
+                defaultV = NewRow.insertCell();
+                operate = NewRow.insertCell();
+                //属性赋值
+                ID.innerHTML = list[i].aid;
+                Name.innerHTML = "<input id=Name" + (list[i].aid) + " value='" + list[i].addressee + "'  style='width: 120px;' type='text' disabled='disabled'/>";
+                NO.innerHTML = "<input id=No" + (list[i].aid) + " value='" + list[i].phone + "'  style='width: 120px;' type='text' /disabled='disabled'>";
+                Type.innerHTML = "<input id=Type" + (list[i].aid) + " value='" + list[i].area + "'  style='width: 120px;' type='text' disabled='disabled'/>";
+                defaultV.innerHTML = "<input id=defaultV" + (list[i].aid) + " value='" + list[i].addressDetail + "'  style='width: 120px;' type='text' disabled='disabled'/>";
+                if (list[i].defaultStatus == "A") {
+                    operate.innerHTML = "<div id=operate" + (list[i].aid) + "><a style='cursor:pointer;color:#007bff;'  onclick='editAddress()'>编辑&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"background-color: rgba(230, 247, 255, 1);border: 1px solid;color: #1890FF;padding:3px 5px;border-radius: 3px;\">默认</span></div>";
+                } else {
+                    operate.innerHTML = "<div id=operate" + (list[i].aid) + "><a style='cursor:pointer;color:#007bff;'  onclick='editAddress()'>编辑</a>&nbsp;&nbsp;<a style='cursor:pointer;color:#007bff;'  onclick='setDefault()'>设为默认</a></div>";
+                }
+            }
+        });
+    }
+    function saveNewAddress() {
+        var td = event.srcElement; // 通过event.srcElement 获取激活事件的对象 td
+        //获取行索引，修改input样式，其中parentElement和table中的标签层级相关，不是一成不变
+        var key = td.parentElement.parentElement.parentElement.innerText.split("\n")[0].trim();
+        $("#Name" + key).attr("disabled", true);
+        $("#No" + key).attr("disabled", true);
+        $("#Type" + key).attr("disabled", true);
+        $("#defaultV" + key).attr("disabled", true);
+        var div1 = $("#operate" + key);
+        $.get("as","a=5&enterpriseId="+eid+"&addressee="+$("#Name"+key).val()+ "&phone="+$("#No"+key).val()+ "&area="+$("#Type"+key).val()+ "&addressDetail="+$("#defaultV"+key).val(),function (str) {
+            eval("var str="+str);
+        });
+        div1[0].innerHTML = '<a style="cursor:pointer;color:#007bff;"  onclick="editAddress()">编辑</a>&nbsp;&nbsp;<a style="cursor:pointer;color:#007bff;">设为默认</a>';
     }
 
     function saveAddress() {
@@ -389,6 +471,9 @@
         $("#Type" + key).attr("disabled", true);
         $("#defaultV" + key).attr("disabled", true);
         var div1 = $("#operate" + key);
+        $.get("as","a=3&aid="+key+"&addressee="+$("#Name"+key).val()+ "&phone="+$("#No"+key).val()+ "&area="+$("#Type"+key).val()+ "&addressDetail="+$("#defaultV"+key).val(),function (str) {
+            eval("var str="+str);
+        });
         div1[0].innerHTML = '<a style="cursor:pointer;color:#007bff;"  onclick="editAddress()">编辑</a>&nbsp;&nbsp;<a style="cursor:pointer;color:#007bff;">设为默认</a>';
     }
 

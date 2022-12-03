@@ -213,7 +213,9 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/amazeui.min.js"></script>
 <script src="js/app.js"></script>
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
 <script>
+    var eid = ${sessionScope.eid};
 
 </script>
 </body>

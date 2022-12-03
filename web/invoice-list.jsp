@@ -162,15 +162,14 @@
                         <div class="am-g tpl-amazeui-form" style="font-size: 14px;color: #666;margin-bottom: 5px;">
                             <div class="am-u-sm-12 am-u-md-6">
                                 <div class="am-u-sm-12">
-                                    <span style="color: #333;">邮寄地址（默认）：</span><span id="deAddress"> </span>
+                                    <span style="color: #333;">邮寄地址（默认）：</span><span name="deAddress"> </span>
                                 </div>
                             </div>
                         </div>
                         <div class="am-g tpl-amazeui-form" style="font-size: 14px;color: #666;">
                             <div class="am-u-sm-12 am-u-md-6">
                                 <div class="am-u-sm-12">
-                                    <span style="color: #333;">电子邮箱：</span> <span>
-                                            2134566876756453@qq.com</span>
+                                    <span style="color: #333;">电子邮箱：</span> <span name="email1"> </span>
                                 </div>
                             </div>
 
@@ -424,18 +423,28 @@
 
     var eid = ${sessionScope.eid};
     $(function () {
-        var post=$.post("as","a=1&enterpriseId="+eid,function (address) {
+        $.get("as","a=1&enterpriseId="+eid,function (address) {
             eval("var address="+address);
-            $("[id=deAddress]").text(address.area+""+address.addressDetail);
+            $("[name=deAddress]").text(address.area+""+address.addressDetail);
+        });
+    });
+    $(function () {
+        $.get("os","o=1&invoicingRecordId="+eid,function (count) {
+            eval("var getamount=" + count);
+            $("#divallcount").text(getamount[0]+"元");
+            $("#divusecont").text(getamount[1]+"元");
+            $("#divnewcount").text(getamount[2]+"元");
+        });
+    });
+    $(function () {
+        $.get("es","e=1&enterpriseId="+eid,function (email11) {
+            eval("var email="+email11);
+            $("[name=email1]").text(email.emailDetail);
         });
     });
 
-    $.get("os","o=1&invoicingRecordId="+eid,function (count) {
-        eval("var getamount=" + count);
-        $("#divallcount").text(getamount[0]+"元");
-        $("#divusecont").text(getamount[1]+"元");
-        $("#divnewcount").text(getamount[2]+"元");
-    });
+
+
 </script>
 </body>
 
