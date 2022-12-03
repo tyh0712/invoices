@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="css/amazeui.min.css"/>
     <link rel="stylesheet" href="css/admin.css">
     <link rel="stylesheet" href="css/app.css">
-
 </head>
 <body data-type="generalComponents">
 <header class="am-topbar am-topbar-inverse admin-header">
@@ -28,7 +27,7 @@
         <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
             <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
                 <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
-                    <span class="tpl-header-list-user-nick">禁言小张</span><span class="tpl-header-list-user-ico"> <img
+                    <span class="tpl-header-list-user-nick" name="userName"></span><span class="tpl-header-list-user-ico"> <img
                         src="img/user01.png"></span>
                 </a>
                 <ul class="am-dropdown-content">
@@ -100,7 +99,7 @@
                             <div class="am-u-sm-12 am-u-md-3">
                                 <div class="am-u-sm-12" style="text-align: center;font-weight: bold;">
                                     <div>可开票金额</div>
-                                    <div id="divnewcount" style="color: red;font-size: 20px;">元</div>
+                                    <div style="color: red;font-size: 20px;">10,000,0.00元</div>
                                 </div>
                             </div>
                             <div class="am-u-sm-12 am-u-md-1">
@@ -111,7 +110,7 @@
                             <div class="am-u-sm-12 am-u-md-3">
                                 <div class="am-u-sm-12" style="text-align: center;font-weight: bold;">
                                     <div>总计可开票金额</div>
-                                    <div id="divallcount" style="color: red;font-size: 20px;">元</div>
+                                    <div style="color: red;font-size: 20px;">20,000,0.00元</div>
                                 </div>
                             </div>
                             <div class="am-u-sm-12 am-u-md-1">
@@ -122,7 +121,7 @@
                             <div class="am-u-sm-12 am-u-md-3">
                                 <div class="am-u-sm-12" style="text-align: center;font-weight: bold;">
                                     <div>历史已开票</div>
-                                    <div id="divusecont" style="color: red;font-size: 20px;">元</div>
+                                    <div style="color: red;font-size: 20px;">10,000,0.00元</div>
                                 </div>
                             </div>
                         </div>
@@ -151,12 +150,12 @@
                         <div class="am-g tpl-amazeui-form" style="font-size: 14px;color: #666;margin-bottom: 5px;">
                             <div class="am-u-sm-12 am-u-md-6">
                                 <div class="am-u-sm-12">
-                                    <span style="color: #333;">抬头（默认）：</span> <span>百度科技有限公司</span>
+                                    <span style="color: #333;">抬头（默认）：</span> <span name="title1"></span>
                                 </div>
                             </div>
                             <div class="am-u-sm-12 am-u-md-6">
                                 <div class="am-u-sm-12">
-                                    <span style="color: #333;">税号：</span> <span>91110000802100XXXX</span>
+                                    <span style="color: #333;">税号：</span> <span name="taxNo1"></span>
                                 </div>
                             </div>
                         </div>
@@ -396,7 +395,7 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/amazeui.min.js"></script>
 <script src="js/app.js"></script>
-<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+<script src="js/jquery-1.8.3.js"></script>
 <script>
     // 退票二次确认
     $(function () {
@@ -422,13 +421,20 @@
             });
         });
     });
-
-    var eid = ${sessionScope.eid};
-    $.get("os","o=1&invoicingRecordId="+eid,function (count) {
-        eval("var getamount=" + count);
-        $("#divallcount").text(getamount[0]+"元");
-        $("#divusecont").text(getamount[1]+"元");
-        $("#divnewcount").text(getamount[2]+"元");
+</script>
+<script>
+    $(document).ready(function () {
+        var eid = ${sessionScope.eid};
+        alert(eid);
+        var userName1 = "${sessionScope.userName}";
+        alert(userName1);
+        $.get("bs","b=1&eid="+eid,function (baseData1) {
+            eval("var baseData=" + baseData1);
+            var title = baseData.title;
+            $("[name=title1]").text(title);
+            $("[name=taxNo1]").text(baseData.taxNo);
+        });
+        $("[name=userName]").text(userName1);
     });
 </script>
 </body>

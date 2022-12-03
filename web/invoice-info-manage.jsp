@@ -29,7 +29,7 @@
         <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
             <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
                 <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
-                    <span class="tpl-header-list-user-nick">禁言小张</span>
+                    <span class="tpl-header-list-user-nick" name="userName"></span>
                     <span class="tpl-header-list-user-ico">
               <img src="img/user01.png">
             </span>
@@ -114,34 +114,34 @@
                                             <tbody id="doc-modal-list">
                                             <tr data-id="2">
                                                 <td class="am-hide-sm-only">
-                                                    <span>1</span>
+                                                    <span name="bid1"></span>
                                                 </td>
-                                                <td class="am-hide-sm-only">百度科技有限公司
+                                                <td class="am-hide-sm-only" name="title1">
                                                     <span style="background-color: rgba(230, 247, 255, 1);border: 1px solid;color: #1890FF;padding:3px 5px;border-radius: 3px;">默认</span>
                                                 </td>
-                                                <td class="am-hide-sm-only">91110000802100XXXX</td>
+                                                <td class="am-hide-sm-only" name="taxNo1"></td>
                                                 <td>
-                                                    <div class="editRow">中国工商银行</div>
-                                                    <input type="text" class="am-form-field editInput" value="中国工商银行"
-                                                           style="border: 1px solid #c2cad8;width: 70%;border-radius: 3px;">
+                                                    <div class="editRow" name="bankName1"></div>
+                                                    <input type="text" class="am-form-field editInput" value="${baseData.bankName}"
+                                                           style="border: 1px solid #c2cad8;width: 70%;border-radius: 3px;" name="bankName2">
                                                 </td>
                                                 <td class="am-hide-sm-only">
-                                                    <div class="editRow">12345678998745632</div>
+                                                    <div class="editRow" name="bankAccount1"></div>
                                                     <input type="text" class="am-form-field editInput"
-                                                           value="12345678998745632"
-                                                           style="border: 1px solid #c2cad8;width: 70%;border-radius: 3px;">
+                                                           value="${baseData.bankAccount}"
+                                                           style="border: 1px solid #c2cad8;width: 70%;border-radius: 3px;" name="bankAccount2">
                                                 </td>
                                                 <td class="am-hide-sm-only">
-                                                    <div class="editRow">13888888888</div>
+                                                    <div class="editRow" name="phone1"></div>
                                                     <input type="text" class="am-form-field editInput"
-                                                           value="13888888888"
-                                                           style="border: 1px solid #c2cad8;width: 70%;border-radius: 3px;">
+                                                           value="${baseData.phone}"
+                                                           style="border: 1px solid #c2cad8;width: 70%;border-radius: 3px;" name="phone2">
                                                 </td>
                                                 <td class="am-hide-sm-only">
-                                                    <div class="editRow">北京市海淀区百度大厦</div>
+                                                    <div class="editRow" name="address1"></div>
                                                     <input type="text" class="am-form-field editInput"
-                                                           value="北京市海淀区百度大厦"
-                                                           style="border: 1px solid #c2cad8;width: 70%;border-radius: 3px;">
+                                                           value="${baseData.address}"
+                                                           style="border: 1px solid #c2cad8;width: 70%;border-radius: 3px;" name="address2">
                                                 </td>
                                                 <td>
                                                     <div class="am-btn-toolbar">
@@ -257,7 +257,29 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/amazeui.min.js"></script>
 <script src="js/app.js"></script>
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
 <script>
+
+    var bid = 0;
+    var eid = ${sessionScope.eid};
+    $(document).ready(function () {
+        //发票信息管理  序号、抬头、税号、开户银行、开户账号、注册固定电话、注册场所地址
+        $.get("bs","b=1&eid="+eid,function (baseData1) {
+            eval("var baseData=" + baseData1);
+            $("[name=bid1]").text(baseData.bid);
+            bid = baseData.bid;
+            $("[name=title1]").text(baseData.title);
+            $("[name=taxNo1]").text(baseData.taxNo);
+            $("[name=bankName1]").text(baseData.bankName);
+            $("[name=bankAccount1]").text(baseData.bankAccount);
+            $("[name=phone1]").text(baseData.phone);
+            $("[name=address1]").text(baseData.address);
+        });
+
+        //右上角用户名
+        var userName1 = "${sessionScope.userName}";
+        $("[name=userName]").text(userName1);
+    })
 
     //   发票
     var cancelBtn = document.getElementById('cancelBtn');
@@ -300,6 +322,24 @@
             for (var i = 0; i < editInput.length; i++) {
                 editInput[i].style.display = "none";
             }
+
+            var bankName = $("[name=bankName2]").val();
+            var bankAccount = $("[name=bankAccount2]").val();
+            var phone = $("[name=phone2]").val();
+            var address = $("[name=address2]").val();
+
+            $.get("bs","b=2&eid="+eid+"&bid="+bid+"&bankName="+bankName+"&bankAccount="+bankAccount+"&phone="+phone+"&address="+address,function (baseData1) {
+                $("[name=bankName1]").empty();
+                $("[name=bankAccount1]").empty();
+                $("[name=phone1]").empty();
+                $("[name=address1]").empty();
+
+                eval("var baseData3=" + baseData1);
+                $("[name=bankName1]").text(baseData3.bankName);
+                $("[name=bankAccount1]").text(baseData3.bankAccount);
+                $("[name=phone1]").text(baseData3.phone);
+                $("[name=address1]").text(baseData3.address);
+            });
         });
     });
 

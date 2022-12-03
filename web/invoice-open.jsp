@@ -42,7 +42,7 @@
         <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
             <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
                 <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
-                    <span class="tpl-header-list-user-nick">禁言小张</span>
+                    <span class="tpl-header-list-user-nick" name="userName"></span>
                     <span class="tpl-header-list-user-ico">
               <img src="img/user01.png">
             </span>
@@ -144,6 +144,7 @@
                                     <input type="checkbox" class="tpl-table-fz-check">
                                 </th>
                                 <th class="table-title">订单编号</th>
+
                                 <th class="table-author am-hide-sm-only">订单金额（元）</th>
                                 <th class="table-date am-hide-sm-only">生成时间</th>
                             </tr>
@@ -249,9 +250,7 @@
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
                                             <label for="user-name" class="am-u-sm-3 am-form-label star"> 抬头</label>
-                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                                百度科技有限公司
-                                            </div>
+                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="title1"></div>
                                         </div>
                                     </form>
                                 </div>
@@ -259,9 +258,7 @@
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
                                             <label for="user-name" class="am-u-sm-3 am-form-label">税号</label>
-                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                                91110000802100XXXX
-                                            </div>
+                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="taxNo1"></div>
                                         </div>
                                     </form>
                                 </div>
@@ -271,9 +268,7 @@
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
                                             <label for="user-name" class="am-u-sm-3 am-form-label star"> 抬头</label>
-                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                                百度科技有限公司
-                                            </div>
+                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="title1"></div>
                                         </div>
                                     </form>
                                 </div>
@@ -281,9 +276,7 @@
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
                                             <label for="user-name" class="am-u-sm-3 am-form-label">税号</label>
-                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                                91110000802100XXXX
-                                            </div>
+                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="taxNo1"></div>
                                         </div>
                                     </form>
                                 </div>
@@ -291,9 +284,7 @@
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
                                             <label for="user-name" class="am-u-sm-3 am-form-label star"> 开户银行</label>
-                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                                中国工商银行
-                                            </div>
+                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="bankName1"></div>
                                         </div>
                                     </form>
                                 </div>
@@ -301,9 +292,7 @@
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
                                             <label for="user-name" class="am-u-sm-3 am-form-label">开户账号</label>
-                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                                2134566876756453
-                                            </div>
+                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="bankAccount1"></div>
                                         </div>
                                     </form>
                                 </div>
@@ -311,9 +300,7 @@
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
                                             <label for="user-name" class="am-u-sm-3 am-form-label star"> 注册固定电话</label>
-                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                                13888888888
-                                            </div>
+                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="phone1"></div>
                                         </div>
                                     </form>
                                 </div>
@@ -321,9 +308,7 @@
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
                                             <label for="user-name" class="am-u-sm-3 am-form-label">注册场所地址</label>
-                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                                南京市建邺区
-                                            </div>
+                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="address1"></div>
                                         </div>
                                     </form>
                                 </div>
@@ -538,10 +523,10 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
 <script src="js/jquery.min.js"></script>
 <script src="js/amazeui.min.js"></script>
 <script src="js/app.js"></script>
-<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         var orderno;
@@ -693,6 +678,24 @@
             $('#invoice_appropriative_title').show();
         }
     }
+
+    $(document).ready(function () {
+        //抬头信息  抬头、税号
+        var eid = ${sessionScope.eid};
+        $.get("bs","b=1&eid="+eid,function (baseData1) {
+            eval("var baseData=" + baseData1);
+            $("[name=title1]").text(baseData.title);
+            $("[name=taxNo1]").text(baseData.taxNo);
+            $("[name=bankName1]").text(baseData.bankName);
+            $("[name=bankAccount1]").text(baseData.bankAccount);
+            $("[name=phone1]").text(baseData.phone);
+            $("[name=address1]").text(baseData.address);
+        });
+
+        //右上角用户名
+        var userName1 = "${sessionScope.userName}";
+        $("[name=userName]").text(userName1);
+    })
 </script>
 </body>
 

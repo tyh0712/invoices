@@ -28,7 +28,7 @@
         <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
             <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
                 <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
-                    <span class="tpl-header-list-user-nick">禁言小张</span><span class="tpl-header-list-user-ico"> <img
+                    <span class="tpl-header-list-user-nick" name="userName"></span><span class="tpl-header-list-user-ico"> <img
                         src="img/user01.png"></span>
                 </a>
                 <ul class="am-dropdown-content">
@@ -93,36 +93,7 @@
                                 </tr>
                                 </thead>
                                 <tbody id="doc-modal-list">
-<%--                                <tr data-id="2">--%>
-<%--                                    <td class="am-hide-sm-only">D20220328000001</td>--%>
-<%--                                    <td class="am-hide-sm-only">百度科技有限公司</td>--%>
-<%--                                    <td class="am-hide-sm-only">1,000,000.00</td>--%>
-<%--                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>--%>
-<%--                                </tr>--%>
-<%--                                <tr data-id="2">--%>
-<%--                                    <td class="am-hide-sm-only">D20220328000002</td>--%>
-<%--                                    <td class="am-hide-sm-only">百度科技有限公司</td>--%>
-<%--                                    <td class="am-hide-sm-only">1,000,000.00</td>--%>
-<%--                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>--%>
-<%--                                </tr>--%>
-<%--                                <tr data-id="2">--%>
-<%--                                    <td class="am-hide-sm-only">D20220328000003</td>--%>
-<%--                                    <td class="am-hide-sm-only">百度科技有限公司</td>--%>
-<%--                                    <td class="am-hide-sm-only">1,000,000.00</td>--%>
-<%--                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>--%>
-<%--                                </tr>--%>
-<%--                                <tr data-id="2">--%>
-<%--                                    <td class="am-hide-sm-only">D20220328000004</td>--%>
-<%--                                    <td class="am-hide-sm-only">百度科技有限公司</td>--%>
-<%--                                    <td class="am-hide-sm-only">1,000,000.00</td>--%>
-<%--                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>--%>
-<%--                                </tr>--%>
-<%--                                <tr data-id="2">--%>
-<%--                                    <td class="am-hide-sm-only">D20220328000005</td>--%>
-<%--                                    <td class="am-hide-sm-only">百度科技有限公司</td>--%>
-<%--                                    <td class="am-hide-sm-only">1,000,000.00</td>--%>
-<%--                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>--%>
-<%--                                </tr>--%>
+
                                 </tbody>
                             </table>
                         </form>
@@ -171,9 +142,7 @@
                         <form class="am-form am-form-horizontal">
                             <div class="am-form-group">
                                 <label for="user-name" class="am-u-sm-3 am-form-label">抬头</label>
-                                <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                    百度科技有限公司
-                                </div>
+                                <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="title1"></div>
                             </div>
                         </form>
                         <hr>
@@ -182,9 +151,7 @@
                         <form class="am-form am-form-horizontal">
                             <div class="am-form-group">
                                 <label for="user-name" class="am-u-sm-3 am-form-label">税号</label>
-                                <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                    91110000802100XXXX
-                                </div>
+                                <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="taxNo1"></div>
                             </div>
                         </form>
                         <hr>
@@ -213,8 +180,22 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/amazeui.min.js"></script>
 <script src="js/app.js"></script>
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
 <script>
+    var eid = ${sessionScope.eid};
     $(document).ready(function () {
+        //右上角用户名
+        var userName1 = "${sessionScope.userName}";
+        $("[name=userName]").text(userName1);
+
+        //抬头信息 抬头、税号
+        var baseData = null;
+        $.get("bs","b=1&eid="+eid,function (baseData1) {
+            eval("baseData=" + baseData1);
+            $("[name=title1]").text(baseData.title);
+            $("[name=taxNo1]").text(baseData.taxNo);
+        });
+
         <%--var iid = ${requestScope.iid};--%>
         var iid = 1;
         var sum = 0.00;
@@ -223,7 +204,7 @@
             for (var i=0;i<orderlist.length;i++){
                 var obj = "<tr data-id=\"2\">\n" +
                     "    <td class=\"am-hide-sm-only\">"+orderlist[i].no+"</td>\n" +
-                    "    <td class=\"am-hide-sm-only\">百度科技有限公司</td>\n" +
+                    "    <td class=\"am-hide-sm-only\">"+baseData.title+"</td>\n" +
                     "    <td class=\"am-hide-sm-only\">"+orderlist[i].totalAmount+"</td>\n" +
                     "    <td class=\"am-hide-sm-only\">"+orderlist[i].createTime+"</td>\n" +
                     "</tr>";

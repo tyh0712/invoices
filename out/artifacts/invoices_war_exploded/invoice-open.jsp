@@ -149,7 +149,7 @@
                                 <th class="table-date am-hide-sm-only">生成时间</th>
                             </tr>
                             </thead>
-                            <tbody id="doc-modal-list1">
+                            <tbody id="doc-modal-list">
                             <tr data-id="2">
                                 <td>
                                     <input type="checkbox">
@@ -463,7 +463,7 @@
                             <th class="table-title" style="text-align: center;">邮箱</th>
                         </tr>
                         </thead>
-                        <tbody id="doc-modal-list2">
+                        <tbody id="doc-modal-list">
                         <tr data-id="2">
                             <td>
                                 <label class="am-radio">
@@ -525,7 +525,7 @@
                             <th class="table-title" style="text-align: center;">地址信息</th>
                         </tr>
                         </thead>
-                        <tbody id="doc-modal-list3">
+                        <tbody id="doc-modal-list">
                         <tr data-id="2">
                             <td>
                                 <label class="am-radio">

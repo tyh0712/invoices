@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="css/amazeui.min.css"/>
     <link rel="stylesheet" href="css/admin.css">
     <link rel="stylesheet" href="css/app.css">
-
 </head>
 <body data-type="generalComponents">
 <header class="am-topbar am-topbar-inverse admin-header">
@@ -28,7 +27,7 @@
         <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
             <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
                 <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
-                    <span class="tpl-header-list-user-nick">禁言小张</span><span class="tpl-header-list-user-ico"> <img
+                    <span class="tpl-header-list-user-nick" name="userName"></span><span class="tpl-header-list-user-ico"> <img
                         src="img/user01.png"></span>
                 </a>
                 <ul class="am-dropdown-content">
@@ -151,19 +150,19 @@
                         <div class="am-g tpl-amazeui-form" style="font-size: 14px;color: #666;margin-bottom: 5px;">
                             <div class="am-u-sm-12 am-u-md-6">
                                 <div class="am-u-sm-12">
-                                    <span style="color: #333;">抬头（默认）：</span> <span>百度科技有限公司</span>
+                                    <span style="color: #333;">抬头（默认）：</span> <span name="title1"></span>
                                 </div>
                             </div>
                             <div class="am-u-sm-12 am-u-md-6">
                                 <div class="am-u-sm-12">
-                                    <span style="color: #333;">税号：</span> <span>91110000802100XXXX</span>
+                                    <span style="color: #333;">税号：</span> <span name="taxNo1"></span>
                                 </div>
                             </div>
                         </div>
                         <div class="am-g tpl-amazeui-form" style="font-size: 14px;color: #666;margin-bottom: 5px;">
                             <div class="am-u-sm-12 am-u-md-6">
                                 <div class="am-u-sm-12">
-                                    <span style="color: #333;">邮寄地址（默认）：</span> <span>北京市海淀区百度大厦</span>
+                                    <span style="color: #333;">邮寄地址（默认）：</span><span id="deAddress"> </span>
                                 </div>
                             </div>
                         </div>
@@ -421,15 +420,36 @@
                 }
             });
         });
-        $(document)
     });
 
     var eid = ${sessionScope.eid};
+    $(function () {
+        var post=$.post("as","a=1&enterpriseId="+eid,function (address) {
+            eval("var address="+address);
+            $("[id=deAddress]").text(address.area+""+address.addressDetail);
+        });
+    });
+
     $.get("os","o=1&invoicingRecordId="+eid,function (count) {
         eval("var getamount=" + count);
         $("#divallcount").text(getamount[0]+"元");
         $("#divusecont").text(getamount[1]+"元");
         $("#divnewcount").text(getamount[2]+"元");
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        //发票抬头及地址信息  抬头、税号
+        var eid = ${sessionScope.eid};
+        $.get("bs","b=1&eid="+eid,function (baseData1) {
+            eval("var baseData=" + baseData1);
+            $("[name=title1]").text(baseData.title);
+            $("[name=taxNo1]").text(baseData.taxNo);
+        });
+
+        //右上角用户名
+        var userName1 = "${sessionScope.userName}";
+        $("[name=userName]").text(userName1);
     });
 </script>
 </body>
