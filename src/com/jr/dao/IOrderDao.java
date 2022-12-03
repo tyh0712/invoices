@@ -18,15 +18,16 @@ public interface IOrderDao {
     public double selectTotalAmountByEId(int enterpriseId);
 
     //根据企业id根据开票状态（已开票）查询订单总金额之和
-    //传入：int 企业ID  /  String 开票状态
+    //传入：int 企业ID  /  String 开票状态/-已开票
     //返回：double 历史已开票订单总金额之和
-    public double selectTotalAmountByEIdAndStatus(int enterpriseId,String invoicingStatus);
+    public double selectTotalAmountByEIdAndStatus(int enterpriseId);
 
     //根据状态（未开票）查询全部
     //传入：String 开票状态
     //返回：List<Order> 没开票的订单集合
 //    public List<Order> selectOrderByStatus(String invoicingStatus);
-    List<Order> selectOrderByStatus(String invoicingStatus, Object... objs);
+//    List<Order> selectOrderByStatus(String invoicingStatus, Object... objs);
+    List<Order> selectOrderByStatus(int judge, String invoicingStatus, Object... objs);
 
     //根据开票记录表主键修改开票状态为（未开票）
     //传入：int 开票记录表主键

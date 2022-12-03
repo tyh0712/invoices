@@ -29,6 +29,7 @@ public class AddressServlet extends HttpServlet {
 
         int a = Integer.parseInt(request.getParameter("a"));
         if (a==1){
+            System.out.println("i=1");
             titleAndAddress(request,response);
         }else if (a==2){
             showAll(request,response);
@@ -50,6 +51,7 @@ public class AddressServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
+        doGet(request,response);
     }
 
     @Override
@@ -63,6 +65,7 @@ public class AddressServlet extends HttpServlet {
     public void titleAndAddress(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         int enterpriseId=Integer.parseInt(request.getParameter("enterpriseId"));
+        System.out.println(enterpriseId);
         Address address=abi.queryDeAddByEId(enterpriseId,"A");
         response.getWriter().print(new Gson().toJson(address));
 
