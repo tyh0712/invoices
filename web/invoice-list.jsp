@@ -439,6 +439,7 @@
 </script>
 <script>
     $(document).ready(function () {
+        //发票抬头及地址信息  抬头、税号
         var eid = ${sessionScope.eid};
         $.get("bs","b=1&eid="+eid,function (baseData1) {
             eval("var baseData=" + baseData1);
@@ -447,6 +448,7 @@
             $("[name=taxNo1]").text(baseData.taxNo);
         });
 
+        //右上角用户名
         var userName1 = "${sessionScope.userName}";
         $("[name=userName]").text(userName1);
     });
