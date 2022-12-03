@@ -32,6 +32,7 @@ public class InvoicingRecordServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         response.setContentType("text/html;charset=utf-8");
         int i = Integer.parseInt(request.getParameter("i"));
+        System.out.println(i);
         if (i==1){
             invoiceList(request,response);
         }else if (i==2){
@@ -59,9 +60,11 @@ public class InvoicingRecordServlet extends HttpServlet {
     public void invoiceList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         InvoicingRecordBizImpl irbi=new InvoicingRecordBizImpl();
         int enterpriseId=Integer.parseInt(request.getParameter("enterpriseId"));
+        System.out.println(enterpriseId);
         List<InvoicingRecord> list=irbi.getIRList(enterpriseId);
         HttpSession session=request.getSession();
         session.setAttribute("invoiceList",list);
+        System.out.println(list);
 //        response.sendRedirect("invoice-list.jsp");
     }
 
@@ -118,12 +121,11 @@ public class InvoicingRecordServlet extends HttpServlet {
     public void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println(request.getParameter("iid"));
         InvoicingRecordBizImpl irbi=new InvoicingRecordBizImpl();
-        InvoicingRecord ir=new InvoicingRecord();
         int iid=Integer.parseInt(request.getParameter("iid"));
-        ir.setIid(iid);
-        List<InvoicingRecord> list=irbi.detailIR(ir.getIid());
+        List<InvoicingRecord> list=irbi.detailIR(iid);
         HttpSession session=request.getSession();
         session.setAttribute("detailList",list);
+        System.out.println(list);
 //        response.sendRedirect("invoice-detail.jsp");
     }
 }
