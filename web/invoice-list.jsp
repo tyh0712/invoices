@@ -425,13 +425,14 @@
 <script>
     $(document).ready(function () {
         var eid = ${sessionScope.eid};
-        var userName1 = "${sessionScope.userName}";
         $.get("bs","b=1&eid="+eid,function (baseData1) {
             eval("var baseData=" + baseData1);
             var title = baseData.title;
             $("[name=title1]").text(title);
             $("[name=taxNo1]").text(baseData.taxNo);
         });
+
+        var userName1 = "${sessionScope.userName}";
         $("[name=userName]").text(userName1);
     });
 </script>
