@@ -17,6 +17,11 @@ public interface IInvoicingRecordDao {
     //返回：List<InvoicingRecord> 与企业ID有关的发票的展示
     public List<InvoicingRecord> selectIRByEId(int enterpriseId);
 
+    //查金额
+    public List<InvoicingRecord> selectIRByEidAmountMin(int enterpriseId,int amount);
+    public List<InvoicingRecord> selectIRByEidAmountMax(int enterpriseId,int amount);
+
+
     //开票
     //传入：InvoicingRecord对象 全部信息
     //返回：int 受影响行数
@@ -31,4 +36,6 @@ public interface IInvoicingRecordDao {
     //传入：int 开票记录表主键
     //返回：InvoicingRecord对象 全部信息
     public List<InvoicingRecord> selectIRByIId(int iid);
+
+
 }
