@@ -25,7 +25,6 @@ public class InvoicingRecordDaoImpl implements IInvoicingRecordDao {
     UniversalMethod um=new UniversalMethod();
     @Override
     public List<InvoicingRecord> selectIRByEId(int enterpriseId) {
-        System.out.println("selectIRByEId");
         ArrayList<InvoicingRecord> list=new ArrayList<>();
         try {
             con= DBHelper.getcon();
@@ -34,7 +33,72 @@ public class InvoicingRecordDaoImpl implements IInvoicingRecordDao {
             ps.setInt(1,enterpriseId);
             rs=ps.executeQuery();
             while (rs.next()){
-                System.out.println(rs==null);
+                InvoicingRecord ir=new InvoicingRecord();
+                ir.setCreatorTime(rs.getDate(1));
+                BaseData baseData = new BaseData();
+                baseData.setTitle(rs.getString(2));
+                ir.setBaseData(baseData);
+                ir.setAmount(rs.getDouble(3));
+                ir.setUplinkAddress(rs.getString(4));
+                ir.setStatus(rs.getString(5));
+                list.add(ir);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            DBHelper.close(rs,ps,con);
+        }
+        return list;
+    }
+
+    @Override
+    public List<InvoicingRecord> selectIRByEidAmountMin(int enterpriseId,int amount) {
+        ArrayList<InvoicingRecord> list=new ArrayList<>();
+        try {
+            con= DBHelper.getcon();
+            String sql="SELECT ir.create_time,bd.title,ir.amount,ir.uplink_address,ir.`status` FROM invoicing_record ir,base_data bd WHERE ir.base_data_id=bd.id AND ir.enterprise_id=? AND ir.amount<=?";
+            ps=con.prepareStatement(sql);
+            ps.setInt(1,enterpriseId);
+            ps.setInt(2,amount);
+            rs=ps.executeQuery();
+            while (rs.next()){
+                InvoicingRecord ir=new InvoicingRecord();
+                ir.setCreatorTime(rs.getDate(1));
+                BaseData baseData = new BaseData();
+                baseData.setTitle(rs.getString(2));
+                ir.setBaseData(baseData);
+                ir.setAmount(rs.getDouble(3));
+                ir.setUplinkAddress(rs.getString(4));
+                ir.setStatus(rs.getString(5));
+                list.add(ir);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            DBHelper.close(rs,ps,con);
+        }
+        return list;
+    }
+
+    @Override
+    public List<InvoicingRecord> selectIRByEidAmountMax(int enterpriseId,int amount) {
+        ArrayList<InvoicingRecord> list=new ArrayList<>();
+        try {
+            con= DBHelper.getcon();
+            String sql="SELECT ir.create_time,bd.title,ir.amount,ir.uplink_address,ir.`status` FROM invoicing_record ir,base_data bd WHERE ir.base_data_id=bd.id AND ir.enterprise_id=? AND ir.amount>=?";
+            ps=con.prepareStatement(sql);
+            ps.setInt(1,enterpriseId);
+            ps.setInt(2,amount);
+            rs=ps.executeQuery();
+            while (rs.next()){
                 InvoicingRecord ir=new InvoicingRecord();
                 ir.setCreatorTime(rs.getDate(1));
                 BaseData baseData = new BaseData();
@@ -112,7 +176,6 @@ public class InvoicingRecordDaoImpl implements IInvoicingRecordDao {
         BaseData baseData=new BaseData();
         Address address=new Address();
         Email email=new Email();
-        System.out.println("selectIRByIId");
         ArrayList<InvoicingRecord> list=new ArrayList<>();
         try {
             con=DBHelper.getcon();
@@ -121,7 +184,6 @@ public class InvoicingRecordDaoImpl implements IInvoicingRecordDao {
             ps.setInt(1,iid);
             rs=ps.executeQuery();
             while (rs.next()){
-                System.out.println(rs==null);
                 ir.setIid(rs.getInt(1));
                 ir.setAmount(rs.getDouble(2));
                 user.setUid(rs.getInt(3));
@@ -149,8 +211,6 @@ public class InvoicingRecordDaoImpl implements IInvoicingRecordDao {
         } finally {
             DBHelper.close(rs,ps,con);
         }
-        System.out.println(list);
-        System.out.println(list==null);
         return list;
     }
 }

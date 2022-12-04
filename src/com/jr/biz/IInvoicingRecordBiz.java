@@ -15,6 +15,10 @@ public interface IInvoicingRecordBiz {
     //完成发票申请列表
     public List<InvoicingRecord> getIRList(int enterpriseId);
 
+    public List<InvoicingRecord> getIRAmountMinList(int enterpriseId,int amount);
+    public List<InvoicingRecord> getIRAmountMaxList(int enterpriseId,int amount);
+
+
     //开票 实现向数据库中添加
     public boolean invoicingIR(InvoicingRecord invoicingRecord);
 

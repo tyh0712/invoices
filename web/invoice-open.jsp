@@ -42,7 +42,7 @@
         <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
             <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
                 <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
-                    <span class="tpl-header-list-user-nick">禁言小张</span>
+                    <span class="tpl-header-list-user-nick" name="userName"></span>
                     <span class="tpl-header-list-user-ico">
               <img src="img/user01.png">
             </span>
@@ -102,7 +102,7 @@
                 <span class="am-input-group-btn">
                   <span style="font-size: 14px;margin-right: 8px;margin-left: 8px">订单编号</span>
                 </span>
-                            <input type="text" class="am-form-field" placeholder="&nbsp;&nbsp;请输入订单编号"
+                            <input id="orderno" type="text" class="am-form-field" placeholder="&nbsp;&nbsp;请输入订单编号"
                                    style="border: 1px solid #c2cad8;width: 68%;border-radius: 3px;">
                         </div>
                     </div>
@@ -111,7 +111,7 @@
                 <span class="am-input-group-btn">
                   <span style="font-size: 14px;margin-right: 8px;margin-left: 8px;">生成日期</span>
                 </span>
-                            <input type="text" class="am-form-field" data-am-datepicker placeholder="&nbsp;&nbsp;请选择日期"
+                            <input id="orderdate" type="text" class="am-form-field" data-am-datepicker placeholder="&nbsp;&nbsp;请选择日期"
                                    style="border: 1px solid #c2cad8;width: 68%;border-radius: 3px;">
                         </div>
                     </div>
@@ -120,12 +120,12 @@
                 <span class="am-input-group-btn">
                   <span style="font-size: 14px;margin-right: 8px;margin-left: 8px">凭证金额</span>
                 </span>
-                            <input type="text" class="am-form-field" placeholder="&nbsp;&nbsp;最低金额(万)"
+                            <input id="ordermin" type="text" class="am-form-field" placeholder="&nbsp;&nbsp;最低金额(万)"
                                    style="border: 1px solid #c2cad8;width: 32%;border-radius: 3px;">
                             <div class="am-form-field"
                                  style="width: 0%; border-radius: 3px;border: none;margin-left: 10px;">~
                             </div>
-                            <input type="text" class="am-form-field" placeholder="&nbsp;&nbsp;最高金额(万)"
+                            <input id="ordermax" type="text" class="am-form-field" placeholder="&nbsp;&nbsp;最高金额(万)"
                                    style="border: 1px solid #c2cad8;width: 32%;border-radius: 3px;margin-left: 20px;">
                         </div>
                     </div>
@@ -149,47 +149,9 @@
                                 <th class="table-date am-hide-sm-only">生成时间</th>
                             </tr>
                             </thead>
-                            <tbody id="doc-modal-list">
-                            <tr data-id="2">
-                                <td>
-                                    <input type="checkbox">
-                                </td>
-                                <td class="am-hide-sm-only">D20220328000001</td>
-                                <td class="am-hide-sm-only">1,000,000.00</td>
-                                <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                            </tr>
-                            <tr data-id="2">
-                                <td>
-                                    <input type="checkbox">
-                                </td>
-                                <td class="am-hide-sm-only">D20220328000002</td>
-                                <td class="am-hide-sm-only">1,000,000.00</td>
-                                <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                            </tr>
-                            <tr data-id="2">
-                                <td>
-                                    <input type="checkbox">
-                                </td>
-                                <td class="am-hide-sm-only">D20220328000003</td>
-                                <td class="am-hide-sm-only">1,000,000.00</td>
-                                <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                            </tr>
-                            <tr data-id="2">
-                                <td>
-                                    <input type="checkbox">
-                                </td>
-                                <td class="am-hide-sm-only">D20220328000004</td>
-                                <td class="am-hide-sm-only">1,000,000.00</td>
-                                <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                            </tr>
-                            <tr data-id="2">
-                                <td>
-                                    <input type="checkbox">
-                                </td>
-                                <td class="am-hide-sm-only">D20220328000005</td>
-                                <td class="am-hide-sm-only">1,000,000.00</td>
-                                <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                            </tr>
+                            <tbody id="doc-modal-list1">
+
+
                             </tbody>
                         </table>
                         <div class="am-cf">
@@ -244,7 +206,7 @@
                             <div class="am-u-sm-12 am-u-md-6">
                                 <form class="am-form am-form-horizontal">
                                     <div class="am-form-group">
-                                        <label for="user-name" class="am-u-sm-3 am-form-label star"> 发票种类</label>
+                                        <label class="am-u-sm-3 am-form-label star"> 发票种类</label>
                                         <div class="am-u-sm-3" style="margin-top: 4px;font-size: 16px;"
                                              onclick="selectCategory('ordinary')">
                                             <label class="am-radio">
@@ -264,7 +226,7 @@
                             <div class="am-u-sm-12 am-u-md-6">
                                 <form class="am-form am-form-horizontal">
                                     <div class="am-form-group">
-                                        <label for="user-name" class="am-u-sm-3 am-form-label star"> 发票类型</label>
+                                        <label class="am-u-sm-3 am-form-label star"> 发票类型</label>
                                         <div class="am-u-sm-3" style="margin-top: 4px;font-size: 16px;"
                                              onclick="selectType('ele')">
                                             <label class="am-radio">
@@ -287,20 +249,16 @@
                                 <div class="am-u-sm-12 am-u-md-6">
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
-                                            <label for="user-name" class="am-u-sm-3 am-form-label star"> 抬头</label>
-                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                                百度科技有限公司
-                                            </div>
+                                            <label class="am-u-sm-3 am-form-label star"> 抬头</label>
+                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="title1"></div>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="am-u-sm-12 am-u-md-6">
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
-                                            <label for="user-name" class="am-u-sm-3 am-form-label">税号</label>
-                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                                91110000802100XXXX
-                                            </div>
+                                            <label class="am-u-sm-3 am-form-label">税号</label>
+                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="taxNo1"></div>
                                         </div>
                                     </form>
                                 </div>
@@ -309,60 +267,48 @@
                                 <div class="am-u-sm-12 am-u-md-6">
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
-                                            <label for="user-name" class="am-u-sm-3 am-form-label star"> 抬头</label>
-                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                                百度科技有限公司
-                                            </div>
+                                            <label class="am-u-sm-3 am-form-label star"> 抬头</label>
+                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="title1"></div>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="am-u-sm-12 am-u-md-6">
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
-                                            <label for="user-name" class="am-u-sm-3 am-form-label">税号</label>
-                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                                91110000802100XXXX
-                                            </div>
+                                            <label class="am-u-sm-3 am-form-label">税号</label>
+                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="taxNo1"></div>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="am-u-sm-12 am-u-md-6">
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
-                                            <label for="user-name" class="am-u-sm-3 am-form-label star"> 开户银行</label>
-                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                                中国工商银行
-                                            </div>
+                                            <label class="am-u-sm-3 am-form-label star"> 开户银行</label>
+                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="bankName1"></div>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="am-u-sm-12 am-u-md-6">
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
-                                            <label for="user-name" class="am-u-sm-3 am-form-label">开户账号</label>
-                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                                2134566876756453
-                                            </div>
+                                            <label class="am-u-sm-3 am-form-label">开户账号</label>
+                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="bankAccount1"></div>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="am-u-sm-12 am-u-md-6">
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
-                                            <label for="user-name" class="am-u-sm-3 am-form-label star"> 注册固定电话</label>
-                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                                13888888888
-                                            </div>
+                                            <label class="am-u-sm-3 am-form-label star"> 注册固定电话</label>
+                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="phone1"></div>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="am-u-sm-12 am-u-md-6">
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
-                                            <label for="user-name" class="am-u-sm-3 am-form-label">注册场所地址</label>
-                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                                南京市建邺区
-                                            </div>
+                                            <label class="am-u-sm-3 am-form-label">注册场所地址</label>
+                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="address1"></div>
                                         </div>
                                     </form>
                                 </div>
@@ -372,9 +318,9 @@
                                 <div class="am-u-sm-12 am-u-md-6">
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
-                                            <label for="user-name" class="am-u-sm-3 am-form-label star"> 邮箱</label>
-                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="email2">
-
+                                            <label class="am-u-sm-3 am-form-label star"> 邮箱</label>
+                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
+                                                123456789@qq.com
                                             </div>
                                         </div>
                                     </form>
@@ -382,7 +328,7 @@
                                 <div class="am-u-sm-12 am-u-md-6">
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
-                                            <label for="user-name" class="am-u-sm-3 am-form-label"></label>
+                                            <label class="am-u-sm-3 am-form-label"></label>
                                             <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
                                                 <span id="selectEmail" style="color: #23abf0;cursor: pointer;">选择</span>
                                             </div>
@@ -394,9 +340,9 @@
                                 <div class="am-u-sm-12 am-u-md-6">
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
-                                            <label for="user-name" class="am-u-sm-3 am-form-label star"> 邮寄地址</label>
-                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                                江苏省南京市建邺区庐山路88号金融城2期
+                                            <label class="am-u-sm-3 am-form-label star"> 邮寄地址</label>
+                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" id="deAddress">
+
                                             </div>
                                         </div>
                                     </form>
@@ -404,7 +350,7 @@
                                 <div class="am-u-sm-12 am-u-md-6">
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
-                                            <label for="user-name" class="am-u-sm-3 am-form-label"></label>
+                                            <label class="am-u-sm-3 am-form-label"></label>
                                             <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
                                                 <span id="selectAddress"
                                                       style="color: #23abf0;cursor: pointer;" name="emailopen">选择</span>
@@ -464,8 +410,46 @@
                         </tr>
                         </thead>
                         <tbody id="doc-modal-list2">
-
-
+                        <tr data-id="2">
+                            <td>
+                                <label class="am-radio">
+                                    <input type="radio" name="radio1" value="" data-am-ucheck>
+                                </label>
+                            </td>
+                            <td class="am-hide-sm-only">3456789876@qq.com</td>
+                        </tr>
+                        <tr data-id="2">
+                            <td>
+                                <label class="am-radio">
+                                    <input type="radio" name="radio1" value="" data-am-ucheck>
+                                </label>
+                            </td>
+                            <td class="am-hide-sm-only">3456789876@qq.com</td>
+                        </tr>
+                        <tr data-id="2">
+                            <td>
+                                <label class="am-radio">
+                                    <input type="radio" name="radio1" value="" data-am-ucheck>
+                                </label>
+                            </td>
+                            <td class="am-hide-sm-only">3456789876@qq.com</td>
+                        </tr>
+                        <tr data-id="2">
+                            <td>
+                                <label class="am-radio">
+                                    <input type="radio" name="radio1" value="" data-am-ucheck checked>
+                                </label>
+                            </td>
+                            <td class="am-hide-sm-only">3456789876@qq.com</td>
+                        </tr>
+                        <tr data-id="2">
+                            <td>
+                                <label class="am-radio">
+                                    <input type="radio" name="radio1" value="" data-am-ucheck>
+                                </label>
+                            </td>
+                            <td class="am-hide-sm-only">3456789876@qq.com</td>
+                        </tr>
                         </tbody>
                     </table>
                 </form>
@@ -487,66 +471,120 @@
                             <th class="table-title" style="text-align: center;">地址信息</th>
                         </tr>
                         </thead>
-                        <tbody id="doc-modal-list">
-                        <tr data-id="2">
-                            <td>
-                                <label class="am-radio">
-                                    <input type="radio" name="radio1" value="" data-am-ucheck checked>
-                                </label>
-                            </td>
-                            <td class="am-hide-sm-only">南京市建邺区河西大街99号</td>
-                        </tr>
-                        <tr data-id="2">
-                            <td>
-                                <label class="am-radio">
-                                    <input type="radio" name="radio1" value="" data-am-ucheck>
-                                </label>
-                            </td>
-                            <td class="am-hide-sm-only">南京市建邺区河西大街99号</td>
-                        </tr>
-                        <tr data-id="2">
-                            <td>
-                                <label class="am-radio">
-                                    <input type="radio" name="radio1" value="" data-am-ucheck>
-                                </label>
-                            </td>
-                            <td class="am-hide-sm-only">南京市建邺区河西大街99号</td>
-                        </tr>
-                        <tr data-id="2">
-                            <td>
-                                <label class="am-radio">
-                                    <input type="radio" name="radio1" value="" data-am-ucheck>
-                                </label>
-                            </td>
-                            <td class="am-hide-sm-only">南京市建邺区河西大街99号</td>
-                        </tr>
-                        <tr data-id="2">
-                            <td>
-                                <label class="am-radio">
-                                    <input type="radio" name="radio1" value="" data-am-ucheck>
-                                </label>
-                            </td>
-                            <td class="am-hide-sm-only">南京市建邺区河西大街99号</td>
-                        </tr>
+                        <tbody id="doc-modal-list3">
+
                         </tbody>
                     </table>
                 </form>
                 <div class="am-modal-footer" style="border-top: 1px solid #dedede;">
                     <span class="am-modal-btn" data-am-modal-cancel>取消</span>
-                    <span class="am-modal-btn" data-am-modal-confirm>确定</span>
+                    <span id="chooseAdd" onclick="chooseAdd()" class="am-modal-btn" data-am-modal-confirm>确定</span>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <script type="text/javascript" src="js/jquery-1.8.3.js"></script>
-<script src="js/jquery.min.js">
-</script>
+<script src="js/jquery.min.js"></script>
 <script src="js/amazeui.min.js"></script>
 <script src="js/app.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var orderno;
+        var orderdate;
+        var ordermin;
+        var ordermax;
+        $("[id='orderno']").blur(function () {
+            orderno=$(this).val();
+            $.get("os","o=2&orderno="+orderno+"&orderdate="+orderdate+"&ordermin="+ordermin+"&ordermax="+ordermax,function (orderlist) {
+                eval("var orderlist="+orderlist);
+                $("#doc-modal-list1").empty();
+                for (var i=0;i<orderlist.length;i++){
+                    var obj = "<tr data-id='2'>\n" +
+                        "    <td>\n" +
+                        "        <input type='checkbox'>\n" +
+                        "    </td>\n" +
+                        "    <td class='am-hide-sm-only'>"+orderlist[i].no +"</td>\n" +
+                        "    <td class='am-hide-sm-only'>"+orderlist[i].totalAmount+"</td>\n" +
+                        "    <td class='am-hide-sm-only'>"+orderlist[i].createTime+"</td>\n" +
+                        "</tr>";
+                    $(obj).appendTo($("#doc-modal-list1"));
+                }
+            });
+        });
+        $("[id='orderdate']").blur(function () {
+            orderdate=$(this).val();
+            $.get("os","o=2&orderno="+orderno+"&orderdate="+orderdate+"&ordermin="+ordermin+"&ordermax="+ordermax,function (orderlist) {
+                eval("var orderlist="+orderlist);
+                $("#doc-modal-list1").empty();
+                for (var i=0;i<orderlist.length;i++){
+                    var obj = "<tr data-id='2'>\n" +
+                        "    <td>\n" +
+                        "        <input type='checkbox'>\n" +
+                        "    </td>\n" +
+                        "    <td class='am-hide-sm-only'>"+orderlist[i].no +"</td>\n" +
+                        "    <td class='am-hide-sm-only'>"+orderlist[i].totalAmount+"</td>\n" +
+                        "    <td class='am-hide-sm-only'>"+orderlist[i].createTime+"</td>\n" +
+                        "</tr>";
+                    $(obj).appendTo($("#doc-modal-list1"));
+                }
+            });
+        });
+        $("[id='ordermin']").blur(function () {
+            ordermin=$(this).val();
+            $.get("os","o=2&orderno="+orderno+"&orderdate="+orderdate+"&ordermin="+ordermin+"&ordermax="+ordermax,function (orderlist) {
+                eval("var orderlist="+orderlist);
+                $("#doc-modal-list1").empty();
+                for (var i=0;i<orderlist.length;i++){
+                    var obj = "<tr data-id='2'>\n" +
+                        "    <td>\n" +
+                        "        <input type='checkbox'>\n" +
+                        "    </td>\n" +
+                        "    <td class='am-hide-sm-only'>"+orderlist[i].no +"</td>\n" +
+                        "    <td class='am-hide-sm-only'>"+orderlist[i].totalAmount+"</td>\n" +
+                        "    <td class='am-hide-sm-only'>"+orderlist[i].createTime+"</td>\n" +
+                        "</tr>";
+                    $(obj).appendTo($("#doc-modal-list1"));
+                }
+            });
+        });
+        $("[id='ordermax']").blur(function () {
+            ordermax=$(this).val();
+            $.get("os","o=2&orderno="+orderno+"&orderdate="+orderdate+"&ordermin="+ordermin+"&ordermax="+ordermax,function (orderlist) {
+                eval("var orderlist="+orderlist);
+                $("#doc-modal-list1").empty();
+                for (var i=0;i<orderlist.length;i++){
+                    var obj = "<tr data-id='2'>\n" +
+                        "    <td>\n" +
+                        "        <input type='checkbox'>\n" +
+                        "    </td>\n" +
+                        "    <td class='am-hide-sm-only'>"+orderlist[i].no +"</td>\n" +
+                        "    <td class='am-hide-sm-only'>"+orderlist[i].totalAmount+"</td>\n" +
+                        "    <td class='am-hide-sm-only'>"+orderlist[i].createTime+"</td>\n" +
+                        "</tr>";
+                    $(obj).appendTo($("#doc-modal-list1"));
+                }
+            });
+        });
+
+        $.get("os","o=2&orderno="+orderno+"&orderdate="+orderdate+"&ordermin="+ordermin+"&ordermax="+ordermax,function (orderlist) {
+            eval("var orderlist="+orderlist);
+            for (var i=0;i<orderlist.length;i++){
+                var obj = "<tr data-id='2'>\n" +
+                    "    <td>\n" +
+                    "        <input type='checkbox'>\n" +
+                    "    </td>\n" +
+                    "    <td class='am-hide-sm-only'>"+orderlist[i].no +"</td>\n" +
+                    "    <td class='am-hide-sm-only'>"+orderlist[i].totalAmount+"</td>\n" +
+                    "    <td class='am-hide-sm-only'>"+orderlist[i].createTime+"</td>\n" +
+                    "</tr>";
+                $(obj).appendTo($("#doc-modal-list1"));
+            }
+        });
+    });
 
 
-<script>
+
     var baseinfoDiv = document.getElementById('baseinfoDiv')
     var showDiv = document.getElementById('showDiv')
     var resultDiv = document.getElementById('resultDiv')
@@ -600,6 +638,38 @@
             $('#invoice_ordinary_title').hide();
             $('#invoice_appropriative_title').show();
         }
+    }
+
+    $(document).ready(function () {
+        //抬头信息  抬头、税号
+        var enterpriseId = ${sessionScope.enterpriseId};
+        $.get("bs","b=1&enterpriseId="+enterpriseId,function (baseData1) {
+            eval("var baseData=" + baseData1);
+            $("[name=title1]").text(baseData.title);
+            $("[name=taxNo1]").text(baseData.taxNo);
+            $("[name=bankName1]").text(baseData.bankName);
+            $("[name=bankAccount1]").text(baseData.bankAccount);
+            $("[name=phone1]").text(baseData.phone);
+            $("[name=address1]").text(baseData.address);
+        });
+
+        //右上角用户名
+        var userName1 = "${sessionScope.userName}";
+        $("[name=userName]").text(userName1);
+
+
+        //返回选择的邮寄地址
+        $.get("as","a=6&enterpriseId="+enterpriseId,function (list) {
+            eval("var list="+list);
+            $('<span id="showAdd">'+list[0].area+''+list[0].addressDetail+'</span>').appendTo($("#deAddress"));
+            for (var i=0;i<list.length;i++){
+                $('<tr data-id="2"><td><label class="am-radio"><input type="radio" name="addressCho" id="'+i+'" value="'+list[i].area+''+list[i].addressDetail+'" data-am-ucheck checked></label></td><td class="am-hide-sm-only"><label class="am-radio" for="'+i+'">'+list[i].area+''+list[i].addressDetail+'</label></td></tr>').appendTo($("#doc-modal-list3"));
+            }
+        });
+    });
+     function chooseAdd() {
+             $("#deAddress").empty();
+             $('<span>'+$('[name="addressCho"]:checked').val()+'</span>').appendTo($("#deAddress"));
     }
     var eid = ${sessionScope.eid};
     $(function () {

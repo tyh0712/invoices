@@ -20,6 +20,16 @@ public class InvoicingRecordBizImpl implements IInvoicingRecordBiz {
     }
 
     @Override
+    public List<InvoicingRecord> getIRAmountMinList(int enterpriseId, int amount) {
+        return irdi.selectIRByEidAmountMin(enterpriseId,amount);
+    }
+
+    @Override
+    public List<InvoicingRecord> getIRAmountMaxList(int enterpriseId, int amount) {
+        return irdi.selectIRByEidAmountMax(enterpriseId,amount);
+    }
+
+    @Override
     public boolean invoicingIR(InvoicingRecord invoicingRecord) {
         return irdi.insertIR(invoicingRecord)==1?true:false;
     }

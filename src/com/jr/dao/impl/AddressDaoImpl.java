@@ -62,10 +62,10 @@ public class AddressDaoImpl implements IAddressDao {
     public int updateDefaultAddByEId(int aid, int enterpriseId) {
 
         List<Address> l=selectAddByEId(enterpriseId);
-        String sql1="UPDATE address SET default_status='A' WHERE id=?";
-        int i1=um.upd(sql1,aid);
         String sql2="UPDATE address SET default_status='B' WHERE id=?";
         int i2=um.upd(sql2,l.get(0).getAid());
+        String sql1="UPDATE address SET default_status='A' WHERE id=?";
+        int i1=um.upd(sql1,aid);
         int i3=0;
         if (i1!=0 && i2!=0){
             i3=1;
@@ -77,6 +77,7 @@ public class AddressDaoImpl implements IAddressDao {
     public int insertAddress(Address address) {
         String sql="INSERT INTO address () VALUES (null,?,?,?,?,?,'B')";
         int i=um.upd(sql,address.getEnterpriseId(),address.getAddressee(),address.getPhone(),address.getArea(),address.getAddressDetail());
+        System.out.println(i);
         return i;
     }
 

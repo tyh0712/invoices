@@ -27,7 +27,7 @@
         <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
             <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
                 <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
-                    <span class="tpl-header-list-user-nick">禁言小张</span><span class="tpl-header-list-user-ico"> <img
+                    <span class="tpl-header-list-user-nick" name="userName"></span><span class="tpl-header-list-user-ico"> <img
                         src="img/user01.png"></span>
                 </a>
                 <ul class="am-dropdown-content">
@@ -99,7 +99,7 @@
                             <div class="am-u-sm-12 am-u-md-3">
                                 <div class="am-u-sm-12" style="text-align: center;font-weight: bold;">
                                     <div>可开票金额</div>
-                                    <div style="color: red;font-size: 20px;">10,000,0.00元</div>
+                                    <div id="divnewcount" style="color: red;font-size: 20px;"></div>
                                 </div>
                             </div>
                             <div class="am-u-sm-12 am-u-md-1">
@@ -110,7 +110,7 @@
                             <div class="am-u-sm-12 am-u-md-3">
                                 <div class="am-u-sm-12" style="text-align: center;font-weight: bold;">
                                     <div>总计可开票金额</div>
-                                    <div style="color: red;font-size: 20px;">20,000,0.00元</div>
+                                    <div id="divallcount" style="color: red;font-size: 20px;"></div>
                                 </div>
                             </div>
                             <div class="am-u-sm-12 am-u-md-1">
@@ -121,7 +121,7 @@
                             <div class="am-u-sm-12 am-u-md-3">
                                 <div class="am-u-sm-12" style="text-align: center;font-weight: bold;">
                                     <div>历史已开票</div>
-                                    <div style="color: red;font-size: 20px;">10,000,0.00元</div>
+                                    <div id="divusecont" style="color: red;font-size: 20px;"></div>
                                 </div>
                             </div>
                         </div>
@@ -150,19 +150,19 @@
                         <div class="am-g tpl-amazeui-form" style="font-size: 14px;color: #666;margin-bottom: 5px;">
                             <div class="am-u-sm-12 am-u-md-6">
                                 <div class="am-u-sm-12">
-                                    <span style="color: #333;">抬头（默认）：</span> <span>百度科技有限公司</span>
+                                    <span style="color: #333;">抬头（默认）：</span> <span name="title1"></span>
                                 </div>
                             </div>
                             <div class="am-u-sm-12 am-u-md-6">
                                 <div class="am-u-sm-12">
-                                    <span style="color: #333;">税号：</span> <span>91110000802100XXXX</span>
+                                    <span style="color: #333;">税号：</span> <span name="taxNo1"></span>
                                 </div>
                             </div>
                         </div>
                         <div class="am-g tpl-amazeui-form" style="font-size: 14px;color: #666;margin-bottom: 5px;">
                             <div class="am-u-sm-12 am-u-md-6">
                                 <div class="am-u-sm-12">
-                                    <span style="color: #333;">邮寄地址（默认）：</span> <span>北京市海淀区百度大厦</span>
+                                    <span style="color: #333;">邮寄地址（默认）：</span><span name="deAddress"> </span>
                                 </div>
                             </div>
                         </div>
@@ -390,11 +390,11 @@
         </div>
     </div>
 </div>
-
-<script src="js/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+<script src="js/jquery.min.js"></script>
 <script src="js/amazeui.min.js"></script>
 <script src="js/app.js"></script>
-<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+
 <script>
     // 退票二次确认
     $(function () {
@@ -420,6 +420,48 @@
             });
         });
     });
+
+    var enterpriseId = ${sessionScope.enterpriseId};
+    $(function () {
+        $.get("as","a=1&enterpriseId="+enterpriseId,function (address) {
+            eval("var address="+address);
+            $("[name=deAddress]").text(address.area+""+address.addressDetail);
+        });
+    });
+    $(function () {
+        $.get("os","o=1&enterpriseId="+enterpriseId,function (count) {
+            eval("var getamount=" + count);
+            $("#divallcount").text(getamount[0]+"元");
+            $("#divusecont").text(getamount[1]+"元");
+            $("#divnewcount").text(getamount[2]+"元");
+        });
+    });
+    $(function () {
+        $.get("es","e=1&enterpriseId="+enterpriseId,function (email11) {
+            eval("var email="+email11);
+            $("[name=email1]").text(email.emailDetail);
+        });
+    });
+
+
+
+</script>
+<script>
+    $(document).ready(function () {
+        //发票抬头及地址信息  抬头、税号
+        var enterpriseId = ${sessionScope.enterpriseId};
+        $.get("bs","b=1&enterpriseId="+enterpriseId,function (baseData1) {
+            eval("var baseData=" + baseData1);
+            $("[name=title1]").text(baseData.title);
+            $("[name=taxNo1]").text(baseData.taxNo);
+        });
+
+        //右上角用户名
+        var userName1 = "${sessionScope.userName}";
+        $("[name=userName]").text(userName1);
+    });
+
+
     var eid = ${sessionScope.eid};
     $(function () {
 

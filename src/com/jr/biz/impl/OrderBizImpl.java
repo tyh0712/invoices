@@ -17,9 +17,9 @@ public class OrderBizImpl implements IOrderBiz {
     OrderDaoImpl odi = new OrderDaoImpl();
 
     @Override
-    public List<Double> getAmount(int enterpriseId, String invoicingStatus) {
+    public List<Double> getAmount(int enterpriseId) {
         double allcount =  odi.selectTotalAmountByEId(enterpriseId);
-        double usecount = odi.selectTotalAmountByEIdAndStatus(enterpriseId,invoicingStatus);
+        double usecount = odi.selectTotalAmountByEIdAndStatus(enterpriseId);
         List<Double> list = new ArrayList<>();
         double newcount = allcount-usecount;
         list.add(allcount);
@@ -29,8 +29,8 @@ public class OrderBizImpl implements IOrderBiz {
     }
 
     @Override
-    public List<Order> invoicingOrder(String invoicingStatus,Object...objs) {
-        return odi.selectOrderByStatus(invoicingStatus,objs);
+    public List<Order> invoicingOrder(int judge,String invoicingStatus,Object...objs) {
+        return odi.selectOrderByStatus(judge,invoicingStatus,objs);
     }
 
     @Override
