@@ -1,5 +1,6 @@
 package com.jr.servlet;
 
+import com.google.gson.Gson;
 import com.jr.biz.impl.InvoicingRecordBizImpl;
 import com.jr.entry.InvoicingRecord;
 
@@ -40,7 +41,12 @@ public class InvoicingRecordServlet extends HttpServlet {
             refund(request,response);
         }else if (i==4){
             detail(request,response);
+        }else if (i==5){
+            invoiceMinList(request, response);
+        }else if (i==6){
+            invoiceMaxList(request, response);
         }
+
     }
 
     @Override
@@ -58,13 +64,48 @@ public class InvoicingRecordServlet extends HttpServlet {
 
     public void invoiceList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         InvoicingRecordBizImpl irbi=new InvoicingRecordBizImpl();
-        int enterpriseId=Integer.parseInt(request.getParameter("enterpriseId"));
-        List<InvoicingRecord> list=irbi.getIRList(enterpriseId);
-        HttpSession session=request.getSession();
-        session.setAttribute("invoiceList",list);
-//        response.sendRedirect("invoice-list.jsp");
+        /*int enterpriseId=Integer.parseInt(request.getParameter("enterpriseId"));
+        List<InvoicingRecord> invoicelist=irbi.getIRList(enterpriseId);*/
+        List<InvoicingRecord> invoicelist=irbi.getIRList(2);
+        String creatortime=request.getParameter("creatortime");
+        String titlestr=request.getParameter("titlestr");
+        String invoicingmin=request.getParameter("invoicingmin");
+        String invoicingmax=request.getParameter("invoicingmax");
+        if (creatortime.equals("undefined") && titlestr.equals("undefined") && invoicingmin.equals("undefined") && invoicingmax.equals("undefined")){
+            Gson gson=new Gson();
+            response.getWriter().print(gson.toJson(invoicelist));
+        }
     }
-
+    public void invoiceMinList(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        InvoicingRecordBizImpl irbi=new InvoicingRecordBizImpl();
+        /*int enterpriseId=Integer.parseInt(request.getParameter("enterpriseId"));
+        int amount=Integer.parseInt(request.getParameter("amount"));
+        List<InvoicingRecord> invoiceMinlist=irbi.getIRAmountMinList(enterpriseId,amount);*/
+        List<InvoicingRecord> invoiceminlist=irbi.getIRAmountMinList(2,8000);
+        String creatortime=request.getParameter("creatortime");
+        String titlestr=request.getParameter("titlestr");
+        String invoicingmin=request.getParameter("invoicingmin");
+        String invoicingmax=request.getParameter("invoicingmax");
+        if (invoicingmin.equals("number") && creatortime.equals("undefined") && titlestr.equals("undefined") && invoicingmax.equals("undefined")){
+            Gson gson=new Gson();
+            response.getWriter().print(gson.toJson(invoiceminlist));
+        }
+    }
+    public void invoiceMaxList(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        InvoicingRecordBizImpl irbi=new InvoicingRecordBizImpl();
+        /*int enterpriseId=Integer.parseInt(request.getParameter("enterpriseId"));
+        int amount=Integer.parseInt(request.getParameter("amount"));
+        List<InvoicingRecord> invoiceMaxlist=irbi.getIRAmountMinList(enterpriseId,amount);*/
+        List<InvoicingRecord> invoicemaxlist=irbi.getIRAmountMinList(2,8000);
+        String creatortime=request.getParameter("creatortime");
+        String titlestr=request.getParameter("titlestr");
+        String invoicingmin=request.getParameter("invoicingmin");
+        String invoicingmax=request.getParameter("invoicingmax");
+        if (invoicingmax.equals("number") && creatortime.equals("undefined") && titlestr.equals("undefined") && invoicingmin.equals("undefined")){
+            Gson gson=new Gson();
+            response.getWriter().print(gson.toJson(invoicemaxlist));
+        }
+    }
     public void invoice(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         InvoicingRecordBizImpl irbi=new InvoicingRecordBizImpl();
         InvoicingRecord ir=new InvoicingRecord();
@@ -112,15 +153,16 @@ public class InvoicingRecordServlet extends HttpServlet {
         }else{
 //            response.sendRedirect("invoice-open.jsp");
         }
-
     }
 
     public void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         InvoicingRecordBizImpl irbi=new InvoicingRecordBizImpl();
         int iid=Integer.parseInt(request.getParameter("iid"));
-        List<InvoicingRecord> list=irbi.detailIR(iid);
-        HttpSession session=request.getSession();
+        List<InvoicingRecord> detaillist=irbi.detailIR(2);
+        Gson gson=new Gson();
+        response.getWriter().print(gson.toJson(detaillist));
+        /*HttpSession session=request.getSession();
         session.setAttribute("detailList",list);
-//        response.sendRedirect("invoice-detail.jsp");
+        response.sendRedirect("invoice-detail.jsp");*/
     }
 }
