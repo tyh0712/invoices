@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -45,9 +46,11 @@ public class BaseDataServlet extends HttpServlet {
     }
 
     public void queryBaseData(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int eid = Integer.parseInt(request.getParameter("eid"));
+        int enterpriseId = Integer.parseInt(request.getParameter("enterpriseId"));
         BaseDataBizImpl bbi = new BaseDataBizImpl();
-        BaseData baseData = bbi.queryBDByEId(eid);
+        BaseData baseData = bbi.queryBDByEId(enterpriseId);
+        HttpSession session = request.getSession();
+        session.setAttribute("baseData",baseData);
         response.getWriter().print(new Gson().toJson(baseData));
     }
 
@@ -66,7 +69,7 @@ public class BaseDataServlet extends HttpServlet {
         baseData.setAddress(address);
         boolean boo = bbi.modify(baseData);
         if (boo){
-            System.out.println("success");
+            queryBaseData(request,response);
         }else {
             response.getWriter().print("failure");
         }

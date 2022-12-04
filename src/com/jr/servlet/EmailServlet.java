@@ -60,13 +60,9 @@ public class EmailServlet extends HttpServlet {
 
     //当前企业发票抬头及地址信息
     public void titleAndAddress(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("utf-8");
-        response.setCharacterEncoding("utf-8");
-        response.setContentType("text/html;charset=UTF-8");
 
         int enterpriseId = Integer.parseInt(request.getParameter("enterpriseId"));
-        String defaultStatus = request.getParameter("defaultStatus");
-        Email email = ebi.queryDeEmailByEId(enterpriseId,defaultStatus);
+        Email email = ebi.queryDeEmailByEId(enterpriseId,"A");
         response.getWriter().println(new Gson().toJson(email));
 
     }

@@ -38,7 +38,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
           <root url="jar://E:/Program Files (x86)/apache-tomcat-8.5.83/lib/servlet-api.jar!/" />
@@ -65,5 +65,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" exported="" name="lib (3)" level="project" />
   </component>
 </module>

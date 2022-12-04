@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -50,6 +49,7 @@ public class AddressServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
+        doGet(request,response);
     }
 
     @Override
@@ -100,9 +100,8 @@ public class AddressServlet extends HttpServlet {
         boolean boo=abi.modifyDeAddByEId(aid,enterpriseId);
         String str="失败";
         if (boo){
+            showAll(request,response);
             System.out.println("success");
-        }else {
-            response.getWriter().print(new Gson().toJson(str));
         }
     }
 
@@ -114,9 +113,10 @@ public class AddressServlet extends HttpServlet {
         address.setPhone(request.getParameter("phone"));
         address.setArea(request.getParameter("area"));
         address.setAddressDetail(request.getParameter("addressDetail"));
-        boolean boo=abi.modifyAddress(address);
+        boolean boo=abi.addAddress(address);
         String str="失败";
         if (boo){
+            showAll(request,response);
             System.out.println("success");
         }else {
             response.getWriter().print(new Gson().toJson(str));
@@ -127,6 +127,7 @@ public class AddressServlet extends HttpServlet {
     public void invoice(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         List<Address> list=abi.queryAddByEId(Integer.parseInt(request.getParameter("enterpriseId")));
+        System.out.println(list.toString());
         response.getWriter().print(new Gson().toJson(list));
 
     }

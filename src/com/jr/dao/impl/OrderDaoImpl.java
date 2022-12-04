@@ -7,9 +7,9 @@ import com.jr.util.DBHelper;
 
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @Auther:唐一涵
@@ -46,14 +46,14 @@ public class OrderDaoImpl implements IOrderDao {
     }
 
     @Override
-    public double selectTotalAmountByEIdAndStatus(int enterpriseId, String invoicingStatus) {
+    public double selectTotalAmountByEIdAndStatus(int enterpriseId) {
         int count = 0;
         try {
             con = DBHelper.getcon();
             String sql = "select total_amount from `order` where enterprise_id=? and invoicing_status=?";
             ps = con.prepareStatement(sql);
             ps.setInt(1,enterpriseId);
-            ps.setString(2,invoicingStatus);
+            ps.setString(2,"A");
             rs = ps.executeQuery();
             while (rs.next()){
                 count += rs.getDouble(1);
@@ -69,50 +69,67 @@ public class OrderDaoImpl implements IOrderDao {
     }
 
     @Override
-    public List<Order> selectOrderByStatus(String invoicingStatus, Object... objs) {
+    public List<Order> selectOrderByStatus(int judge, String invoicingStatus, Object... objs) {
         Order order;
         List<Order> list = new ArrayList<>();
         try {
             con = DBHelper.getcon();
+            Map<Integer,String> str=new TreeMap<>();
+            Map<Integer,Object> objs1=new TreeMap<>();
             String str1=null;
-            String str2=null;
-            String str3=null;
             String str4="invoicing_status=?";
-            String str5=null;
+            int x=0;
             for (int i=0;i<objs.length;i++) {
                 if (objs[i] instanceof String) {
-                    str1 = "no=?";
+                    str.put(i+1,"no=?");
+                    objs1.put(i+1,objs[i]);
+                }
+                else if (objs[i] instanceof Date) {
+                    str.put(i+1,"create_time=?");
+                    objs1.put(i+1,objs[i]);
                 }
                 else if (objs[i] instanceof Double) {
-                    str2 = "total_amount=?";
-                }
-                else if (objs[i] instanceof Timestamp) {
-                    str3 = "create_time=?";
-                }
-            }
-            if (str1==null){
-                str5=str4+" AND "+str2+" AND "+str3;
-                if (str2==null){
-                    str5=str4+" AND "+str3;
-                    if (str3==null){
-                        str5=str4;
+                    if (judge==1){
+                        str.put(i+1,"total_amount>?");
+                        objs1.put(i+1,objs[i]);
+
+                    }else if (judge==2){
+                        str.put(i+1,"total_amount<?");
+                        objs1.put(i+1,objs[i]);
+
+                    }else{
+                        if (x==0){
+                            str.put(i+1,"total_amount>?");
+                        }
+                        objs1.put(i+1,objs[i]);
+                        if (x!=0){
+                            if ((double)objs1.get(i+1)<(double)objs1.get(x)){
+                                objs1.put(i+1,objs[x-1]);
+                                objs1.put(x,objs[i]);
+                                str.put(i+1,"total_amount<?");
+                            }else {
+                                str.put(i+1,"total_amount<?");
+                            }
+                        }x=i+1;
                     }
                 }
-            }else if (str2==null){
-                str5=str4+" AND "+str1+" AND "+str3;
-                if (str3==null){
-                    str5=str4+" AND "+str1;
-                }
-            }else if (str3==null){
-                str5=str4+" AND "+str1+" AND "+str2;
-            }else {
-                str5=str4+" AND "+str1+" AND "+str2+" AND "+str3;
             }
-            String sql="select * from `order` where "+str5+"";
+            if (str.size()==0){
+                str1=str4;
+            }else {
+                for (int i=1;i<=str.size();i++){
+                    if (i==1){
+                        str1=str4+" AND "+str.get(1);
+                    }else {
+                        str1=str1+" AND "+str.get(i);
+                    }
+                }
+            }
+            String sql="select * from `order` where "+str1+"";
             ps = con.prepareStatement(sql);
             ps.setString(1,invoicingStatus);
-            for (int i=0;i<objs.length;i++){
-                ps.setObject(i+2,objs[i]);
+            for (int i=1;i<=objs1.size();i++){
+                ps.setObject(i+1,objs1.get(i));
             }
             rs = ps.executeQuery();
             while (rs.next()){
@@ -168,7 +185,6 @@ public class OrderDaoImpl implements IOrderDao {
                 order.setInvoicingRecord(invoicingRecord);
                 order.setCreateTime(rs.getTimestamp(8));
                 list.add(order);
-                System.out.println(order);
             }
         } catch (IOException e) {
             e.printStackTrace();

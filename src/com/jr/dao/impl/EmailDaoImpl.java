@@ -29,13 +29,14 @@ public class EmailDaoImpl implements IEmailDao {
         Email email = null;
         try {
             con = DBHelper.getcon();
-            String sql = "select email_detail from email where enterprise_id=? and default_status='A' ";
+            String sql = "select email_detail from email where enterprise_id=? and default_status=? ";
             ps = con.prepareStatement(sql);
             ps.setInt(1,enterpriseId);
+            ps.setString(2,defaultStatus);
             rs = ps.executeQuery();
             if (rs.next()){
                 email = new Email();
-                email.setEmailDetail(rs.getString("email_detail"));
+                email.setEmailDetail(rs.getString(1));
             }
 
         } catch (IOException e) {

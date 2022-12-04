@@ -28,7 +28,7 @@
         <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
             <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
                 <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
-                    <span class="tpl-header-list-user-nick">禁言小张</span><span class="tpl-header-list-user-ico"> <img
+                    <span class="tpl-header-list-user-nick" name="userName"></span><span class="tpl-header-list-user-ico"> <img
                         src="img/user01.png"></span>
                 </a>
                 <ul class="am-dropdown-content">
@@ -81,7 +81,7 @@
                 <div class="am-g">
                     <div class="am-u-sm-12">
                         <div><span style="font-size: 16px;margin-left: 7px;">合计开票金额：</span> <span
-                                style="color: red;font-size: 22px;font-weight: bold;">10,000,000.00元</span></div>
+                                style="color: red;font-size: 22px;font-weight: bold;" name="sum"></span></div>
                         <form class="am-form">
                             <table class="am-table am-table-striped am-table-hover table-main">
                                 <thead>
@@ -93,36 +93,7 @@
                                 </tr>
                                 </thead>
                                 <tbody id="doc-modal-list">
-                                <tr data-id="2">
-                                    <td class="am-hide-sm-only">D20220328000001</td>
-                                    <td class="am-hide-sm-only">百度科技有限公司</td>
-                                    <td class="am-hide-sm-only">1,000,000.00</td>
-                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                                </tr>
-                                <tr data-id="2">
-                                    <td class="am-hide-sm-only">D20220328000002</td>
-                                    <td class="am-hide-sm-only">百度科技有限公司</td>
-                                    <td class="am-hide-sm-only">1,000,000.00</td>
-                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                                </tr>
-                                <tr data-id="2">
-                                    <td class="am-hide-sm-only">D20220328000003</td>
-                                    <td class="am-hide-sm-only">百度科技有限公司</td>
-                                    <td class="am-hide-sm-only">1,000,000.00</td>
-                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                                </tr>
-                                <tr data-id="2">
-                                    <td class="am-hide-sm-only">D20220328000004</td>
-                                    <td class="am-hide-sm-only">百度科技有限公司</td>
-                                    <td class="am-hide-sm-only">1,000,000.00</td>
-                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                                </tr>
-                                <tr data-id="2">
-                                    <td class="am-hide-sm-only">D20220328000005</td>
-                                    <td class="am-hide-sm-only">百度科技有限公司</td>
-                                    <td class="am-hide-sm-only">1,000,000.00</td>
-                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                                </tr>
+
                                 </tbody>
                             </table>
                         </form>
@@ -148,7 +119,7 @@
                     <div class="am-u-sm-12 am-u-md-6">
                         <form class="am-form am-form-horizontal">
                             <div class="am-form-group">
-                                <label for="user-name" class="am-u-sm-3 am-form-label">发票种类</label>
+                                <label class="am-u-sm-3 am-form-label">发票种类</label>
                                 <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
                                     普通增值税发票
                                 </div>
@@ -159,7 +130,7 @@
                     <div class="am-u-sm-12 am-u-md-6" style="padding:0">
                         <form class="am-form am-form-horizontal">
                             <div class="am-form-group">
-                                <label for="user-name" class="am-u-sm-3 am-form-label">发票类型</label>
+                                <label class="am-u-sm-3 am-form-label">发票类型</label>
                                 <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
                                     电子发票
                                 </div>
@@ -170,10 +141,8 @@
                     <div class="am-u-sm-12 am-u-md-6" style="padding:0">
                         <form class="am-form am-form-horizontal">
                             <div class="am-form-group">
-                                <label for="user-name" class="am-u-sm-3 am-form-label">抬头</label>
-                                <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                    百度科技有限公司
-                                </div>
+                                <label class="am-u-sm-3 am-form-label">抬头</label>
+                                <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="title1"></div>
                             </div>
                         </form>
                         <hr>
@@ -181,18 +150,16 @@
                     <div class="am-u-sm-12 am-u-md-6" style="padding:0">
                         <form class="am-form am-form-horizontal">
                             <div class="am-form-group">
-                                <label for="user-name" class="am-u-sm-3 am-form-label">税号</label>
-                                <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                    91110000802100XXXX
-                                </div>
+                                <label class="am-u-sm-3 am-form-label">税号</label>
+                                <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="taxNo1"></div>
                             </div>
                         </form>
                         <hr>
                     </div>
                     <div class="am-u-sm-12 am-u-md-6">
                         <form class="am-form am-form-horizontal">
-                            <div class="am-form-group">
-                                <label for="user-name" class="am-u-sm-3 am-form-label">邮箱</label>
+                            <div class="am-form-group" id="addAndEmail">
+                                <label class="am-u-sm-3 am-form-label">邮箱</label>
                                 <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
                                     123456789@qq.com
                                 </div>
@@ -209,12 +176,69 @@
         </div>
     </div>
 </div>
-
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
 <script src="js/jquery.min.js"></script>
 <script src="js/amazeui.min.js"></script>
 <script src="js/app.js"></script>
 <script>
+    var enterpriseId = ${sessionScope.enterpriseId};
+    $(document).ready(function () {
+        //右上角用户名
+        var userName1 = "${sessionScope.userName}";
+        $("[name=userName]").text(userName1);
 
+        //抬头信息 抬头、税号
+        var baseData = null;
+        $.get("bs","b=1&enterpriseId="+enterpriseId,function (baseData1) {
+            eval("baseData=" + baseData1);
+            $("[name=title1]").text(baseData.title);
+            $("[name=taxNo1]").text(baseData.taxNo);
+        });
+
+        <%--var iid = ${requestScope.iid};--%>
+        var iid = 1;
+        var sum = 0.00;
+        $.get("os","o=4&invoicingRecordId="+iid,function (list1) {
+            eval("var orderlist="+list1);
+            for (var i=0;i<orderlist.length;i++){
+                var obj = "<tr data-id=\"2\">\n" +
+                    "    <td class=\"am-hide-sm-only\">"+orderlist[i].no+"</td>\n" +
+                    "    <td class=\"am-hide-sm-only\">"+baseData.title+"</td>\n" +
+                    "    <td class=\"am-hide-sm-only\">"+orderlist[i].totalAmount+"</td>\n" +
+                    "    <td class=\"am-hide-sm-only\">"+orderlist[i].createTime+"</td>\n" +
+                    "</tr>";
+                $(obj).appendTo($("#doc-modal-list"));
+                sum += orderlist[i].totalAmount;
+            }
+            $("[name=sum]").text(sum+"元");
+        });
+
+        //邮寄地址信息addAndEmail
+        $(function () {
+            <%--var aid = ${requestScope.aid};--%>
+            <%--var eid = ${requestScope.eid};--%>
+            var aid=1;
+            var eid=null;
+            if (eid==null){
+                $.get("as","a=7&aid="+aid,function (address) {
+                    eval("var address="+address);
+                    $("#addAndEmail").empty();
+                    $('<label class="am-u-sm-3 am-form-label">邮寄地址' +
+                        '</label><div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">'
+                        +address.area+''+address.addressDetail+'</div>').appendTo($("#addAndEmail"));
+                });
+            }
+            if (aid==null) {
+                $.get("es", "e=4&eid=" + eid, function (email) {
+                    eval("var email=" + email);
+                    $("#addAndEmail").empty();
+                    $('<label class="am-u-sm-3 am-form-label">邮箱' +
+                        '</label><div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">'
+                        + emailDetail + '</div>').appendTo($("#addAndEmail"));
+                });
+            }
+        });
+    });
 </script>
 </body>
 
