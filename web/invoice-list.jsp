@@ -191,7 +191,7 @@
                                             <span
                                                     style="font-size: 14px;margin-right: 8px;margin-left: 8px">发票申请日期</span>
                                         </span>
-                                    <input type="text" class="am-form-field" data-am-datepicker
+                                    <input type="text" class="am-form-field" id="creatortime" data-am-datepicker
                                            placeholder="&nbsp;&nbsp;请选择日期"
                                            style="border: 1px solid #c2cad8;width: 68%;border-radius: 3px;">
                                 </div>
@@ -202,7 +202,7 @@
                                         <span class="am-input-group-btn">
                                             <span style="font-size: 14px;margin-right: 8px;margin-left: 8px">发票抬头</span>
                                         </span>
-                                    <input type="text" class="am-form-field" placeholder="&nbsp;&nbsp;请输入发票抬头"
+                                    <input type="text" class="am-form-field" id="titlestr" placeholder="&nbsp;&nbsp;请输入发票抬头"
                                            style="border: 1px solid #c2cad8;width: 68%;border-radius: 3px;">
                                 </div>
                             </div>
@@ -211,12 +211,12 @@
                                         <span class="am-input-group-btn">
                                             <span style="font-size: 14px;margin-right: 8px;margin-left: 8px">发票金额</span>
                                         </span>
-                                    <input type="text" class="am-form-field" placeholder="&nbsp;&nbsp;最低金额(万)"
+                                    <input type="text" class="am-form-field" id="invoicingmin" placeholder="&nbsp;&nbsp;最低金额(万)"
                                            style="border: 1px solid #c2cad8;width: 32%;border-radius: 3px;">
                                     <div class="am-form-field"
                                          style="width: 0%; border-radius: 3px;border: none;margin-left: 10px;">~
                                     </div>
-                                    <input type="text" class="am-form-field" placeholder="&nbsp;&nbsp;最高金额(万)"
+                                    <input type="text" class="am-form-field" id="invoicingmax" placeholder="&nbsp;&nbsp;最高金额(万)"
                                            style="border: 1px solid #c2cad8;width: 32%;border-radius: 3px;margin-left: 20px;">
                                 </div>
                             </div>
@@ -228,9 +228,7 @@
                                                         style="font-size: 14px;margin-right: 8px;margin-left: 8px">处理状态</span>
                                             </span>
                                         <div class="am-btn-group am-btn-group-sm status-type">
-                                            <button type="button" class="am-btn am-btn-primary am-radius">全部
-                                            </button>
-                                            <button type="button" class="am-btn am-btn-default">申请中</button>
+                                            <button type="button" class="am-btn am-btn-primary am-radius">全部</button>
                                             <button type="button" class="am-btn am-btn-default">已开票</button>
                                             <button type="button" class="am-btn am-btn-default">已作废</button>
                                         </div>
@@ -259,102 +257,7 @@
                             </tr>
                             </thead>
                             <tbody id="doc-modal-list">
-                                <tr data-id="2">
-                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                                    <td class="am-hide-sm-only">百度科技有限公司</td>
-                                    <td class="am-hide-sm-only">1,000,000.00</td>
-                                    <td class="am-hide-sm-only">F64A3FA774552D72</td>
-                                    <td class="am-hide-sm-only">
-                                            <span class="ele-dot-status ele-dot-status-success"><span>
-                                                    <span class="ele-dot-text"> 已开票</span>
-                                    <td>
-                                        <div class="am-btn-toolbar">
-                                            <div class="am-btn-group am-btn-group-xs">
-                                                <a href="invoice-detail.jsp"><span class="am-text-secondary"
-                                                                                   style="cursor:pointer"><span></span>
-                                                            详情</span></a>
-                                                <span class="am-text-secondary am-icon"
-                                                      style="cursor:pointer"><span></span>
-                                                        退票</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr data-id="2">
-                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                                    <td class="am-hide-sm-only">百度科技有限公司</td>
-                                    <td class="am-hide-sm-only">1,000,000.00</td>
-                                    <td class="am-hide-sm-only">F64A3FA774552D72</td>
-                                    <td class="am-hide-sm-only">
-                                            <span class="ele-dot-status ele-dot-status-error"><span>
-                                                    <span class="ele-dot-text">已作废</span>
-                                    <td>
-                                        <div class="am-btn-toolbar">
-                                            <div class="am-btn-group am-btn-group-xs">
-                                                <a href="invoice-detail.jsp"><span class="am-text-secondary"
-                                                                                   style="cursor:pointer"><span></span>
-                                                            详情</span></a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr data-id="2">
-                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                                    <td class="am-hide-sm-only">百度科技有限公司</td>
-                                    <td class="am-hide-sm-only">1,000,000.00</td>
-                                    <td class="am-hide-sm-only">F64A3FA774552D72</td>
-                                    <td class="am-hide-sm-only">
-                                            <span class="ele-dot-status ele-dot-status-error"><span>
-                                                    <span class="ele-dot-text">已作废</span>
-                                    <td>
-                                        <div class="am-btn-toolbar">
-                                            <div class="am-btn-group am-btn-group-xs">
-                                                <a href="invoice-detail.jsp"><span class="am-text-secondary"
-                                                                                   style="cursor:pointer"><span></span>
-                                                            详情</span></a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr data-id="2">
-                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                                    <td class="am-hide-sm-only">百度科技有限公司</td>
-                                    <td class="am-hide-sm-only">1,000,000.00</td>
-                                    <td class="am-hide-sm-only">F64A3FA774552D72</td>
-                                    <td class="am-hide-sm-only">
-                                            <span class="ele-dot-status ele-dot-status-error"><span>
-                                                    <span class="ele-dot-text">已作废</span>
-                                    <td>
-                                        <div class="am-btn-toolbar">
-                                            <div class="am-btn-group am-btn-group-xs">
-                                                <a href="invoice-detail.jsp"><span class="am-text-secondary"
-                                                                                   style="cursor:pointer"><span></span>
-                                                            详情</span></a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr data-id="2">
-                                    <td class="am-hide-sm-only">2021-12-31 12：12：12</td>
-                                    <td class="am-hide-sm-only">百度科技有限公司</td>
-                                    <td class="am-hide-sm-only">1,000,000.00</td>
-                                    <td class="am-hide-sm-only">F64A3FA774552D72</td>
-                                    <td class="am-hide-sm-only">
-                                            <span class="ele-dot-status ele-dot-status-success"><span>
-                                                    <span class="ele-dot-text">已开票</span>
-                                    <td>
-                                        <div class="am-btn-toolbar">
-                                            <div class="am-btn-group am-btn-group-xs">
-                                                <a href="invoice-detail.jsp"><span class="am-text-secondary"
-                                                                                   style="cursor:pointer"><span></span>
-                                                            详情</span></a>
-                                                <span class="am-text-secondary am-icon"
-                                                      style="cursor:pointer"><span></span>
-                                                        退票</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
+
                             </tbody>
                         </table>
                         <div class="am-cf">
@@ -442,11 +345,6 @@
             $("[name=email1]").text(email.emailDetail);
         });
     });
-
-
-
-</script>
-<script>
     $(document).ready(function () {
         //发票抬头及地址信息  抬头、税号
         var enterpriseId = ${sessionScope.enterpriseId};
@@ -455,22 +353,388 @@
             $("[name=title1]").text(baseData.title);
             $("[name=taxNo1]").text(baseData.taxNo);
         });
-
-        //右上角用户名
         var userName1 = "${sessionScope.userName}";
         $("[name=userName]").text(userName1);
     });
+    var creatortime;
+    var titlestr;
+    var invoicingmin;
+    var invoicingmax;
 
-
-    var eid = ${sessionScope.eid};
-    $(function () {
-
-        $.get("es","e=1&eid="+eid,function (email11) {
-            eval("var email="+email11);
-            $("[name=email1]").text(email.emailDetail);
+    $.get("is","i=1&creatortime="+creatortime+"&titlestr="+titlestr+"&invoicingmin="+invoicingmin+"&invoicingmax="+invoicingmax,function (invoicelist) {
+        eval("var invoicelist="+invoicelist);
+        for (var i=0;i<invoicelist.length;i++){
+            if (invoicelist[i].status=="A"){
+                var obj = "<tr data-id=\"2\">\n" +
+                    "    <td class=\"am-hide-sm-only\">"+invoicelist[i].creatorTime+"</td>\n" +
+                    "    <td class=\"am-hide-sm-only\">"+invoicelist[i].baseData.title+"</td>\n" +
+                    "    <td class=\"am-hide-sm-only\">"+invoicelist[i].amount+"</td>\n" +
+                    "    <td class=\"am-hide-sm-only\">"+invoicelist[i].uplinkAddress+"</td>\n" +
+                    "    <td class=\"am-hide-sm-only\">\n" +
+                    "            <span class=\"ele-dot-status ele-dot-status-success\"><span>\n" +
+                    "                    <span class=\"ele-dot-text\">已开票</span>\n" +
+                    "    <td>\n" +
+                    "        <div class=\"am-btn-toolbar\">\n" +
+                    "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
+                    "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                    "                                                   style=\"cursor:pointer\"><span></span>\n" +
+                    "                            详情</span></a>\n" +
+                    "                <span class=\"am-text-secondary am-icon\"\n" +
+                    "                      style=\"cursor:pointer\"><span></span>\n" +
+                    "                        退票</span>\n" +
+                    "            </div>\n" +
+                    "        </div>\n" +
+                    "    </td>\n" +
+                    "</tr>";
+            }else if (invoicelist[i].status=="B") {
+                var obj="<tr data-id=\"2\">\n" +
+                    "    <td class=\"am-hide-sm-only\">"+invoicelist[i].creatorTime+"</td>\n" +
+                    "    <td class=\"am-hide-sm-only\">"+invoicelist[i].baseData.title+"</td>\n" +
+                    "    <td class=\"am-hide-sm-only\">"+invoicelist[i].amount+"</td>\n" +
+                    "    <td class=\"am-hide-sm-only\">"+invoicelist[i].uplinkAddress+"</td>\n" +
+                    "    <td class=\"am-hide-sm-only\">\n" +
+                    "                <span class=\"ele-dot-status ele-dot-status-error\"><span>\n" +
+                    "                        <span class=\"ele-dot-text\">已作废</span>\n" +
+                    "    <td>\n" +
+                    "        <div class=\"am-btn-toolbar\">\n" +
+                    "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
+                    "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                    "                                                    style=\"cursor:pointer\"><span></span>\n" +
+                    "                                详情</span></a>\n" +
+                    "            </div>\n" +
+                    "        </div>\n" +
+                    "    </td>\n" +
+                    "</tr>" +
+                    ""
+            }
+            $(obj).appendTo($("#doc-modal-list"));
+        }
+    });
+    $("[id='creatortime']").blur(function () {
+        creatortime=$(this).val();
+        $.get("is","i=1&creatortime="+creatortime+"&titlestr="+titlestr+"&invoicingmin="+invoicingmin+"&invoicingmax="+invoicingmax,function (invoicelist) {
+            $("#doc-modal-list").empty()
+            eval("var invoicelist="+invoicelist);
+            for (var i=0;i<invoicelist.length;i++){
+                if (invoicelist[i].status=="A"){
+                    var obj = "<tr data-id=\"2\">\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[i].creatorTime+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[i].baseData.title+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[i].amount+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[i].uplinkAddress+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">\n" +
+                        "            <span class=\"ele-dot-status ele-dot-status-success\"><span>\n" +
+                        "                    <span class=\"ele-dot-text\">已开票</span>\n" +
+                        "    <td>\n" +
+                        "        <div class=\"am-btn-toolbar\">\n" +
+                        "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
+                        "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                        "                                                   style=\"cursor:pointer\"><span></span>\n" +
+                        "                            详情</span></a>\n" +
+                        "                <span class=\"am-text-secondary am-icon\"\n" +
+                        "                      style=\"cursor:pointer\"><span></span>\n" +
+                        "                        退票</span>\n" +
+                        "            </div>\n" +
+                        "        </div>\n" +
+                        "    </td>\n" +
+                        "</tr>";
+                }else if (invoicecreatortimelist[i].status=="B") {
+                    var obj="<tr data-id=\"2\">\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicecreatortimelist[i].creatorTime+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicecreatortimelist[i].baseData.title+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicecreatortimelist[i].amount+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicecreatortimelist[i].uplinkAddress+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">\n" +
+                        "                <span class=\"ele-dot-status ele-dot-status-error\"><span>\n" +
+                        "                        <span class=\"ele-dot-text\">已作废</span>\n" +
+                        "    <td>\n" +
+                        "        <div class=\"am-btn-toolbar\">\n" +
+                        "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
+                        "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                        "                                                    style=\"cursor:pointer\"><span></span>\n" +
+                        "                                详情</span></a>\n" +
+                        "            </div>\n" +
+                        "        </div>\n" +
+                        "    </td>\n" +
+                        "</tr>"
+                }
+                $(obj).appendTo($("#doc-modal-list"));
+            }
         });
     });
+    $("[id='titlestr']").blur(function () {
+        titlestr=$(this).val();
+        $.get("is","i=8&titlestr="+titlestr,function (invoicetitlelist) {
+            $("#doc-modal-list").empty()
+            eval("var invoicetitlelist="+invoicetitlelist);
+            for (var i=0;i<invoicetitlelist.length;i++){
+                if (invoicetitlelist[i].status=="A"){
+                    var obj = "<tr data-id=\"2\">\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicetitlelist[i].creatorTime+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicetitlelist[i].baseData.title+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicetitlelist[i].amount+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicetitlelist[i].uplinkAddress+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">\n" +
+                        "            <span class=\"ele-dot-status ele-dot-status-success\"><span>\n" +
+                        "                    <span class=\"ele-dot-text\">已开票</span>\n" +
+                        "    <td>\n" +
+                        "        <div class=\"am-btn-toolbar\">\n" +
+                        "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
+                        "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                        "                                                   style=\"cursor:pointer\"><span></span>\n" +
+                        "                            详情</span></a>\n" +
+                        "                <span class=\"am-text-secondary am-icon\"\n" +
+                        "                      style=\"cursor:pointer\"><span></span>\n" +
+                        "                        退票</span>\n" +
+                        "            </div>\n" +
+                        "        </div>\n" +
+                        "    </td>\n" +
+                        "</tr>";
+                }else if (invoicetitlelist[i].status=="B") {
+                    var obj="<tr data-id=\"2\">\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicetitlelist[i].creatorTime+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicetitlelist[i].baseData.title+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicetitlelist[i].amount+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicetitlelist[i].uplinkAddress+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">\n" +
+                        "                <span class=\"ele-dot-status ele-dot-status-error\"><span>\n" +
+                        "                        <span class=\"ele-dot-text\">已作废</span>\n" +
+                        "    <td>\n" +
+                        "        <div class=\"am-btn-toolbar\">\n" +
+                        "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
+                        "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                        "                                                    style=\"cursor:pointer\"><span></span>\n" +
+                        "                                详情</span></a>\n" +
+                        "            </div>\n" +
+                        "        </div>\n" +
+                        "    </td>\n" +
+                        "</tr>"
+                }
+                $(obj).appendTo($("#doc-modal-list"));
+            }
+        });
+    });
+    $("[id='invoicingmin']").blur(function () {
+        invoicingmin=$(this).val();
+        $.get("is","i=5&invoicingmin="+invoicingmin,function (invoiceminlist) {
+            $("#doc-modal-list").empty()
+            eval("var invoiceminlist="+invoiceminlist);
+            for (var i=0;i<invoiceminlist.length;i++){
+                if (invoiceminlist[i].status=="A"){
+                    var obj = "<tr data-id=\"2\">\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoiceminlist[i].creatorTime+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoiceminlist[i].baseData.title+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoiceminlist[i].amount+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoiceminlist[i].uplinkAddress+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">\n" +
+                        "            <span class=\"ele-dot-status ele-dot-status-success\"><span>\n" +
+                        "                    <span class=\"ele-dot-text\">已开票</span>\n" +
+                        "    <td>\n" +
+                        "        <div class=\"am-btn-toolbar\">\n" +
+                        "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
+                        "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                        "                                                   style=\"cursor:pointer\"><span></span>\n" +
+                        "                            详情</span></a>\n" +
+                        "                <span class=\"am-text-secondary am-icon\"\n" +
+                        "                      style=\"cursor:pointer\"><span></span>\n" +
+                        "                        退票</span>\n" +
+                        "            </div>\n" +
+                        "        </div>\n" +
+                        "    </td>\n" +
+                        "</tr>";
+                }else if (invoiceminlist[i].status=="B") {
+                    var obj="<tr data-id=\"2\">\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoiceminlist[i].creatorTime+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoiceminlist[i].baseData.title+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoiceminlist[i].amount+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoiceminlist[i].uplinkAddress+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">\n" +
+                        "                <span class=\"ele-dot-status ele-dot-status-error\"><span>\n" +
+                        "                        <span class=\"ele-dot-text\">已作废</span>\n" +
+                        "    <td>\n" +
+                        "        <div class=\"am-btn-toolbar\">\n" +
+                        "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
+                        "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                        "                                                    style=\"cursor:pointer\"><span></span>\n" +
+                        "                                详情</span></a>\n" +
+                        "            </div>\n" +
+                        "        </div>\n" +
+                        "    </td>\n" +
+                        "</tr>"
+                }
+                $(obj).appendTo($("#doc-modal-list"));
+            }
+        });
+    });
+    $("[id='invoicingmax']").blur(function () {
+        invoicingmax=$(this).val();
+        $.get("is","i=6&invoicingmax="+invoicingmax,function (invoicemaxlist) {
+            $("#doc-modal-list").empty()
+            eval("var invoicemaxlist="+invoicemaxlist);
+            for (var i=0;i<invoicemaxlist.length;i++){
+                if (invoicemaxlist[i].status=="A"){
+                    var obj = "<tr data-id=\"2\">\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicemaxlist[i].creatorTime+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicemaxlist[i].baseData.title+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicemaxlist[i].amount+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicemaxlist[i].uplinkAddress+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">\n" +
+                        "            <span class=\"ele-dot-status ele-dot-status-success\"><span>\n" +
+                        "                    <span class=\"ele-dot-text\">已开票</span>\n" +
+                        "    <td>\n" +
+                        "        <div class=\"am-btn-toolbar\">\n" +
+                        "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
+                        "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                        "                                                   style=\"cursor:pointer\"><span></span>\n" +
+                        "                            详情</span></a>\n" +
+                        "                <span class=\"am-text-secondary am-icon\"\n" +
+                        "                      style=\"cursor:pointer\"><span></span>\n" +
+                        "                        退票</span>\n" +
+                        "            </div>\n" +
+                        "        </div>\n" +
+                        "    </td>\n" +
+                        "</tr>";
+                }else if (invoicemaxlist[i].status=="B") {
+                    var obj="<tr data-id=\"2\">\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicemaxlist[i].creatorTime+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicemaxlist[i].baseData.title+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicemaxlist[i].amount+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicemaxlist[i].uplinkAddress+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">\n" +
+                        "                <span class=\"ele-dot-status ele-dot-status-error\"><span>\n" +
+                        "                        <span class=\"ele-dot-text\">已作废</span>\n" +
+                        "    <td>\n" +
+                        "        <div class=\"am-btn-toolbar\">\n" +
+                        "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
+                        "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                        "                                                    style=\"cursor:pointer\"><span></span>\n" +
+                        "                                详情</span></a>\n" +
+                        "            </div>\n" +
+                        "        </div>\n" +
+                        "    </td>\n" +
+                        "</tr>"
+                }
+                $(obj).appendTo($("#doc-modal-list"));
+            }
+        });
+    });
+    $("[type=\"button\"]:eq(0)").click(function () {
+        $.get("is","i=1&creatortime="+creatortime+"&titlestr="+titlestr+"&invoicingmin="+invoicingmin+"&invoicingmax="+invoicingmax,function (invoicelist) {
+            $("#doc-modal-list").empty()
+            eval("var invoicelist="+invoicelist);
+            for (var i=0;i<invoicelist.length;i++){
+                if (invoicelist[i].status=="A"){
+                    var obj = "<tr data-id=\"2\">\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[i].creatorTime+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[i].baseData.title+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[i].amount+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[i].uplinkAddress+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">\n" +
+                        "            <span class=\"ele-dot-status ele-dot-status-success\"><span>\n" +
+                        "                    <span class=\"ele-dot-text\">已开票</span>\n" +
+                        "    <td>\n" +
+                        "        <div class=\"am-btn-toolbar\">\n" +
+                        "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
+                        "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                        "                                                   style=\"cursor:pointer\"><span></span>\n" +
+                        "                            详情</span></a>\n" +
+                        "                <span class=\"am-text-secondary am-icon\"\n" +
+                        "                      style=\"cursor:pointer\"><span></span>\n" +
+                        "                        退票</span>\n" +
+                        "            </div>\n" +
+                        "        </div>\n" +
+                        "    </td>\n" +
+                        "</tr>";
+                }else if (invoicelist[i].status=="B") {
+                    var obj="<tr data-id=\"2\">\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[i].creatorTime+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[i].baseData.title+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[i].amount+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[i].uplinkAddress+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">\n" +
+                        "                <span class=\"ele-dot-status ele-dot-status-error\"><span>\n" +
+                        "                        <span class=\"ele-dot-text\">已作废</span>\n" +
+                        "    <td>\n" +
+                        "        <div class=\"am-btn-toolbar\">\n" +
+                        "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
+                        "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                        "                                                    style=\"cursor:pointer\"><span></span>\n" +
+                        "                                详情</span></a>\n" +
+                        "            </div>\n" +
+                        "        </div>\n" +
+                        "    </td>\n" +
+                        "</tr>"
+                }
+                $(obj).appendTo($("#doc-modal-list"));
+            }
+        });
+    })
+
+    $("[type=\"button\"]:eq(1)").click(function () {
+        var x="A";
+        $.get("is","i=7&status="+x,function (invoicestatuslist) {
+            $("#doc-modal-list").empty()
+            eval("var invoicestatuslist="+invoicestatuslist);
+
+            for (var i=0;i<invoicestatuslist.length;i++){
+                if (invoicestatuslist[i].status==="A"){
+                    var obj = "<tr data-id=\"2\">\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicestatuslist[i].creatorTime+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicestatuslist[i].baseData.title+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicestatuslist[i].amount+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicestatuslist[i].uplinkAddress+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">\n" +
+                        "            <span class=\"ele-dot-status ele-dot-status-success\"><span>\n" +
+                        "                    <span class=\"ele-dot-text\">已开票</span>\n" +
+                        "    <td>\n" +
+                        "        <div class=\"am-btn-toolbar\">\n" +
+                        "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
+                        "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                        "                                                   style=\"cursor:pointer\"><span></span>\n" +
+                        "                            详情</span></a>\n" +
+                        "                <span class=\"am-text-secondary am-icon\"\n" +
+                        "                      style=\"cursor:pointer\"><span></span>\n" +
+                        "                        退票</span>\n" +
+                        "            </div>\n" +
+                        "        </div>\n" +
+                        "    </td>\n" +
+                        "</tr>";
+                }
+                $(obj).appendTo($("#doc-modal-list"));
+            }
+        });
+    })
+    $("[type=\"button\"]:eq(2)").click(function () {
+        var y="B"
+        $.get("is","i=7&status="+y,function (invoicestatuslist) {
+            $("#doc-modal-list").empty()
+            eval("var invoicestatuslist="+invoicestatuslist);
+            for (var i=0;i<invoicestatuslist.length;i++){
+                if (invoicestatuslist[i].status==="B") {
+                    var obj="<tr data-id=\"2\">\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicestatuslist[i].creatorTime+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicestatuslist[i].baseData.title+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicestatuslist[i].amount+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicestatuslist[i].uplinkAddress+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">\n" +
+                        "                <span class=\"ele-dot-status ele-dot-status-error\"><span>\n" +
+                        "                        <span class=\"ele-dot-text\">已作废</span>\n" +
+                        "    <td>\n" +
+                        "        <div class=\"am-btn-toolbar\">\n" +
+                        "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
+                        "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                        "                                                    style=\"cursor:pointer\"><span></span>\n" +
+                        "                                详情</span></a>\n" +
+                        "            </div>\n" +
+                        "        </div>\n" +
+                        "    </td>\n" +
+                        "</tr>"
+                }
+                $(obj).appendTo($("#doc-modal-list"));
+            }
+        });
+    });
+
 </script>
 </body>
-
 </html>
