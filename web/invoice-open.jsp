@@ -353,7 +353,7 @@
                                             <label class="am-u-sm-3 am-form-label"></label>
                                             <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
                                                 <span id="selectAddress"
-                                                      style="color: #23abf0;cursor: pointer;">选择</span>
+                                                      style="color: #23abf0;cursor: pointer;" name="emailopen">选择</span>
                                             </div>
                                         </div>
                                     </form>
@@ -671,7 +671,27 @@
              $("#deAddress").empty();
              $('<span>'+$('[name="addressCho"]:checked').val()+'</span>').appendTo($("#deAddress"));
     }
+    var eid = ${sessionScope.eid};
+    $(function () {
+
+        $.get("es","e=3&eid="+eid,function (email2) {
+            eval("var email="+email2);
+            $("[name=email2]").text(email.emailDetail);
+        });
+        $.get("es","e=5&eid="+eid,function (emailinfo) {
+            eval("var list="+emailinfo);
+            for(var i=0;i<list.length;i++){
+                $("<tr id='"+list[i].eid+"'>"+list[i].eid+"</tr>")
+                    .appendTo($("#doc-modal-list2"));
+                $("<td><label><input type='radio' name='radio1' value='' data-am-ucheck/></label><td>")
+                    .appendTo($("#"+list[i].eid+""));
+                $("<td value='"+list[i].emailDetail+"'>"+list[i].emailDetail+"</td>")
+                    .appendTo($("#"+list[i].eid+""));
+            }
+        });
+    });
 </script>
+
 </body>
 
 </html>

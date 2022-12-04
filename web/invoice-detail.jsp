@@ -158,10 +158,10 @@
                     </div>
                     <div class="am-u-sm-12 am-u-md-6">
                         <form class="am-form am-form-horizontal">
-                            <div class="am-form-group" id="addAndEmail">
+                            <div class="am-form-group">
                                 <label class="am-u-sm-3 am-form-label">邮箱</label>
-                                <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                    123456789@qq.com
+                                <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="email3">
+
                                 </div>
                             </div>
                         </form>
@@ -194,6 +194,7 @@
             $("[name=title1]").text(baseData.title);
             $("[name=taxNo1]").text(baseData.taxNo);
         });
+
 
         <%--var iid = ${requestScope.iid};--%>
         var iid = 1;
@@ -238,6 +239,18 @@
                 });
             }
         });
+
+
+        var eid = ${sessionScope.eid};
+        $(function () {
+
+            $.get("es","e=4&eid="+eid,function (email3) {
+                eval("var email="+email3);
+                $("[name=email3]").text(email.emailDetail);
+            });
+        });
+
+
     });
 </script>
 </body>

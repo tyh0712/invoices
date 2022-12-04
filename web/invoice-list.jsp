@@ -460,6 +460,16 @@
         var userName1 = "${sessionScope.userName}";
         $("[name=userName]").text(userName1);
     });
+
+
+    var eid = ${sessionScope.eid};
+    $(function () {
+
+        $.get("es","e=1&eid="+eid,function (email11) {
+            eval("var email="+email11);
+            $("[name=email1]").text(email.emailDetail);
+        });
+    });
 </script>
 </body>
 
