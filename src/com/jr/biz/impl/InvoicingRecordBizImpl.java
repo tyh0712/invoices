@@ -4,6 +4,8 @@ import com.jr.biz.IInvoicingRecordBiz;
 import com.jr.dao.impl.InvoicingRecordDaoImpl;
 import com.jr.entry.InvoicingRecord;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,6 +20,17 @@ public class InvoicingRecordBizImpl implements IInvoicingRecordBiz {
     public List<InvoicingRecord> getIRList(int enterpriseId) {
         return irdi.selectIRByEId(enterpriseId);
     }
+
+    @Override
+    public List<InvoicingRecord> selectStatusList(int enterpriseId, String status) {
+        return irdi.selectIRByStatus(enterpriseId,status);
+    }
+
+    @Override
+    public List<InvoicingRecord> selectIRByTitle(int enterpriseId, String title) {
+        return irdi.selectIRByTitle(enterpriseId,title);
+    }
+
 
     @Override
     public List<InvoicingRecord> getIRAmountMinList(int enterpriseId, int amount) {
@@ -40,7 +53,7 @@ public class InvoicingRecordBizImpl implements IInvoicingRecordBiz {
     }
 
     @Override
-    public List<InvoicingRecord> detailIR(int iid) {
-        return irdi.selectIRByIId(iid);
+    public List<InvoicingRecord> detailIR(InvoicingRecord invoicingRecord) {
+        return irdi.selectIRByIId(invoicingRecord);
     }
 }
