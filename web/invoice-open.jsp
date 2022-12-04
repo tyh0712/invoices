@@ -373,8 +373,8 @@
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
                                             <label for="user-name" class="am-u-sm-3 am-form-label star"> 邮箱</label>
-                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                                123456789@qq.com
+                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="email2">
+
                                             </div>
                                         </div>
                                     </form>
@@ -407,7 +407,7 @@
                                             <label for="user-name" class="am-u-sm-3 am-form-label"></label>
                                             <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
                                                 <span id="selectAddress"
-                                                      style="color: #23abf0;cursor: pointer;">选择</span>
+                                                      style="color: #23abf0;cursor: pointer;" name="emailopen">选择</span>
                                             </div>
                                         </div>
                                     </form>
@@ -463,47 +463,9 @@
                             <th class="table-title" style="text-align: center;">邮箱</th>
                         </tr>
                         </thead>
-                        <tbody id="doc-modal-list">
-                        <tr data-id="2">
-                            <td>
-                                <label class="am-radio">
-                                    <input type="radio" name="radio1" value="" data-am-ucheck>
-                                </label>
-                            </td>
-                            <td class="am-hide-sm-only">3456789876@qq.com</td>
-                        </tr>
-                        <tr data-id="2">
-                            <td>
-                                <label class="am-radio">
-                                    <input type="radio" name="radio1" value="" data-am-ucheck>
-                                </label>
-                            </td>
-                            <td class="am-hide-sm-only">3456789876@qq.com</td>
-                        </tr>
-                        <tr data-id="2">
-                            <td>
-                                <label class="am-radio">
-                                    <input type="radio" name="radio1" value="" data-am-ucheck>
-                                </label>
-                            </td>
-                            <td class="am-hide-sm-only">3456789876@qq.com</td>
-                        </tr>
-                        <tr data-id="2">
-                            <td>
-                                <label class="am-radio">
-                                    <input type="radio" name="radio1" value="" data-am-ucheck checked>
-                                </label>
-                            </td>
-                            <td class="am-hide-sm-only">3456789876@qq.com</td>
-                        </tr>
-                        <tr data-id="2">
-                            <td>
-                                <label class="am-radio">
-                                    <input type="radio" name="radio1" value="" data-am-ucheck>
-                                </label>
-                            </td>
-                            <td class="am-hide-sm-only">3456789876@qq.com</td>
-                        </tr>
+                        <tbody id="doc-modal-list2">
+
+
                         </tbody>
                     </table>
                 </form>
@@ -577,10 +539,13 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
 <script src="js/jquery.min.js">
 </script>
 <script src="js/amazeui.min.js"></script>
 <script src="js/app.js"></script>
+
+
 <script>
     var baseinfoDiv = document.getElementById('baseinfoDiv')
     var showDiv = document.getElementById('showDiv')
@@ -636,7 +601,27 @@
             $('#invoice_appropriative_title').show();
         }
     }
+    var eid = ${sessionScope.eid};
+    $(function () {
+
+        $.get("es","e=3&eid="+eid,function (email2) {
+            eval("var email="+email2);
+            $("[name=email2]").text(email.emailDetail);
+        });
+        $.get("es","e=5&eid="+eid,function (emailinfo) {
+            eval("var list="+emailinfo);
+            for(var i=0;i<list.length;i++){
+                $("<tr id='"+list[i].eid+"'>"+list[i].eid+"</tr>")
+                    .appendTo($("#doc-modal-list2"));
+                $("<td><label><input type='radio' name='radio1' value='' data-am-ucheck/></label><td>")
+                    .appendTo($("#"+list[i].eid+""));
+                $("<td value='"+list[i].emailDetail+"'>"+list[i].emailDetail+"</td>")
+                    .appendTo($("#"+list[i].eid+""));
+            }
+        });
+    });
 </script>
+
 </body>
 
 </html>

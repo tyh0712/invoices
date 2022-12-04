@@ -231,7 +231,7 @@
                                                 <th class="table-date am-hide-sm-only">操作</th>
                                             </tr>
                                             </thead>
-                                            <tbody id="doc-modal-list">
+                                            <tbody id="doc-modal-list3" >
 
                                             </tbody>
                                         </table>
@@ -321,20 +321,19 @@
 
     // 电子邮箱
     function addtmpParam() {
-        var Table = document.getElementById("table_id_email");
-        var rowsNum = Table.rows.length - 1;
-        NewRow = Table.insertRow(); //添加行
-        ID = NewRow.insertCell(); //添加列
-        Name = NewRow.insertCell();
-        // NO = NewRow.insertCell();
-        // Type = NewRow.insertCell();
-        // defaultV = NewRow.insertCell();
-        operate = NewRow.insertCell();
-        //属性赋值
-        ID.innerHTML = rowsNum + 1;
-        Name.innerHTML = "<input id=Name" + (rowsNum + 1) + " style='width:120px' type='text' />";
-        // NO.innerHTML = "<input id=No" +  (rowsNum + 1) +"  style='width: 80px;' type='text' />";
-        operate.innerHTML = '<div id=operate' + (rowsNum + 1) + '><a style="cursor:pointer;color:#007bff;"  onclick="saveInterfaceParam();">保存</a>&nbsp;&nbsp;<a style="cursor:pointer;color:#007bff;"  onclick="saveInterfaceParam();">取消</a></div>';
+   $.get("es","e=2&eid="+eid,function (emailinfo) {
+            eval("var list="+emailinfo);
+            var i=list.length-1;
+            var x=list[i].eid+1;
+                $("<tr id='"+x+"' value='"+x+"'>"+x+"</tr>")
+                    .appendTo($("#doc-modal-list3"));
+                $("<td value='"+x+"'>"+x+"</td>")
+                    .appendTo($("#"+x+""));
+                $("<td><input id=Name"+x+" style='width: 120px;' type='text'/></td>")
+                    .appendTo($("#"+x+""));
+                $('<td><div id=edit'+x+'><a style="cursor:pointer;color:#007bff;"  onclick="saveNewInterfaceParam()">保存</a>&nbsp;&nbsp;<a style="cursor:pointer;color:#007bff;" onclick="saveNewInterfaceParam()">取消</a></div></td>').appendTo($("#"+x+""));
+
+        });
     }
 
     function saveInterfaceParam() {
@@ -345,8 +344,30 @@
         $("#No" + key).attr("disabled", true);
         $("#Type" + key).attr("disabled", true);
         $("#defaultV" + key).attr("disabled", true);
-        var div1 = $("#operate" + key);
-        div1[0].innerHTML = '<a style="cursor:pointer;color:#007bff;"  onclick="editInterfaceParam()">编辑</a>&nbsp;&nbsp;<a style="cursor:pointer;color:#007bff;">设为默认</a>';
+        $.get("es","e=7&email_detail="+$("#Name"+key).val()+"&eid="+key,function () {
+
+        });
+        $("#edit"+key+"").empty();
+        $('<a style="cursor:pointer;color:#007bff;"  onclick="editInterfaceParam()">编辑</a>&nbsp;&nbsp;<a style="cursor:pointer;color:#007bff;" onclick="setEmailStatus()">设为默认</a>').appendTo($("#edit"+key+""));
+
+        //     var div1 = $("#operate" + key);
+    //     div1[0].innerHTML = '<a style="cursor:pointer;color:#007bff;"  onclick="editInterfaceParam()">编辑</a>&nbsp;&nbsp;<a style="cursor:pointer;color:#007bff;">设为默认</a>';
+    }
+    function saveNewInterfaceParam() {
+        var td = event.srcElement; // 通过event.srcElement 获取激活事件的对象 td
+        //获取行索引，修改input样式，其中parentElement和table中的标签层级相关，不是一成不变
+        var key = td.parentElement.parentElement.parentElement.innerText.split("\n")[0].trim();
+        $("#Name" + key).attr("disabled", true);
+        $("#No" + key).attr("disabled", true);
+        $("#Type" + key).attr("disabled", true);
+        $("#defaultV" + key).attr("disabled", true);
+        $("#edit"+key+"").empty();
+        $('<a style="cursor:pointer;color:#007bff;"  onclick="editInterfaceParam()">编辑</a>&nbsp;&nbsp;<a style="cursor:pointer;color:#007bff;" onclick="setEmailStatus()">设为默认</a>').appendTo($("#edit"+key+""));
+        $.get("es","e=6&eid="+eid+"&email_detail="+$("#Name"+key).val(),function () {
+
+        });
+        //     var div1 = $("#operate" + key);
+        //     div1[0].innerHTML = '<a style="cursor:pointer;color:#007bff;"  onclick="editInterfaceParam()">编辑</a>&nbsp;&nbsp;<a style="cursor:pointer;color:#007bff;">设为默认</a>';
     }
 
     function editInterfaceParam() {
@@ -356,8 +377,23 @@
         $("#No" + key).attr("disabled", false);
         $("#Type" + key).attr("disabled", false);
         $("#defaultV" + key).attr("disabled", false);
-        var div1 = $("#operate" + key);
-        div1[0].innerHTML = '<a style="cursor:pointer;color:#007bff;"  onclick="saveInterfaceParam();">保存</a>&nbsp;&nbsp;<a style="cursor:pointer;color:#007bff;"  onclick="saveInterfaceParam();">取消</a>';
+        $("#edit"+key+"").empty();
+        $('<a style="cursor:pointer;color:#007bff;"  onclick="saveInterfaceParam();">保存</a>&nbsp;&nbsp;<a style="cursor:pointer;color:#007bff;"  onclick="saveInterfaceParam();">取消</a>').appendTo($("#edit"+key+""));
+        // var div1 = $("#operate" + key);
+        // div1[0].innerHTML = '<a style="cursor:pointer;color:#007bff;"  onclick="saveInterfaceParam();">保存</a>&nbsp;&nbsp;<a style="cursor:pointer;color:#007bff;"  onclick="saveInterfaceParam();">取消</a>';
+    }
+
+    //邮箱--设为默认
+    function setEmailStatus() {
+        var td = event.srcElement; // 通过event.srcElement 获取激活事件的对象 td
+        var key = td.parentElement.parentElement.parentElement.innerText.split("\n")[0].trim();
+        $("#Name" + key).attr("disabled", false);
+        $("#No" + key).attr("disabled", false);
+        $("#Type" + key).attr("disabled", false);
+        $("#defaultV" + key).attr("disabled", false);
+        $.get("es","e=8&id="+key+"&eid="+eid,function () {
+
+        });
     }
 
     // 邮寄地址
@@ -401,7 +437,23 @@
         $("#defaultV" + key).attr("disabled", false);
         var div1 = $("#operate" + key);
         div1[0].innerHTML = '<a style="cursor:pointer;color:#007bff;"  onclick="saveAddress();">保存</a>&nbsp;&nbsp;<a style="cursor:pointer;color:#007bff;"  onclick="saveAddress();">取消</a>';
-    }
+     }
+    var eid = ${sessionScope.eid};
+    $(function () {
+
+        $.get("es","e=2&eid="+eid,function (emailinfo) {
+            eval("var list="+emailinfo);
+            for(var i=0;i<list.length;i++){
+                $("<tr id='"+list[i].eid+"' value='"+list[i].eid+"'>"+list[i].eid+"</tr>")
+                    .appendTo($("#doc-modal-list3"));
+                $("<td value='"+list[i].eid+"'>"+list[i].eid+"</td>")
+                    .appendTo($("#"+list[i].eid+""));
+                $("<td><input id=Name"+list[i].eid+" style='width: 120px;' type='text' value='"+list[i].emailDetail+"' disabled='disabled'/></td>")
+                    .appendTo($("#"+list[i].eid+""));
+                $('<td><div id=edit'+list[i].eid+'><a style="cursor:pointer;color:#007bff;"  onclick="editInterfaceParam()">编辑</a>&nbsp;&nbsp;<a style="cursor:pointer;color:#007bff;" onclick="setEmailStatus()">设为默认</a></div></td>').appendTo($("#"+list[i].eid+""));
+            }
+        });
+    });
 </script>
 </body>
 

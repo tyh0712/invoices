@@ -40,9 +40,9 @@ public class EmailServlet extends HttpServlet {
         }else if(e==6){//发票抬头及地址信息--编辑--电子邮箱--新增
             addEmail(request, response);
         }else if(e==7){//发票抬头及地址信息--编辑--电子邮箱--编辑邮箱
-            modifyEmailStatus(request, response);
-        }else if(e==8){//发票抬头及地址信息--编辑--电子邮箱--设为默认
             modifyEmailDetail(request, response);
+        }else if(e==8){//发票抬头及地址信息--编辑--电子邮箱--设为默认
+            modifyEmailStatus(request, response);
         }
     }
 
@@ -64,9 +64,8 @@ public class EmailServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=UTF-8");
 
-        int enterpriseId = Integer.parseInt(request.getParameter("enterpriseId"));
-        String defaultStatus = request.getParameter("defaultStatus");
-        Email email = ebi.queryDeEmailByEId(enterpriseId,defaultStatus);
+        int enterpriseId = Integer.parseInt(request.getParameter("eid"));
+        Email email = ebi.queryDeEmailByEId(enterpriseId,"A");
         response.getWriter().println(new Gson().toJson(email));
 
     }
@@ -77,7 +76,7 @@ public class EmailServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=UTF-8");
 
-        int enterpriseId = Integer.parseInt(request.getParameter("enterpriseId"));
+        int enterpriseId = Integer.parseInt(request.getParameter("eid"));
         List<Email> list = ebi.queryEmailByEId(enterpriseId);
         response.getWriter().println(new Gson().toJson(list));
     }
@@ -87,27 +86,30 @@ public class EmailServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=UTF-8");
-
+        System.out.println("tyfdtyvdf");
         Email email = new Email();
-        email.setEmailDetail(request.getParameter("email_detail"));
-//        boolean boo = ebi.modifyEmailStatus(eid,enterpriseId);
-//        if (boo){
-//            message(request, response);
-//        }else{
-//            System.out.println("修改失败");
-//        }
+        int eid=Integer.parseInt(request.getParameter("id"));
+        int enterpriseId=Integer.parseInt(request.getParameter("eid"));
+        boolean boo = ebi.modifyEmailStatus(eid,enterpriseId);
+        if (boo){
+            System.out.println("设置成功");
+            message(request, response);
+        }else{
+            System.out.println("修改失败");
+        }
     }
 
     public void modifyEmailDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=UTF-8");
-
         Email email = new Email();
         email.setEmailDetail(request.getParameter("email_detail"));
+        email.setEid(Integer.parseInt(request.getParameter("eid")));
+        System.out.println(email.toString());
         boolean boo = ebi.modifyEmailDetail(email);
         if (boo){
-            message(request, response);
+            System.out.println("success");
         }else{
             System.out.println("修改失败");
         }
@@ -118,12 +120,12 @@ public class EmailServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=UTF-8");
-
         Email email = new Email();
         email.setEmailDetail(request.getParameter("email_detail"));
+        email.setEnterpriseId(Integer.parseInt(request.getParameter("eid")));
         boolean boo = ebi.addEmail(email);
         if (boo){
-            message(request, response);
+            System.out.println("success");
         }else{
             System.out.println("添加失败");
         }
@@ -135,7 +137,7 @@ public class EmailServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=UTF-8");
 
-        int enterpriseId = Integer.parseInt(request.getParameter("enterpriseId"));
+        int enterpriseId = Integer.parseInt(request.getParameter("eid"));
         List<Email> list = ebi.queryEmailByEId(enterpriseId);
         response.getWriter().println(new Gson().toJson(list.get(0)));
     }

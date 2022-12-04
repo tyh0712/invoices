@@ -94,7 +94,7 @@
         <div class="am-g" style="height: 100px;">
             <div class="am-u-sm-6" style="padding-left: 0;">
                 <div class="tpl-portlet-components">
-                    <div class="tpl-block " id="resultDiv">
+                    <div class="tpl-block " id="resultDiv1">
                         <div class="am-g tpl-amazeui-form">
                             <div class="am-u-sm-12 am-u-md-3">
                                 <div class="am-u-sm-12" style="text-align: center;font-weight: bold;">
@@ -132,7 +132,7 @@
             </div>
             <div class="am-u-sm-6">
                 <div class="tpl-portlet-components">
-                    <div class="tpl-block " id="resultDiv">
+                    <div class="tpl-block " id="resultDiv2">
                         <div></div>
                         <div class="am-g tpl-amazeui-form">
                             <div class="am-u-sm-12 am-u-md-6">
@@ -169,8 +169,7 @@
                         <div class="am-g tpl-amazeui-form" style="font-size: 14px;color: #666;">
                             <div class="am-u-sm-12 am-u-md-6">
                                 <div class="am-u-sm-12">
-                                    <span style="color: #333;">电子邮箱：</span> <span>
-                                            2134566876756453@qq.com</span>
+                                    <span style="color: #333;">电子邮箱：</span> <span name="email1"> </span>
                                 </div>
                             </div>
 
@@ -183,7 +182,7 @@
         <div class="am-g" style="height: 100px;">
             <div class="am-u-sm-12" style="padding-left: 0;">
                 <div class="tpl-portlet-components">
-                    <div class="tpl-block " id="resultDiv">
+                    <div class="tpl-block " id="resultDiv3">
                         <div class="am-g tpl-amazeui-form">
 
                             <div class="am-u-sm-6 am-u-md-3">
@@ -392,9 +391,10 @@
     </div>
 </div>
 
-<script src="js/jquery.min.js"></script>
+<script src="js/jquery-1.8.3.js"></script>
 <script src="js/amazeui.min.js"></script>
 <script src="js/app.js"></script>
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
 <script>
     // 退票二次确认
     $(function () {
@@ -418,6 +418,14 @@
                     alert("点击了取消")
                 }
             });
+        });
+    });
+    var eid = ${sessionScope.eid};
+    $(function () {
+
+        $.get("es","e=1&eid="+eid,function (email11) {
+            eval("var email="+email11);
+            $("[name=email1]").text(email.emailDetail);
         });
     });
 </script>

@@ -193,8 +193,8 @@
                         <form class="am-form am-form-horizontal">
                             <div class="am-form-group">
                                 <label for="user-name" class="am-u-sm-3 am-form-label">邮箱</label>
-                                <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                    123456789@qq.com
+                                <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="email3">
+
                                 </div>
                             </div>
                         </form>
@@ -213,8 +213,17 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/amazeui.min.js"></script>
 <script src="js/app.js"></script>
-<script>
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
 
+<script>
+    var eid = ${sessionScope.eid};
+    $(function () {
+
+        $.get("es","e=4&eid="+eid,function (email3) {
+            eval("var email="+email3);
+            $("[name=email3]").text(email.emailDetail);
+        });
+    });
 </script>
 </body>
 
