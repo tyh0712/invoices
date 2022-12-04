@@ -353,9 +353,11 @@
             $("[name=title1]").text(baseData.title);
             $("[name=taxNo1]").text(baseData.taxNo);
         });
-        var userName1 = "${sessionScope.userName}";
-        $("[name=userName]").text(userName1);
     });
+
+    var userName1 = "${sessionScope.userName}";
+    $("[name=userName]").text(userName1);
+
     var creatortime;
     var titlestr;
     var invoicingmin;
@@ -363,42 +365,43 @@
 
     $.get("is","i=1&creatortime="+creatortime+"&titlestr="+titlestr+"&invoicingmin="+invoicingmin+"&invoicingmax="+invoicingmax,function (invoicelist) {
         eval("var invoicelist="+invoicelist);
-        for (var i=0;i<invoicelist.length;i++){
-            if (invoicelist[i].status=="A"){
+        for (var j=0;j<invoicelist.length;j++){
+            if (invoicelist[j].status=="A"){
                 var obj = "<tr data-id=\"2\">\n" +
-                    "    <td class=\"am-hide-sm-only\">"+invoicelist[i].creatorTime+"</td>\n" +
-                    "    <td class=\"am-hide-sm-only\">"+invoicelist[i].baseData.title+"</td>\n" +
-                    "    <td class=\"am-hide-sm-only\">"+invoicelist[i].amount+"</td>\n" +
-                    "    <td class=\"am-hide-sm-only\">"+invoicelist[i].uplinkAddress+"</td>\n" +
+                    "    <td class=\"am-hide-sm-only\">"+invoicelist[j].creatorTime+"</td>\n" +
+                    "    <td class=\"am-hide-sm-only\">"+invoicelist[j].baseData.title+"</td>\n" +
+                    "    <td class=\"am-hide-sm-only\">"+invoicelist[j].amount+"</td>\n" +
+                    "    <td class=\"am-hide-sm-only\">"+invoicelist[j].uplinkAddress+"</td>\n" +
                     "    <td class=\"am-hide-sm-only\">\n" +
                     "            <span class=\"ele-dot-status ele-dot-status-success\"><span>\n" +
                     "                    <span class=\"ele-dot-text\">已开票</span>\n" +
                     "    <td>\n" +
                     "        <div class=\"am-btn-toolbar\">\n" +
                     "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
-                    "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                    "                <a href=\"is?i=4&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
                     "                                                   style=\"cursor:pointer\"><span></span>\n" +
                     "                            详情</span></a>\n" +
-                    "                <span class=\"am-text-secondary am-icon\"\n" +
+                    "                <a href=\"is?i=3&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary am-icon\"\n" +
                     "                      style=\"cursor:pointer\"><span></span>\n" +
-                    "                        退票</span>\n" +
+                    "                        退票</span></a>\n" +
                     "            </div>\n" +
                     "        </div>\n" +
                     "    </td>\n" +
                     "</tr>";
-            }else if (invoicelist[i].status=="B") {
+
+            }else if (invoicelist[j].status=="B") {
                 var obj="<tr data-id=\"2\">\n" +
-                    "    <td class=\"am-hide-sm-only\">"+invoicelist[i].creatorTime+"</td>\n" +
-                    "    <td class=\"am-hide-sm-only\">"+invoicelist[i].baseData.title+"</td>\n" +
-                    "    <td class=\"am-hide-sm-only\">"+invoicelist[i].amount+"</td>\n" +
-                    "    <td class=\"am-hide-sm-only\">"+invoicelist[i].uplinkAddress+"</td>\n" +
+                    "    <td class=\"am-hide-sm-only\">"+invoicelist[j].creatorTime+"</td>\n" +
+                    "    <td class=\"am-hide-sm-only\">"+invoicelist[j].baseData.title+"</td>\n" +
+                    "    <td class=\"am-hide-sm-only\">"+invoicelist[j].amount+"</td>\n" +
+                    "    <td class=\"am-hide-sm-only\">"+invoicelist[j].uplinkAddress+"</td>\n" +
                     "    <td class=\"am-hide-sm-only\">\n" +
                     "                <span class=\"ele-dot-status ele-dot-status-error\"><span>\n" +
                     "                        <span class=\"ele-dot-text\">已作废</span>\n" +
                     "    <td>\n" +
                     "        <div class=\"am-btn-toolbar\">\n" +
                     "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
-                    "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                    "                <a href=\"is?i=4&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
                     "                                                    style=\"cursor:pointer\"><span></span>\n" +
                     "                                详情</span></a>\n" +
                     "            </div>\n" +
@@ -410,47 +413,49 @@
             $(obj).appendTo($("#doc-modal-list"));
         }
     });
+
+
     $("[id='creatortime']").blur(function () {
         creatortime=$(this).val();
         $.get("is","i=1&creatortime="+creatortime+"&titlestr="+titlestr+"&invoicingmin="+invoicingmin+"&invoicingmax="+invoicingmax,function (invoicelist) {
             $("#doc-modal-list").empty()
             eval("var invoicelist="+invoicelist);
-            for (var i=0;i<invoicelist.length;i++){
-                if (invoicelist[i].status=="A"){
+            for (var j=0;j<invoicelist.length;j++){
+                if (invoicelist[j].status=="A"){
                     var obj = "<tr data-id=\"2\">\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicelist[i].creatorTime+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicelist[i].baseData.title+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicelist[i].amount+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicelist[i].uplinkAddress+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[j].creatorTime+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[j].baseData.title+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[j].amount+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[j].uplinkAddress+"</td>\n" +
                         "    <td class=\"am-hide-sm-only\">\n" +
                         "            <span class=\"ele-dot-status ele-dot-status-success\"><span>\n" +
                         "                    <span class=\"ele-dot-text\">已开票</span>\n" +
                         "    <td>\n" +
                         "        <div class=\"am-btn-toolbar\">\n" +
                         "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
-                        "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                        "                <a href=\"is?i=4&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
                         "                                                   style=\"cursor:pointer\"><span></span>\n" +
                         "                            详情</span></a>\n" +
-                        "                <span class=\"am-text-secondary am-icon\"\n" +
+                        "                <a href=\"is?i=3&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary am-icon\"\n" +
                         "                      style=\"cursor:pointer\"><span></span>\n" +
-                        "                        退票</span>\n" +
+                        "                        退票</span></a>\n" +
                         "            </div>\n" +
                         "        </div>\n" +
                         "    </td>\n" +
                         "</tr>";
-                }else if (invoicecreatortimelist[i].status=="B") {
+                }else if (invoicecreatortimelist[j].status=="B") {
                     var obj="<tr data-id=\"2\">\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicecreatortimelist[i].creatorTime+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicecreatortimelist[i].baseData.title+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicecreatortimelist[i].amount+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicecreatortimelist[i].uplinkAddress+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicecreatortimelist[j].creatorTime+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicecreatortimelist[j].baseData.title+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicecreatortimelist[j].amount+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicecreatortimelist[j].uplinkAddress+"</td>\n" +
                         "    <td class=\"am-hide-sm-only\">\n" +
                         "                <span class=\"ele-dot-status ele-dot-status-error\"><span>\n" +
                         "                        <span class=\"ele-dot-text\">已作废</span>\n" +
                         "    <td>\n" +
                         "        <div class=\"am-btn-toolbar\">\n" +
                         "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
-                        "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                        "                <a href=\"is?i=4&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
                         "                                                    style=\"cursor:pointer\"><span></span>\n" +
                         "                                详情</span></a>\n" +
                         "            </div>\n" +
@@ -467,42 +472,42 @@
         $.get("is","i=8&titlestr="+titlestr,function (invoicetitlelist) {
             $("#doc-modal-list").empty()
             eval("var invoicetitlelist="+invoicetitlelist);
-            for (var i=0;i<invoicetitlelist.length;i++){
-                if (invoicetitlelist[i].status=="A"){
+            for (var j=0;j<invoicetitlelist.length;j++){
+                if (invoicetitlelist[j].status=="A"){
                     var obj = "<tr data-id=\"2\">\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicetitlelist[i].creatorTime+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicetitlelist[i].baseData.title+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicetitlelist[i].amount+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicetitlelist[i].uplinkAddress+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicetitlelist[j].creatorTime+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicetitlelist[j].baseData.title+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicetitlelist[j].amount+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicetitlelist[j].uplinkAddress+"</td>\n" +
                         "    <td class=\"am-hide-sm-only\">\n" +
                         "            <span class=\"ele-dot-status ele-dot-status-success\"><span>\n" +
                         "                    <span class=\"ele-dot-text\">已开票</span>\n" +
                         "    <td>\n" +
                         "        <div class=\"am-btn-toolbar\">\n" +
                         "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
-                        "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                        "                <a href=\"is?i=4&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
                         "                                                   style=\"cursor:pointer\"><span></span>\n" +
                         "                            详情</span></a>\n" +
-                        "                <span class=\"am-text-secondary am-icon\"\n" +
+                        "                <a href=\"is?i=3&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary am-icon\"\n" +
                         "                      style=\"cursor:pointer\"><span></span>\n" +
-                        "                        退票</span>\n" +
+                        "                        退票</span></a>\n" +
                         "            </div>\n" +
                         "        </div>\n" +
                         "    </td>\n" +
                         "</tr>";
-                }else if (invoicetitlelist[i].status=="B") {
+                }else if (invoicetitlelist[j].status=="B") {
                     var obj="<tr data-id=\"2\">\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicetitlelist[i].creatorTime+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicetitlelist[i].baseData.title+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicetitlelist[i].amount+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicetitlelist[i].uplinkAddress+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicetitlelist[j].creatorTime+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicetitlelist[j].baseData.title+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicetitlelist[j].amount+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicetitlelist[j].uplinkAddress+"</td>\n" +
                         "    <td class=\"am-hide-sm-only\">\n" +
                         "                <span class=\"ele-dot-status ele-dot-status-error\"><span>\n" +
                         "                        <span class=\"ele-dot-text\">已作废</span>\n" +
                         "    <td>\n" +
                         "        <div class=\"am-btn-toolbar\">\n" +
                         "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
-                        "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                        "                <a href=\"is?i=4&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
                         "                                                    style=\"cursor:pointer\"><span></span>\n" +
                         "                                详情</span></a>\n" +
                         "            </div>\n" +
@@ -519,42 +524,42 @@
         $.get("is","i=5&invoicingmin="+invoicingmin,function (invoiceminlist) {
             $("#doc-modal-list").empty()
             eval("var invoiceminlist="+invoiceminlist);
-            for (var i=0;i<invoiceminlist.length;i++){
-                if (invoiceminlist[i].status=="A"){
+            for (var j=0;j<invoiceminlist.length;j++){
+                if (invoiceminlist[j].status=="A"){
                     var obj = "<tr data-id=\"2\">\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoiceminlist[i].creatorTime+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoiceminlist[i].baseData.title+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoiceminlist[i].amount+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoiceminlist[i].uplinkAddress+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoiceminlist[j].creatorTime+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoiceminlist[j].baseData.title+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoiceminlist[j].amount+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoiceminlist[j].uplinkAddress+"</td>\n" +
                         "    <td class=\"am-hide-sm-only\">\n" +
                         "            <span class=\"ele-dot-status ele-dot-status-success\"><span>\n" +
                         "                    <span class=\"ele-dot-text\">已开票</span>\n" +
                         "    <td>\n" +
                         "        <div class=\"am-btn-toolbar\">\n" +
                         "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
-                        "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                        "                <a href=\"is?i=4&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
                         "                                                   style=\"cursor:pointer\"><span></span>\n" +
                         "                            详情</span></a>\n" +
-                        "                <span class=\"am-text-secondary am-icon\"\n" +
+                        "                <a href=\"is?i=3&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary am-icon\"\n" +
                         "                      style=\"cursor:pointer\"><span></span>\n" +
-                        "                        退票</span>\n" +
+                        "                        退票</span></a>\n" +
                         "            </div>\n" +
                         "        </div>\n" +
                         "    </td>\n" +
                         "</tr>";
-                }else if (invoiceminlist[i].status=="B") {
+                }else if (invoiceminlist[j].status=="B") {
                     var obj="<tr data-id=\"2\">\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoiceminlist[i].creatorTime+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoiceminlist[i].baseData.title+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoiceminlist[i].amount+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoiceminlist[i].uplinkAddress+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoiceminlist[j].creatorTime+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoiceminlist[j].baseData.title+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoiceminlist[j].amount+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoiceminlist[j].uplinkAddress+"</td>\n" +
                         "    <td class=\"am-hide-sm-only\">\n" +
                         "                <span class=\"ele-dot-status ele-dot-status-error\"><span>\n" +
                         "                        <span class=\"ele-dot-text\">已作废</span>\n" +
                         "    <td>\n" +
                         "        <div class=\"am-btn-toolbar\">\n" +
                         "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
-                        "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                        "                <a href=\"is?i=4&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
                         "                                                    style=\"cursor:pointer\"><span></span>\n" +
                         "                                详情</span></a>\n" +
                         "            </div>\n" +
@@ -571,42 +576,42 @@
         $.get("is","i=6&invoicingmax="+invoicingmax,function (invoicemaxlist) {
             $("#doc-modal-list").empty()
             eval("var invoicemaxlist="+invoicemaxlist);
-            for (var i=0;i<invoicemaxlist.length;i++){
-                if (invoicemaxlist[i].status=="A"){
+            for (var j=0;j<invoicemaxlist.length;j++){
+                if (invoicemaxlist[j].status=="A"){
                     var obj = "<tr data-id=\"2\">\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicemaxlist[i].creatorTime+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicemaxlist[i].baseData.title+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicemaxlist[i].amount+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicemaxlist[i].uplinkAddress+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicemaxlist[j].creatorTime+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicemaxlist[j].baseData.title+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicemaxlist[j].amount+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicemaxlist[j].uplinkAddress+"</td>\n" +
                         "    <td class=\"am-hide-sm-only\">\n" +
                         "            <span class=\"ele-dot-status ele-dot-status-success\"><span>\n" +
                         "                    <span class=\"ele-dot-text\">已开票</span>\n" +
                         "    <td>\n" +
                         "        <div class=\"am-btn-toolbar\">\n" +
                         "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
-                        "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                        "                <a href=\"is?i=4&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
                         "                                                   style=\"cursor:pointer\"><span></span>\n" +
                         "                            详情</span></a>\n" +
-                        "                <span class=\"am-text-secondary am-icon\"\n" +
+                        "                <a href=\"is?i=3&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary am-icon\"\n" +
                         "                      style=\"cursor:pointer\"><span></span>\n" +
-                        "                        退票</span>\n" +
+                        "                        退票</span></a>\n" +
                         "            </div>\n" +
                         "        </div>\n" +
                         "    </td>\n" +
                         "</tr>";
-                }else if (invoicemaxlist[i].status=="B") {
+                }else if (invoicemaxlist[j].status=="B") {
                     var obj="<tr data-id=\"2\">\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicemaxlist[i].creatorTime+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicemaxlist[i].baseData.title+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicemaxlist[i].amount+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicemaxlist[i].uplinkAddress+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicemaxlist[j].creatorTime+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicemaxlist[j].baseData.title+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicemaxlist[j].amount+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicemaxlist[j].uplinkAddress+"</td>\n" +
                         "    <td class=\"am-hide-sm-only\">\n" +
                         "                <span class=\"ele-dot-status ele-dot-status-error\"><span>\n" +
                         "                        <span class=\"ele-dot-text\">已作废</span>\n" +
                         "    <td>\n" +
                         "        <div class=\"am-btn-toolbar\">\n" +
                         "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
-                        "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                        "                <a href=\"is?i=4&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
                         "                                                    style=\"cursor:pointer\"><span></span>\n" +
                         "                                详情</span></a>\n" +
                         "            </div>\n" +
@@ -622,42 +627,42 @@
         $.get("is","i=1&creatortime="+creatortime+"&titlestr="+titlestr+"&invoicingmin="+invoicingmin+"&invoicingmax="+invoicingmax,function (invoicelist) {
             $("#doc-modal-list").empty()
             eval("var invoicelist="+invoicelist);
-            for (var i=0;i<invoicelist.length;i++){
-                if (invoicelist[i].status=="A"){
+            for (var j=0;j<invoicelist.length;j++){
+                if (invoicelist[j].status=="A"){
                     var obj = "<tr data-id=\"2\">\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicelist[i].creatorTime+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicelist[i].baseData.title+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicelist[i].amount+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicelist[i].uplinkAddress+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[j].creatorTime+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[j].baseData.title+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[j].amount+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[j].uplinkAddress+"</td>\n" +
                         "    <td class=\"am-hide-sm-only\">\n" +
                         "            <span class=\"ele-dot-status ele-dot-status-success\"><span>\n" +
                         "                    <span class=\"ele-dot-text\">已开票</span>\n" +
                         "    <td>\n" +
                         "        <div class=\"am-btn-toolbar\">\n" +
                         "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
-                        "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                        "                <a href=\"is?i=4&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
                         "                                                   style=\"cursor:pointer\"><span></span>\n" +
                         "                            详情</span></a>\n" +
-                        "                <span class=\"am-text-secondary am-icon\"\n" +
+                        "                <a href=\"is?i=3&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary am-icon\"\n" +
                         "                      style=\"cursor:pointer\"><span></span>\n" +
-                        "                        退票</span>\n" +
+                        "                        退票</span></a>\n" +
                         "            </div>\n" +
                         "        </div>\n" +
                         "    </td>\n" +
                         "</tr>";
-                }else if (invoicelist[i].status=="B") {
+                }else if (invoicelist[j].status=="B") {
                     var obj="<tr data-id=\"2\">\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicelist[i].creatorTime+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicelist[i].baseData.title+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicelist[i].amount+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicelist[i].uplinkAddress+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[j].creatorTime+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[j].baseData.title+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[j].amount+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[j].uplinkAddress+"</td>\n" +
                         "    <td class=\"am-hide-sm-only\">\n" +
                         "                <span class=\"ele-dot-status ele-dot-status-error\"><span>\n" +
                         "                        <span class=\"ele-dot-text\">已作废</span>\n" +
                         "    <td>\n" +
                         "        <div class=\"am-btn-toolbar\">\n" +
                         "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
-                        "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                        "                <a href=\"is?i=4&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
                         "                                                    style=\"cursor:pointer\"><span></span>\n" +
                         "                                详情</span></a>\n" +
                         "            </div>\n" +
@@ -676,25 +681,25 @@
             $("#doc-modal-list").empty()
             eval("var invoicestatuslist="+invoicestatuslist);
 
-            for (var i=0;i<invoicestatuslist.length;i++){
-                if (invoicestatuslist[i].status==="A"){
+            for (var j=0;j<invoicestatuslist.length;j++){
+                if (invoicestatuslist[j].status==="A"){
                     var obj = "<tr data-id=\"2\">\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicestatuslist[i].creatorTime+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicestatuslist[i].baseData.title+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicestatuslist[i].amount+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicestatuslist[i].uplinkAddress+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicestatuslist[j].creatorTime+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicestatuslist[j].baseData.title+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicestatuslist[j].amount+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicestatuslist[j].uplinkAddress+"</td>\n" +
                         "    <td class=\"am-hide-sm-only\">\n" +
                         "            <span class=\"ele-dot-status ele-dot-status-success\"><span>\n" +
                         "                    <span class=\"ele-dot-text\">已开票</span>\n" +
                         "    <td>\n" +
                         "        <div class=\"am-btn-toolbar\">\n" +
                         "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
-                        "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                        "                <a href=\"is?i=4&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
                         "                                                   style=\"cursor:pointer\"><span></span>\n" +
                         "                            详情</span></a>\n" +
-                        "                <span class=\"am-text-secondary am-icon\"\n" +
+                        "                <a href=\"is?i=3&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary am-icon\"\n" +
                         "                      style=\"cursor:pointer\"><span></span>\n" +
-                        "                        退票</span>\n" +
+                        "                        退票</span></a>\n" +
                         "            </div>\n" +
                         "        </div>\n" +
                         "    </td>\n" +
@@ -709,20 +714,20 @@
         $.get("is","i=7&status="+y,function (invoicestatuslist) {
             $("#doc-modal-list").empty()
             eval("var invoicestatuslist="+invoicestatuslist);
-            for (var i=0;i<invoicestatuslist.length;i++){
-                if (invoicestatuslist[i].status==="B") {
+            for (var j=0;j<invoicestatuslist.length;j++){
+                if (invoicestatuslist[j].status==="B") {
                     var obj="<tr data-id=\"2\">\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicestatuslist[i].creatorTime+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicestatuslist[i].baseData.title+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicestatuslist[i].amount+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicestatuslist[i].uplinkAddress+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicestatuslist[j].creatorTime+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicestatuslist[j].baseData.title+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicestatuslist[j].amount+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicestatuslist[j].uplinkAddress+"</td>\n" +
                         "    <td class=\"am-hide-sm-only\">\n" +
                         "                <span class=\"ele-dot-status ele-dot-status-error\"><span>\n" +
                         "                        <span class=\"ele-dot-text\">已作废</span>\n" +
                         "    <td>\n" +
                         "        <div class=\"am-btn-toolbar\">\n" +
                         "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
-                        "                <a href=\"invoice-detail.jsp\"><span class=\"am-text-secondary\"\n" +
+                        "                <a href=\"is?i=4&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
                         "                                                    style=\"cursor:pointer\"><span></span>\n" +
                         "                                详情</span></a>\n" +
                         "            </div>\n" +
