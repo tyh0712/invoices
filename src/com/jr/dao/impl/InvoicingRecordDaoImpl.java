@@ -239,37 +239,23 @@ public class InvoicingRecordDaoImpl implements IInvoicingRecordDao {
     }
 
     @Override
-    public List<InvoicingRecord> selectIRByIId(InvoicingRecord invoicingRecord) {
+    public InvoicingRecord selectIRByIId(int iid) {
         InvoicingRecord ir=new InvoicingRecord();
-        User user=new User();
         BaseData baseData=new BaseData();
         Address address=new Address();
         Email email=new Email();
-        ArrayList<InvoicingRecord> list=new ArrayList<>();
+//        ArrayList<InvoicingRecord> list=new ArrayList<>();
         try {
             con=DBHelper.getcon();
-            String sql="SELECT * from invoicing_record WHERE id=?";
+            String sql="SELECT id,category,`type` from invoicing_record WHERE id=?";
             ps=con.prepareStatement(sql);
-            ps.setInt(1,invoicingRecord.getIid());
+            ps.setInt(1,iid);
             rs=ps.executeQuery();
             while (rs.next()){
                 ir.setIid(rs.getInt(1));
-                ir.setAmount(rs.getDouble(2));
-                user.setUid(rs.getInt(3));
-                user.setEnterpriseId(rs.getInt(4));
-                ir.setUser(user);
-                ir.setCreatorTime(rs.getDate(5));
-                ir.setCategory(rs.getString(6));
-                ir.setType(rs.getString(7));
-                ir.setStatus(rs.getString(8));
-                baseData.setBid(rs.getInt(9));
-                ir.setBaseData(baseData);
-                address.setAid(rs.getInt(10));
-                ir.setAddress(address);
-                email.setEid(rs.getInt(11));
-                ir.setEmail(email);
-                ir.setUplinkAddress(rs.getString(12));
-                list.add(ir);
+                ir.setCategory(rs.getString(2));
+                ir.setType(rs.getString(3));
+//                list.add(ir);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -280,6 +266,6 @@ public class InvoicingRecordDaoImpl implements IInvoicingRecordDao {
         } finally {
             DBHelper.close(rs,ps,con);
         }
-        return list;
+        return ir;
     }
 }
