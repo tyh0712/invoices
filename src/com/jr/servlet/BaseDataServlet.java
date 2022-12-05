@@ -49,7 +49,6 @@ public class BaseDataServlet extends HttpServlet {
         int enterpriseId = Integer.parseInt(request.getParameter("enterpriseId"));
         BaseDataBizImpl bbi = new BaseDataBizImpl();
         BaseData baseData = bbi.queryBDByEId(enterpriseId);
-        System.out.println(baseData.toString());
         HttpSession session = request.getSession();
         session.setAttribute("baseData",baseData);
         response.getWriter().print(new Gson().toJson(baseData));

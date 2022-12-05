@@ -139,8 +139,12 @@ public class InvoicingRecordServlet extends HttpServlet {
         ir.getEmail().setEid(eid);
         ir.setUplinkAddress(uplinkAddress);
         boolean boo=irbi.invoicingIR(ir);
+        System.out.println(boo);
         if (boo) {
-            response.sendRedirect("invoice-list.jsp");
+
+
+        }else{
+
         }
     }
 
@@ -163,7 +167,6 @@ public class InvoicingRecordServlet extends HttpServlet {
 //        response.getWriter().print(gson.toJson(detaillist));
         HttpSession session=request.getSession();
         session.setAttribute("detaillist",detaillist);
-        System.out.println(detaillist.toString());
 //        response.getWriter().print(new Gson().toJson(detaillist));
         response.sendRedirect("invoice-detail.jsp");
     }
