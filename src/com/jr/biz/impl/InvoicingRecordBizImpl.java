@@ -53,7 +53,7 @@ public class InvoicingRecordBizImpl implements IInvoicingRecordBiz {
     }
 
     @Override
-    public List<InvoicingRecord> detailIR(InvoicingRecord invoicingRecord) {
-        return irdi.selectIRByIId(invoicingRecord);
+    public InvoicingRecord detailIR(int iid) {
+        return irdi.selectIRByIId(iid);
     }
 }
