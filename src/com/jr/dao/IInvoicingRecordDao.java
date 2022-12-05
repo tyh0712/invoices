@@ -2,6 +2,8 @@ package com.jr.dao;
 
 import com.jr.entry.InvoicingRecord;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,6 +19,8 @@ public interface IInvoicingRecordDao {
     //返回：List<InvoicingRecord> 与企业ID有关的发票的展示
     public List<InvoicingRecord> selectIRByEId(int enterpriseId);
 
+    public List<InvoicingRecord> selectIRByStatus(int enterpriseId,String status);
+    public List<InvoicingRecord> selectIRByTitle(int enterpriseId,String title);
     //查金额
     public List<InvoicingRecord> selectIRByEidAmountMin(int enterpriseId,int amount);
     public List<InvoicingRecord> selectIRByEidAmountMax(int enterpriseId,int amount);
@@ -35,7 +39,7 @@ public interface IInvoicingRecordDao {
     //详情 根据发票id查询全部
     //传入：int 开票记录表主键
     //返回：InvoicingRecord对象 全部信息
-    public List<InvoicingRecord> selectIRByIId(int iid);
+    public InvoicingRecord selectIRByIId(int iid);
 
 
 }
