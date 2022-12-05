@@ -210,14 +210,14 @@
                                         <div class="am-u-sm-3" style="margin-top: 4px;font-size: 16px;"
                                              onclick="selectCategory('ordinary')">
                                             <label class="am-radio">
-                                                <input type="radio" name="radio1" value="" data-am-ucheck checked>
+                                                <input type="radio" name="radio1" value="普通增值税发票" data-am-ucheck checked>
                                                 普通增值税发票
                                             </label>
                                         </div>
                                         <div class="am-u-sm-6" style="margin-top: 4px;font-size: 16px;"
                                              onclick="selectCategory('appropriative')">
                                             <label class="am-radio">
-                                                <input type="radio" name="radio1" value="" data-am-ucheck> 增值税专用发票
+                                                <input type="radio" name="radio1" value="增值税专用发票" data-am-ucheck> 增值税专用发票
                                             </label>
                                         </div>
                                     </div>
@@ -230,13 +230,13 @@
                                         <div class="am-u-sm-3" style="margin-top: 4px;font-size: 16px;"
                                              onclick="selectType('ele')">
                                             <label class="am-radio">
-                                                <input type="radio" name="radio1" value="" data-am-ucheck checked> 电子发票
+                                                <input type="radio" name="radio2" value="电子发票" data-am-ucheck checked> 电子发票
                                             </label>
                                         </div>
                                         <div class="am-u-sm-6" style="margin-top: 4px;font-size: 16px;"
                                              onclick="selectType('paper')">
                                             <label class="am-radio">
-                                                <input type="radio" name="radio1" value="" data-am-ucheck> 纸质发票
+                                                <input type="radio" name="radio2" value="纸质发票" data-am-ucheck> 纸质发票
                                             </label>
                                         </div>
                                     </div>
@@ -556,6 +556,40 @@
             baseinfoDiv.style.display = 'none';
             showDiv.style.display = 'none';
             resultDiv.style.display = 'block';
+
+            var uid="${sessionScope.uid}";
+            var creatorTime=Date.now();
+            function getRadioValue1() {
+                var obj=document.getElementsByName("radio1");
+                for (var i=0;i<obj.length;i++){
+                    if (obj[i].checked) {
+                        return obj[i].value;
+                    }
+                }
+            }
+            function getRadioValue2() {
+                var obj=document.getElementsByName("radio2");
+                for (var i=0;i<obj.length;i++){
+                    if (obj[i].checked) {
+                        return obj[i].value;
+                    }
+                }
+            }
+            var category=getRadioValue1();
+            var type =getRadioValue2();
+            var status="A";
+            var bid="${sessionScope.bid}";
+            var aid="${sessionScope.aid}";
+            var eid="${sessionScope.eid}";
+            function randomString(length, chars) {
+                var result = '';
+                for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+                return result;
+            }
+            var uplinkAddress = randomString(16, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+            $.get("is","i=2&amount="+8000+"&enterpriseId="+enterpriseId+"&uid="+uid+"&creatorTime="+creatorTime+"&category="+category+"&type="+type+"&status="+status+"&bid="+bid+"&aid="+aid+"&eid="+eid+"&uplinkAddress="+uplinkAddress+"",function () {
+            })
+
         });
     });
     // 邮寄地址选择按钮
@@ -616,6 +650,7 @@
         //右上角用户名
         var userName1 = "${sessionScope.userName}";
         $("[name=userName]").text(userName1);
+
 
 
         //返回选择的邮寄地址

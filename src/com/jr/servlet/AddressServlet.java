@@ -127,7 +127,6 @@ public class AddressServlet extends HttpServlet {
     public void invoice(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         List<Address> list=abi.queryAddByEId(Integer.parseInt(request.getParameter("enterpriseId")));
-        System.out.println(list.toString());
         response.getWriter().print(new Gson().toJson(list));
 
     }
