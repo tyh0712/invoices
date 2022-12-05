@@ -31,6 +31,9 @@ public interface IEmailBiz {
     //开票
     public List<Email> queryEmailByEId(int enterpriseId);
 
+    //根据邮箱查询主键
+    public int queryEidByDetail(String emailDetail);
+
     //详情
     public Email queryEmailByIId(int eid);
 }

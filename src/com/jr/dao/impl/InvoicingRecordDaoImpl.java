@@ -55,6 +55,30 @@ public class InvoicingRecordDaoImpl implements IInvoicingRecordDao {
     }
 
     @Override
+    public int selectIdByUplinkAddress(String uplinkAddress) {
+        int num=0;
+        try {
+            con=DBHelper.getcon();
+            String sql="SELECT id FROM invoicing_record WHERE  uplink_address=?;";
+            ps= con.prepareStatement(sql);
+            ps.setString(1,uplinkAddress);
+            rs=ps.executeQuery();
+            while (rs.next()){
+                num=rs.getInt(1);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            DBHelper.close(rs,ps,con);
+        }
+        return num;
+    }
+
+    @Override
     public List<InvoicingRecord> selectIRByStatus(int enterpriseId, String status) {
         ArrayList<InvoicingRecord> list=new ArrayList<>();
         try {

@@ -88,6 +88,7 @@ public class AddressDaoImpl implements IAddressDao {
         ResultSet rs=null;
         Address address=null;
         List<Address> list=new ArrayList<Address>();
+
         try {
             con=DBHelper.getcon();
             String sql="SELECT * FROM address WHERE enterprise_id=? ORDER BY default_status";
@@ -115,6 +116,34 @@ public class AddressDaoImpl implements IAddressDao {
             DBHelper.close(rs,ps,con);
         }
         return list;
+    }
+
+    @Override
+    public int selectAidByAddress(String address) {
+        Connection con=null;
+        PreparedStatement ps=null;
+        ResultSet rs=null;
+        int aid=0;
+        try {
+            con=DBHelper.getcon();
+            String sql="SELECT id FROM address WHERE address_detail LIKE \"%\"?\"%\"";
+            ps=con.prepareStatement(sql);
+            address=address.substring(address.length()-5);
+            ps.setString(1,address);
+            rs=ps.executeQuery();
+            while (rs.next()){
+                aid=rs.getInt(1);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }finally {
+            DBHelper.close(rs,ps,con);
+        }
+        return aid;
     }
 
     @Override

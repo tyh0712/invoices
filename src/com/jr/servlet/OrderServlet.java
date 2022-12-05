@@ -200,8 +200,8 @@ public class OrderServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
 
-        int invoicingRecordId = Integer.parseInt(request.getParameter("invoicingRecordId"));
-        boolean boo = orderBiz.refundOrder(invoicingRecordId);
+        int iid = Integer.parseInt(request.getParameter("iid"));
+        boolean boo = orderBiz.refundOrder(iid);
         if (boo){
             //退票成功此处应该无变化
         }

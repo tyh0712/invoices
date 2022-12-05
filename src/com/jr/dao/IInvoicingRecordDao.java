@@ -25,6 +25,7 @@ public interface IInvoicingRecordDao {
     public List<InvoicingRecord> selectIRByEidAmountMin(int enterpriseId,int amount);
     public List<InvoicingRecord> selectIRByEidAmountMax(int enterpriseId,int amount);
 
+    public int selectIdByUplinkAddress(String uplinkAddress);
 
     //开票
     //传入：InvoicingRecord对象 全部信息

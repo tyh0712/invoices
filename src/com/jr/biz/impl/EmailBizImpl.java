@@ -46,6 +46,11 @@ public class EmailBizImpl implements IEmailBiz {
     }
 
     @Override
+    public int queryEidByDetail(String emailDetail) {
+        return edi.selectEidByDetail(emailDetail);
+    }
+
+    @Override
     public Email queryEmailByIId(int eid) {
         return edi.selectEmailByIId(eid);
     }

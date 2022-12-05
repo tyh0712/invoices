@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -129,6 +130,14 @@ public class AddressServlet extends HttpServlet {
         List<Address> list=abi.queryAddByEId(Integer.parseInt(request.getParameter("enterpriseId")));
         response.getWriter().print(new Gson().toJson(list));
 
+    }
+
+    public void getAID(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+        int aid=abi.queryAidByAdd(request.getParameter("address"));
+        HttpSession session=request.getSession();
+        session.setAttribute("aid",aid);
+        response.sendRedirect("invoice-open.jsp");
     }
 
     public void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

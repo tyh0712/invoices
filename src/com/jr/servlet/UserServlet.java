@@ -57,6 +57,7 @@ public class UserServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("enterpriseId",user1.getEnterpriseId());
             session.setAttribute("userName",user1.getName());
+            session.setAttribute("uid",user1.getUid());
             response.sendRedirect("invoice-list.jsp");
         }else {
             response.sendRedirect("login.jsp");

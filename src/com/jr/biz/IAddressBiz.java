@@ -33,4 +33,7 @@ public interface IAddressBiz {
 
     //详情 查看该发票使用的地址
     public Address queryAddByIId(int aid);
+
+    //根据地址查询主键
+    int queryAidByAdd(String address);
 }

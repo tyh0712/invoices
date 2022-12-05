@@ -444,7 +444,7 @@
                 for (var i=0;i<ph.pageList.length;i++){
                     var obj = "<tr data-id='2'>\n" +
                         "    <td>\n" +
-                        "        <input type='checkbox' id="+ph.pageList[i].oid+" name="+(i+4)+" class='checkbox-acount' value="+ph.pageList[i].totalAmount+">\n" +
+                        "        <input type='checkbox' name="+(i+4)+" class='checkbox-acount' value="+ph.pageList[i].totalAmount+">\n" +
                         "    </td>\n" +
                         "    <td class='am-hide-sm-only'>"+ph.pageList[i].no +"</td>\n" +
                         "    <td class='am-hide-sm-only'>"+ph.pageList[i].totalAmount+"</td>\n" +
@@ -492,6 +492,7 @@
 
         var oids = [];//存储选中的订单的id，以备后续使用
 
+
         $(document).ready(function () {
             $("#orderno").blur(function () {
                 submitvalue("1");
@@ -512,7 +513,7 @@
                 for (var i=0;i<ph.pageList.length;i++){
                     var obj = "<tr data-id='2'>\n" +
                         "    <td>\n" +
-                        "        <input type='checkbox' id="+ph.pageList[i].oid+" name="+(i+1)+" class='checkbox-acount' value="+ph.pageList[i].totalAmount+">\n" +
+                        "        <input type='checkbox' name="+(i+1)+" class='checkbox-acount' value="+ph.pageList[i].totalAmount+">\n" +
                         "    </td>\n" +
                         "    <td class='am-hide-sm-only'>"+ph.pageList[i].no +"</td>\n" +
                         "    <td class='am-hide-sm-only'>"+ph.pageList[i].totalAmount+"</td>\n" +
@@ -560,9 +561,10 @@
                         oids.push(oid);
                     }
 
-            })
+            });
 
         });
+
 
     var baseinfoDiv = document.getElementById('baseinfoDiv')
     var showDiv = document.getElementById('showDiv')
@@ -575,8 +577,16 @@
             showDiv.style.display = 'none';
             resultDiv.style.display = 'block';
 
+
             var uid="${sessionScope.uid}";
             var creatorTime=Date.now();
+            //开票后修改相关订单信息
+            /*for (var i=0;i<oids.length;i++){
+                $.get("os","o=5&invoicingRecordId="+invoicingRecordId+"&oid="+oids[i],function () {
+
+                });
+            }*/
+
             function getRadioValue1() {
                 var obj=document.getElementsByName("radio1");
                 for (var i=0;i<obj.length;i++){
@@ -596,7 +606,7 @@
             var category=getRadioValue1();
             var type =getRadioValue2();
             var status="A";
-            var bid="${sessionScope.bid}";
+            var bid="${sessionScope.baseData.bid}";
             var aid="${sessionScope.aid}";
             var eid="${sessionScope.eid}";
             function randomString(length, chars) {
@@ -605,7 +615,7 @@
                 return result;
             }
             var uplinkAddress = randomString(16, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
-            $.get("is","i=2&amount="+8000+"&enterpriseId="+enterpriseId+"&uid="+uid+"&creatorTime="+creatorTime+"&category="+category+"&type="+type+"&status="+status+"&bid="+bid+"&aid="+aid+"&eid="+eid+"&uplinkAddress="+uplinkAddress+"",function () {
+            $.get("is","i=2&amount="+acount+"&enterpriseId="+enterpriseId+"&uid="+uid+"&creatorTime="+creatorTime+"&category="+category+"&type="+type+"&status="+status+"&bid="+bid+"&aid="+aid+"&eid="+eid+"&uplinkAddress="+uplinkAddress+"",function () {
             })
         });
     });
@@ -691,15 +701,19 @@
     });
 
      function chooseAdd() {
-             $("#deAddress").empty();
+         $("#deAddress").empty();
          $('<span>'+$('[name="addressCho"]:checked').val()+'</span>').appendTo($("#deAddress"));
+         $.get("as","a=6&address="+$('[name="addressCho"]:checked').val(),function () {
+         })
     }
 
     //邮箱选择事件
     function chooseEmail() {
         $("#emailopen").empty();
         $('<span>'+$('[name="emailCho"]:checked').val()+'</span>').appendTo($("#emailopen"));
+        $.get("es","e=5&emailDetail="+$('[name="emailCho"]:checked').val(),function () {
 
+        });
     }
 </script>
 
