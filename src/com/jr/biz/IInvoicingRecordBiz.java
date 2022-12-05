@@ -34,5 +34,5 @@ public interface IInvoicingRecordBiz {
     public boolean refundIR(int iid);
 
     //详情 根据发票id查询全部
-    public List<InvoicingRecord> detailIR(InvoicingRecord invoicingRecord);
+    public InvoicingRecord detailIR(int iid);
 }
