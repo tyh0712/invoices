@@ -88,8 +88,8 @@ public class EmailServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         Email email = new Email();
-        int eid=Integer.parseInt(request.getParameter("id"));
-        int enterpriseId=Integer.parseInt(request.getParameter("eid"));
+        int eid=Integer.parseInt(request.getParameter("eid"));
+        int enterpriseId=Integer.parseInt(request.getParameter("enterpriseId"));
         boolean boo = ebi.modifyEmailStatus(eid,enterpriseId);
         if (boo){
             System.out.println("设置成功");
@@ -124,7 +124,7 @@ public class EmailServlet extends HttpServlet {
 
         Email email = new Email();
         email.setEmailDetail(request.getParameter("email_detail"));
-        email.setEnterpriseId(Integer.parseInt(request.getParameter("eid")));
+        email.setEnterpriseId(Integer.parseInt(request.getParameter("enterpriseId")));
         boolean boo = ebi.addEmail(email);
         if (boo){
             System.out.println("success");

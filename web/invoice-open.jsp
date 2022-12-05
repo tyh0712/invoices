@@ -319,8 +319,8 @@
                                     <form class="am-form am-form-horizontal">
                                         <div class="am-form-group">
                                             <label class="am-u-sm-3 am-form-label star"> 邮箱</label>
-                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                                123456789@qq.com
+                                            <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" id="emailopen">
+
                                             </div>
                                         </div>
                                     </form>
@@ -330,7 +330,7 @@
                                         <div class="am-form-group">
                                             <label class="am-u-sm-3 am-form-label"></label>
                                             <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                                <span id="selectEmail" style="color: #23abf0;cursor: pointer;">选择</span>
+                                                <span id="selectEmail" style="color: #23abf0;cursor: pointer;" >选择</span>
                                             </div>
                                         </div>
                                     </form>
@@ -353,7 +353,7 @@
                                             <label class="am-u-sm-3 am-form-label"></label>
                                             <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
                                                 <span id="selectAddress"
-                                                      style="color: #23abf0;cursor: pointer;" name="emailopen">选择</span>
+                                                      style="color: #23abf0;cursor: pointer;" >选择</span>
                                             </div>
                                         </div>
                                     </form>
@@ -410,52 +410,13 @@
                         </tr>
                         </thead>
                         <tbody id="doc-modal-list2">
-                        <tr data-id="2">
-                            <td>
-                                <label class="am-radio">
-                                    <input type="radio" name="radio1" value="" data-am-ucheck>
-                                </label>
-                            </td>
-                            <td class="am-hide-sm-only">3456789876@qq.com</td>
-                        </tr>
-                        <tr data-id="2">
-                            <td>
-                                <label class="am-radio">
-                                    <input type="radio" name="radio1" value="" data-am-ucheck>
-                                </label>
-                            </td>
-                            <td class="am-hide-sm-only">3456789876@qq.com</td>
-                        </tr>
-                        <tr data-id="2">
-                            <td>
-                                <label class="am-radio">
-                                    <input type="radio" name="radio1" value="" data-am-ucheck>
-                                </label>
-                            </td>
-                            <td class="am-hide-sm-only">3456789876@qq.com</td>
-                        </tr>
-                        <tr data-id="2">
-                            <td>
-                                <label class="am-radio">
-                                    <input type="radio" name="radio1" value="" data-am-ucheck checked>
-                                </label>
-                            </td>
-                            <td class="am-hide-sm-only">3456789876@qq.com</td>
-                        </tr>
-                        <tr data-id="2">
-                            <td>
-                                <label class="am-radio">
-                                    <input type="radio" name="radio1" value="" data-am-ucheck>
-                                </label>
-                            </td>
-                            <td class="am-hide-sm-only">3456789876@qq.com</td>
-                        </tr>
+
                         </tbody>
                     </table>
                 </form>
                 <div class="am-modal-footer" style="border-top: 1px solid #dedede;">
                     <span class="am-modal-btn" data-am-modal-cancel>取消</span>
-                    <span class="am-modal-btn" data-am-modal-confirm>确定</span>
+                    <span id="chooseEmail" onclick="chooseEmail()" class="am-modal-btn"  data-am-modal-confirm >确定</span>
                 </div>
             </div>
         </div>
@@ -639,10 +600,9 @@
             $('#invoice_appropriative_title').show();
         }
     }
-
+    var enterpriseId = ${sessionScope.enterpriseId};
     $(document).ready(function () {
         //抬头信息  抬头、税号
-        var enterpriseId = ${sessionScope.enterpriseId};
         $.get("bs","b=1&enterpriseId="+enterpriseId,function (baseData1) {
             eval("var baseData=" + baseData1);
             $("[name=title1]").text(baseData.title);
@@ -665,31 +625,37 @@
             for (var i=0;i<list.length;i++){
                 $('<tr data-id="2"><td><label class="am-radio"><input type="radio" name="addressCho" id="'+i+'" value="'+list[i].area+''+list[i].addressDetail+'" data-am-ucheck checked></label></td><td class="am-hide-sm-only"><label class="am-radio" for="'+i+'">'+list[i].area+''+list[i].addressDetail+'</label></td></tr>').appendTo($("#doc-modal-list3"));
             }
-        });
+        })
     });
-     function chooseAdd() {
-             $("#deAddress").empty();
-             $('<span>'+$('[name="addressCho"]:checked').val()+'</span>').appendTo($("#deAddress"));
-    }
-    var eid = ${sessionScope.eid};
-    $(function () {
 
-        $.get("es","e=3&eid="+eid,function (email2) {
+    $(function () {
+        //去开票--邮箱显示
+        $.get("es","e=3&enterpriseId="+enterpriseId,function (email2) {
             eval("var email="+email2);
             $("[name=email2]").text(email.emailDetail);
         });
-        $.get("es","e=5&eid="+eid,function (emailinfo) {
-            eval("var list="+emailinfo);
+        //去开票--邮箱选择
+        $.get("es","e=5&enterpriseId="+enterpriseId,function (list) {
+            eval("var list="+list);
+            $('<span id="showemail">'+list[0].emailDetail+'</span>').appendTo($("#emailopen"));
             for(var i=0;i<list.length;i++){
-                $("<tr id='"+list[i].eid+"'>"+list[i].eid+"</tr>")
-                    .appendTo($("#doc-modal-list2"));
-                $("<td><label><input type='radio' name='radio1' value='' data-am-ucheck/></label><td>")
-                    .appendTo($("#"+list[i].eid+""));
-                $("<td value='"+list[i].emailDetail+"'>"+list[i].emailDetail+"</td>")
-                    .appendTo($("#"+list[i].eid+""));
+                $('<tr data-id="2"><td><label class="am-radio"><input type="radio" name="emailCho" id="'+i+'" value="'+list[i].emailDetail+'" data-am-ucheck checked></label></td><td class="am-hide-sm-only"><label class="am-radio" for="'+i+'">'+list[i].emailDetail+'</label></td></tr>').appendTo($("#doc-modal-list2"));
+
             }
         });
     });
+
+     function chooseAdd() {
+             $("#deAddress").empty();
+         $('<span>'+$('[name="addressCho"]:checked').val()+'</span>').appendTo($("#deAddress"));
+    }
+
+    //邮箱选择事件
+    function chooseEmail() {
+        $("#emailopen").empty();
+        $('<span>'+$('[name="emailCho"]:checked').val()+'</span>').appendTo($("#emailopen"));
+
+    }
 </script>
 
 </body>

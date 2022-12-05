@@ -158,11 +158,8 @@
                     </div>
                     <div class="am-u-sm-12 am-u-md-6">
                         <form class="am-form am-form-horizontal">
-                            <div class="am-form-group">
-                                <label class="am-u-sm-3 am-form-label">邮箱</label>
-                                <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="email3">
+                            <div class="am-form-group" id="addAndEmail">
 
-                                </div>
                             </div>
                         </form>
                     </div>
@@ -181,9 +178,10 @@
 <script src="js/amazeui.min.js"></script>
 <script src="js/app.js"></script>
 <script>
-    var enterpriseId = ${sessionScope.enterpriseId};
+
     $(document).ready(function () {
         //右上角用户名
+        var enterpriseId = ${sessionScope.enterpriseId};
         var userName1 = "${sessionScope.userName}";
         $("[name=userName]").text(userName1);
 
@@ -239,18 +237,6 @@
                 });
             }
         });
-
-
-        var eid = ${sessionScope.eid};
-        $(function () {
-
-            $.get("es","e=4&eid="+eid,function (email3) {
-                eval("var email="+email3);
-                $("[name=email3]").text(email.emailDetail);
-            });
-        });
-
-
     });
 </script>
 </body>

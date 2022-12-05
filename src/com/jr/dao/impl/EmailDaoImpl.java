@@ -56,10 +56,11 @@ public class EmailDaoImpl implements IEmailDao {
         UniversalMethod um=new UniversalMethod();
 
         List<Email> list=selectEmailByEId(enterpriseId);
-        String sql1="UPDATE email SET default_status='A' WHERE id=?";
-        int i1=um.upd(sql1,eid);
         String sql2="UPDATE email SET default_status='B' WHERE id=?";
         int i2=um.upd(sql2,list.get(0).getEid());
+        String sql1="UPDATE email SET default_status='A' WHERE id=?";
+        int i1=um.upd(sql1,eid);
+
         int i3=0;
         if (i1!=0 && i2!=0){
             i3=1;

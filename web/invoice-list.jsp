@@ -421,7 +421,21 @@
         });
     });
 
-    var enterpriseId = ${sessionScope.enterpriseId};
+
+    //用户表、发票基础信息表相关
+    $(document).ready(function () {
+        //发票抬头及地址信息  抬头、税号
+        var enterpriseId = ${sessionScope.enterpriseId};
+        $.get("bs","b=1&enterpriseId="+enterpriseId,function (baseData1) {
+            eval("var baseData=" + baseData1);
+            $("[name=title1]").text(baseData.title);
+            $("[name=taxNo1]").text(baseData.taxNo);
+        });
+
+        //右上角用户名
+        var userName1 = "${sessionScope.userName}";
+        $("[name=userName]").text(userName1);
+
     $(function () {
         $.get("as","a=1&enterpriseId="+enterpriseId,function (address) {
             eval("var address="+address);
@@ -443,32 +457,6 @@
         });
     });
 
-
-
-</script>
-<script>
-    $(document).ready(function () {
-        //发票抬头及地址信息  抬头、税号
-        var enterpriseId = ${sessionScope.enterpriseId};
-        $.get("bs","b=1&enterpriseId="+enterpriseId,function (baseData1) {
-            eval("var baseData=" + baseData1);
-            $("[name=title1]").text(baseData.title);
-            $("[name=taxNo1]").text(baseData.taxNo);
-        });
-
-        //右上角用户名
-        var userName1 = "${sessionScope.userName}";
-        $("[name=userName]").text(userName1);
-    });
-
-
-    var eid = ${sessionScope.eid};
-    $(function () {
-
-        $.get("es","e=1&eid="+eid,function (email11) {
-            eval("var email="+email11);
-            $("[name=email1]").text(email.emailDetail);
-        });
     });
 </script>
 </body>
