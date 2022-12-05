@@ -107,7 +107,6 @@ public class EmailServlet extends HttpServlet {
         Email email = new Email();
         email.setEmailDetail(request.getParameter("email_detail"));
         email.setEid(Integer.parseInt(request.getParameter("eid")));
-        System.out.println(email.toString());
         boolean boo = ebi.modifyEmailDetail(email);
         if (boo){
             System.out.println("success");

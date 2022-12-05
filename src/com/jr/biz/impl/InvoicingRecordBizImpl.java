@@ -43,6 +43,11 @@ public class InvoicingRecordBizImpl implements IInvoicingRecordBiz {
     }
 
     @Override
+    public int getInvoicingRecordId(String uplinkAddress) {
+        return irdi.selectIdByUplinkAddress(uplinkAddress);
+    }
+
+    @Override
     public boolean invoicingIR(InvoicingRecord invoicingRecord) {
         return irdi.insertIR(invoicingRecord)==1?true:false;
     }

@@ -51,6 +51,8 @@ public class InvoicingRecordServlet extends HttpServlet {
             invoiceStatusList(request, response);
         }else if (i==8){
             invoiceTitleList(request, response);
+        }else if (i==9){
+            invoicingRecordId(request, response);
         }
     }
     @Override
@@ -139,7 +141,6 @@ public class InvoicingRecordServlet extends HttpServlet {
         ir.getEmail().setEid(eid);
         ir.setUplinkAddress(uplinkAddress);
         boolean boo=irbi.invoicingIR(ir);
-        System.out.println(boo);
         if (boo) {
 
 
@@ -147,10 +148,18 @@ public class InvoicingRecordServlet extends HttpServlet {
 
         }
     }
-
+    public void invoicingRecordId(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String uplinkAddress=request.getParameter("uplinkAddress");
+        int iid=irbi.getInvoicingRecordId(uplinkAddress);
+        HttpSession session=request.getSession();
+        session.setAttribute("iid",iid);
+        System.out.println(iid);
+        response.sendRedirect("invoice-open.jsp");
+    }
     public void refund(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         InvoicingRecord ir=new InvoicingRecord();
         int iid=Integer.parseInt(request.getParameter("iid"));
+
         ir.setIid(iid);
         boolean boo=irbi.refundIR(ir.getIid());
         if (boo){

@@ -68,6 +68,13 @@ public class AddressBizImpl implements IAddressBiz {
     }
 
     @Override
+    public int queryAidByAdd(String address) {
+
+        return adi.selectAidByAddress(address);
+
+    }
+
+    @Override
     public Address queryAddByIId(int aid) {
 
         return adi.selectAddByIId(aid);

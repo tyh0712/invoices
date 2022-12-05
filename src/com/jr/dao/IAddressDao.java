@@ -44,4 +44,7 @@ public interface IAddressDao {
     //传入：int 开票记录表主键
     //返回：Address对象
     public Address selectAddByIId(int iid);
+
+    //根据地址查询主键
+    int selectAidByAddress(String address);
 }

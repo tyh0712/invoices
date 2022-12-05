@@ -26,7 +26,7 @@ public interface IInvoicingRecordBiz {
 
     public List<InvoicingRecord> getIRAmountMaxList(int enterpriseId,int amount);
 
-
+    public int getInvoicingRecordId(String uplinkAddress);
     //开票 实现向数据库中添加
     public boolean invoicingIR(InvoicingRecord invoicingRecord);
 

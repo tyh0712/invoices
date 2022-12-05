@@ -429,132 +429,119 @@
 <script src="js/amazeui.min.js"></script>
 <script src="js/app.js"></script>
 <script type="text/javascript">
-        function submitvalue(subvalue) {
-            var orderno = $("[id='orderno']").val();
-            var orderdate = $("[id='orderdate']").val();
-            var ordermin = $("[id='ordermin']").val();
-            var ordermax = $("[id='ordermax']").val();
-
-            $.get("os","o=2&orderno="+orderno+"&orderdate="+orderdate+"&ordermin="+ordermin+"&ordermax="+ordermax+"&index="+subvalue,function (pageHelper2) {
-                eval("var ph="+pageHelper2);
-                $("#doc-modal-list1").empty();
-                $("#ulid").empty();
-                for (var i=0;i<ph.pageList.length;i++){
-                    var obj = "<tr data-id='2'>\n" +
-                        "    <td>\n" +
-                        "        <input type='checkbox' name="+(i+4)+" class='checkbox-acount' value="+ph.pageList[i].totalAmount+">\n" +
-                        "    </td>\n" +
-                        "    <td class='am-hide-sm-only'>"+ph.pageList[i].no +"</td>\n" +
-                        "    <td class='am-hide-sm-only'>"+ph.pageList[i].totalAmount+"</td>\n" +
-                        "    <td class='am-hide-sm-only'>"+ph.pageList[i].createTime+"</td>\n" +
-                        "</tr>";
-                    $(obj).appendTo($("#doc-modal-list1"));
-                }
-
-                var objherd = "<li class=\"am-disabled\">\n" +
-                    "  <a href=\"#\">«</a>\n" +
-                    "  </li>";
-
-                var objlast = "   <li>\n" +
-                    "   <a href=\"#\">»</a>\n" +
-                    "    </li>";
-                $(objherd).appendTo($("[id='ulid']"));
-                for(var i=1;i<=ph.totalPage;i++){
-                    var obj="<li class=\"am-active\">\n" +
-                        "  <a class='ahref' value='"+i+"'>"+i+"</a>\n" +
-                        "   </li>";
-                    $(obj).appendTo($("[id='ulid']"));
-                }
-                $(objlast).appendTo($("[id='ulid']"));
-            });
-
-        }
-        var acount =0;//这是计算的选中的订单的总金额
-        function sumacount(val){
-            acount +=val;
-        }
-        function reducecount(val){
-            acount -=val;
-        }
-        var names = [];//存储checkbox的name属性
-        names.push(-1);//让数组初始不为空；
-        function isInArray(arr,value){//判断数组中是否存在某元素
-            for(var i = 0; i < arr.length; i++){
-                if(value === arr[i]){
-                    return i;
-                }
+    function submitvalue(subvalue) {
+        var orderno = $("[id='orderno']").val();
+        var orderdate = $("[id='orderdate']").val();
+        var ordermin = $("[id='ordermin']").val();
+        var ordermax = $("[id='ordermax']").val();
+        $.get("os","o=2&orderno="+orderno+"&orderdate="+orderdate+"&ordermin="+ordermin+"&ordermax="+ordermax+"&index="+subvalue,function (pageHelper2) {
+            eval("var ph="+pageHelper2);
+            $("#doc-modal-list1").empty();
+            $("#ulid").empty();
+            for (var i=0;i<ph.pageList.length;i++){
+                var obj = "<tr data-id='2'>\n" +
+                    "    <td>\n" +
+                    "        <input type='checkbox' name="+(i+4)+" class='checkbox-acount' value="+ph.pageList[i].totalAmount+">\n" +
+                    "    </td>\n" +
+                    "    <td class='am-hide-sm-only'>"+ph.pageList[i].no +"</td>\n" +
+                    "    <td class='am-hide-sm-only'>"+ph.pageList[i].totalAmount+"</td>\n" +
+                    "    <td class='am-hide-sm-only'>"+ph.pageList[i].createTime+"</td>\n" +
+                    "</tr>";
+                $(obj).appendTo($("#doc-modal-list1"));
             }
-            return -1;
-        }
-
-        $(document).ready(function () {
-            $("#orderno").blur(function () {
-                submitvalue(null);
-            });
-            $("#orderdate").blur(function () {
-                submitvalue(null);
-            });
-            $("#ordermin").blur(function () {
-                submitvalue(null);
-            });
-            $("#ordermax").blur(function () {
-                submitvalue(null);
-            });
-
-            $.get("os","o=2&orderno=undefined&orderdate=undefined&ordermin=undefined&ordermax=undefined",function (pageHelper1) {
-                eval("var ph="+pageHelper1);
-                for (var i=0;i<ph.pageList.length;i++){
-                    var obj = "<tr data-id='2'>\n" +
-                        "    <td>\n" +
-                        "        <input type='checkbox' name="+(i+1)+" class='checkbox-acount' value="+ph.pageList[i].totalAmount+">\n" +
-                        "    </td>\n" +
-                        "    <td class='am-hide-sm-only'>"+ph.pageList[i].no +"</td>\n" +
-                        "    <td class='am-hide-sm-only'>"+ph.pageList[i].totalAmount+"</td>\n" +
-                        "    <td class='am-hide-sm-only'>"+ph.pageList[i].createTime+"</td>\n" +
-                        "</tr>";
-                    $(obj).appendTo($("#doc-modal-list1"));
-                }
-                var objherd = "<li class=\"am-disabled\">\n" +
-                    "  <a href=\"#\">«</a>\n" +
-                    "  </li>";
-
-                var objlast = "   <li>\n" +
-                    "   <a href=\"#\">»</a>\n" +
-                    "    </li>";
-                $(objherd).appendTo($("[id='ulid']"));
-                for(var i=1;i<=ph.totalPage;i++){
-                    var obj="<li class=\"am-active\">\n" +
-                        "  <a class='ahref' value='"+i+"'>"+i+"</a>\n" +
-                        "   </li>";
-                    $(obj).appendTo($("[id='ulid']"));
-                }
-                $(objlast).appendTo($("[id='ulid']"));
-            });
-
-            $(document).on("click","[class='ahref']",function () {
-                var val=$(this)[0].getAttribute("value");
-                submitvalue(val);
-            });
-
-            $(document).on("click","[class='checkbox-acount']",function () {
-                    var namei = $(this)[0].getAttribute("name");
-                    if (isInArray(names,namei)!=-1){
-                        var val=$(this)[0].getAttribute("value");
-                        var num = parseInt(val);
-                        reducecount(num);
-                        names.splice(isInArray(names,namei),1);
-                    }else {
-                        var val=$(this)[0].getAttribute("value");
-                        var num = parseInt(val);
-                        sumacount(num);
-                        names.push(namei);
-                    }
-
-            })
-
+            var objherd = "<li class=\"am-disabled\">\n" +
+                "  <a href=\"#\">«</a>\n" +
+                "  </li>";
+            var objlast = "   <li>\n" +
+                "   <a href=\"#\">»</a>\n" +
+                "    </li>";
+            $(objherd).appendTo($("[id='ulid']"));
+            for(var i=1;i<=ph.totalPage;i++){
+                var obj="<li class=\"am-active\">\n" +
+                    "  <a class='ahref' value='"+i+"'>"+i+"</a>\n" +
+                    "   </li>";
+                $(obj).appendTo($("[id='ulid']"));
+            }
+            $(objlast).appendTo($("[id='ulid']"));
         });
-
-
+    }
+    var acount =0;//这是计算的选中的订单的总金额
+    function sumacount(val){
+        acount +=val;
+    }
+    function reducecount(val){
+        acount -=val;
+    }
+    var names = [];//存储checkbox的name属性
+    names.push(-1);//让数组初始不为空；
+    function isInArray(arr,value){//判断数组中是否存在某元素
+        for(var i = 0; i < arr.length; i++){
+            if(value === arr[i]){
+                return i;
+            }
+        }
+        return -1;
+    }
+    $(document).ready(function () {
+        $("#orderno").blur(function () {
+            submitvalue(null);
+        });
+        $("#orderdate").blur(function () {
+            submitvalue(null);
+        });
+        $("#ordermin").blur(function () {
+            submitvalue(null);
+        });
+        $("#ordermax").blur(function () {
+            submitvalue(null);
+        });
+        $.get("os","o=2&orderno=undefined&orderdate=undefined&ordermin=undefined&ordermax=undefined",function (pageHelper1) {
+            eval("var ph="+pageHelper1);
+            for (var i=0;i<ph.pageList.length;i++){
+                var obj = "<tr data-id='2'>\n" +
+                    "    <td>\n" +
+                    "        <input type='checkbox' name="+(i+1)+" class='checkbox-acount' value="+ph.pageList[i].totalAmount+">\n" +
+                    "    </td>\n" +
+                    "    <td class='am-hide-sm-only'>"+ph.pageList[i].no +"</td>\n" +
+                    "    <td class='am-hide-sm-only'>"+ph.pageList[i].totalAmount+"</td>\n" +
+                    "    <td class='am-hide-sm-only'>"+ph.pageList[i].createTime+"</td>\n" +
+                    "</tr>";
+                $(obj).appendTo($("#doc-modal-list1"));
+            }
+            var objherd = "<li class=\"am-disabled\">\n" +
+                "  <a href=\"#\">«</a>\n" +
+                "  </li>";
+            var objlast = "   <li>\n" +
+                "   <a href=\"#\">»</a>\n" +
+                "    </li>";
+            $(objherd).appendTo($("[id='ulid']"));
+            for(var i=1;i<=ph.totalPage;i++){
+                var obj="<li class=\"am-active\">\n" +
+                    "  <a class='ahref' value='"+i+"'>"+i+"</a>\n" +
+                    "   </li>";
+                $(obj).appendTo($("[id='ulid']"));
+            }
+            $(objlast).appendTo($("[id='ulid']"));
+        });
+        $(document).on("click","[class='ahref']",function () {
+            var val=$(this)[0].getAttribute("value");
+            submitvalue(val);
+        });
+        $(document).on("click","[class='checkbox-acount']",function () {
+            var namei = $(this)[0].getAttribute("name");
+            if (isInArray(names,namei)!=-1){
+                var val=$(this)[0].getAttribute("value");
+                var num = parseInt(val);
+                reducecount(num);
+                names.splice(isInArray(names,namei),1);
+            }else {
+                var val=$(this)[0].getAttribute("value");
+                var num = parseInt(val);
+                sumacount(num);
+                names.push(namei);
+            }
+        })
+    });
     var baseinfoDiv = document.getElementById('baseinfoDiv')
     var showDiv = document.getElementById('showDiv')
     var resultDiv = document.getElementById('resultDiv')
@@ -566,8 +553,16 @@
             showDiv.style.display = 'none';
             resultDiv.style.display = 'block';
 
+
             var uid="${sessionScope.uid}";
             var creatorTime=Date.now();
+            //开票后修改相关订单信息
+            /*for (var i=0;i<oids.length;i++){
+                $.get("os","o=5&invoicingRecordId="+invoicingRecordId+"&oid="+oids[i],function () {
+
+                });
+            }*/
+
             function getRadioValue1() {
                 var obj=document.getElementsByName("radio1");
                 for (var i=0;i<obj.length;i++){
@@ -587,7 +582,7 @@
             var category=getRadioValue1();
             var type =getRadioValue2();
             var status="A";
-            var bid="${sessionScope.bid}";
+            var bid="${sessionScope.baseData.bid}";
             var aid="${sessionScope.aid}";
             var eid="${sessionScope.eid}";
             function randomString(length, chars) {
@@ -596,7 +591,7 @@
                 return result;
             }
             var uplinkAddress = randomString(16, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
-            $.get("is","i=2&amount="+8000+"&enterpriseId="+enterpriseId+"&uid="+uid+"&creatorTime="+creatorTime+"&category="+category+"&type="+type+"&status="+status+"&bid="+bid+"&aid="+aid+"&eid="+eid+"&uplinkAddress="+uplinkAddress+"",function () {
+            $.get("is","i=2&amount="+acount+"&enterpriseId="+enterpriseId+"&uid="+uid+"&creatorTime="+creatorTime+"&category="+category+"&type="+type+"&status="+status+"&bid="+bid+"&aid="+aid+"&eid="+eid+"&uplinkAddress="+uplinkAddress+"",function () {
             })
 
         });
@@ -690,8 +685,10 @@
     });
 
      function chooseAdd() {
-             $("#deAddress").empty();
+         $("#deAddress").empty();
          $('<span>'+$('[name="addressCho"]:checked').val()+'</span>').appendTo($("#deAddress"));
+         $.get("as","a=6&address="+$('[name="addressCho"]:checked').val(),function () {
+         })
     }
 
     //邮箱选择事件
