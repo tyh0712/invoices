@@ -46,9 +46,10 @@ public class BaseDataServlet extends HttpServlet {
     }
 
     public void queryBaseData(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int eid = Integer.parseInt(request.getParameter("eid"));
+        int enterpriseId = Integer.parseInt(request.getParameter("enterpriseId"));
         BaseDataBizImpl bbi = new BaseDataBizImpl();
-        BaseData baseData = bbi.queryBDByEId(eid);
+        BaseData baseData = bbi.queryBDByEId(enterpriseId);
+        System.out.println(baseData.toString());
         HttpSession session = request.getSession();
         session.setAttribute("baseData",baseData);
         response.getWriter().print(new Gson().toJson(baseData));

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 
 <head>
@@ -119,9 +120,8 @@
                     <div class="am-u-sm-12 am-u-md-6">
                         <form class="am-form am-form-horizontal">
                             <div class="am-form-group">
-                                <label for="user-name" class="am-u-sm-3 am-form-label">发票种类</label>
-                                <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                    普通增值税发票
+                                <label class="am-u-sm-3 am-form-label">发票种类</label>
+                                <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="category1">
                                 </div>
                             </div>
                         </form>
@@ -130,9 +130,8 @@
                     <div class="am-u-sm-12 am-u-md-6" style="padding:0">
                         <form class="am-form am-form-horizontal">
                             <div class="am-form-group">
-                                <label for="user-name" class="am-u-sm-3 am-form-label">发票类型</label>
-                                <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                    电子发票
+                                <label class="am-u-sm-3 am-form-label">发票类型</label>
+                                <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="type1">
                                 </div>
                             </div>
                         </form>
@@ -141,7 +140,7 @@
                     <div class="am-u-sm-12 am-u-md-6" style="padding:0">
                         <form class="am-form am-form-horizontal">
                             <div class="am-form-group">
-                                <label for="user-name" class="am-u-sm-3 am-form-label">抬头</label>
+                                <label class="am-u-sm-3 am-form-label">抬头</label>
                                 <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="title1"></div>
                             </div>
                         </form>
@@ -150,7 +149,7 @@
                     <div class="am-u-sm-12 am-u-md-6" style="padding:0">
                         <form class="am-form am-form-horizontal">
                             <div class="am-form-group">
-                                <label for="user-name" class="am-u-sm-3 am-form-label">税号</label>
+                                <label class="am-u-sm-3 am-form-label">税号</label>
                                 <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="taxNo1"></div>
                             </div>
                         </form>
@@ -158,11 +157,8 @@
                     </div>
                     <div class="am-u-sm-12 am-u-md-6">
                         <form class="am-form am-form-horizontal">
-                            <div class="am-form-group">
-                                <label for="user-name" class="am-u-sm-3 am-form-label">邮箱</label>
-                                <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                    123456789@qq.com
-                                </div>
+                            <div class="am-form-group" id="addAndEmail">
+
                             </div>
                         </form>
                     </div>
@@ -176,25 +172,32 @@
         </div>
     </div>
 </div>
-
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
 <script src="js/jquery.min.js"></script>
 <script src="js/amazeui.min.js"></script>
 <script src="js/app.js"></script>
-<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
 <script>
-    var eid = ${sessionScope.eid};
+
     $(document).ready(function () {
+        var enterpriseId = ${sessionScope.enterpriseId};
         //右上角用户名
         var userName1 = "${sessionScope.userName}";
         $("[name=userName]").text(userName1);
 
         //抬头信息 抬头、税号
         var baseData = null;
-        $.get("bs","b=1&eid="+eid,function (baseData1) {
+        $.get("bs","b=1&enterpriseId="+enterpriseId,function (baseData1) {
             eval("baseData=" + baseData1);
             $("[name=title1]").text(baseData.title);
             $("[name=taxNo1]").text(baseData.taxNo);
         });
+        var x='${sessionScope.detaillist["category"]}';
+        var y='${sessionScope.detaillist["type"]}';
+        var obj1="<span>"+x+"</span>";
+        $(obj1).appendTo($("[class=\"am-u-sm-9\"]:eq(0)"));
+        var obj2="<span>"+y+"</span>";
+        $(obj2).appendTo($("[class=\"am-u-sm-9\"]:eq(1)"));
+
 
         <%--var iid = ${requestScope.iid};--%>
         var iid = 1;
@@ -212,6 +215,34 @@
                 sum += orderlist[i].totalAmount;
             }
             $("[name=sum]").text(sum+"元");
+        });
+
+
+
+        //邮寄地址信息addAndEmail
+        $(function () {
+            <%--var aid = ${requestScope.aid};--%>
+            <%--var eid = ${requestScope.eid};--%>
+            var aid=1;
+            var eid=null;
+            if (eid==null){
+                $.get("as","a=7&aid="+aid,function (address) {
+                    eval("var address="+address);
+                    $("#addAndEmail").empty();
+                    $('<label class="am-u-sm-3 am-form-label">邮寄地址' +
+                        '</label><div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">'
+                        +address.area+''+address.addressDetail+'</div>').appendTo($("#addAndEmail"));
+                });
+            }
+            if (aid==null) {
+                $.get("es", "e=4&eid=" + eid, function (email) {
+                    eval("var email=" + email);
+                    $("#addAndEmail").empty();
+                    $('<label class="am-u-sm-3 am-form-label">邮箱' +
+                        '</label><div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">'
+                        + emailDetail + '</div>').appendTo($("#addAndEmail"));
+                });
+            }
         });
     });
 </script>

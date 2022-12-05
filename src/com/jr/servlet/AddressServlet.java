@@ -100,9 +100,8 @@ public class AddressServlet extends HttpServlet {
         boolean boo=abi.modifyDeAddByEId(aid,enterpriseId);
         String str="失败";
         if (boo){
+            showAll(request,response);
             System.out.println("success");
-        }else {
-            response.getWriter().print(new Gson().toJson(str));
         }
     }
 
@@ -114,9 +113,10 @@ public class AddressServlet extends HttpServlet {
         address.setPhone(request.getParameter("phone"));
         address.setArea(request.getParameter("area"));
         address.setAddressDetail(request.getParameter("addressDetail"));
-        boolean boo=abi.modifyAddress(address);
+        boolean boo=abi.addAddress(address);
         String str="失败";
         if (boo){
+            showAll(request,response);
             System.out.println("success");
         }else {
             response.getWriter().print(new Gson().toJson(str));
@@ -127,6 +127,7 @@ public class AddressServlet extends HttpServlet {
     public void invoice(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         List<Address> list=abi.queryAddByEId(Integer.parseInt(request.getParameter("enterpriseId")));
+        System.out.println(list.toString());
         response.getWriter().print(new Gson().toJson(list));
 
     }
