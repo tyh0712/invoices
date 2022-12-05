@@ -66,7 +66,7 @@ public class EmailServlet extends HttpServlet {
 
         int enterpriseId = Integer.parseInt(request.getParameter("enterpriseId"));
         Email email = ebi.queryDeEmailByEId(enterpriseId,"A");
-        response.getWriter().println(new Gson().toJson(email));
+        response.getWriter().print(new Gson().toJson(email));
 
     }
 
@@ -78,7 +78,7 @@ public class EmailServlet extends HttpServlet {
 
         int enterpriseId = Integer.parseInt(request.getParameter("enterpriseId"));
         List<Email> list = ebi.queryEmailByEId(enterpriseId);
-        response.getWriter().println(new Gson().toJson(list));
+        response.getWriter().print(new Gson().toJson(list));
     }
 
     //修改
@@ -141,7 +141,7 @@ public class EmailServlet extends HttpServlet {
 
         int enterpriseId = Integer.parseInt(request.getParameter("enterpriseId"));
         List<Email> list = ebi.queryEmailByEId(enterpriseId);
-        response.getWriter().println(new Gson().toJson(list.get(0)));
+        response.getWriter().print(new Gson().toJson(list.get(0)));
     }
 
 
@@ -153,6 +153,6 @@ public class EmailServlet extends HttpServlet {
 
         int eid = Integer.parseInt(request.getParameter("eid"));
         Email email = ebi.queryEmailByIId(eid);
-        response.getWriter().println(new Gson().toJson(email));
+        response.getWriter().print(new Gson().toJson(email));
     }
 }
