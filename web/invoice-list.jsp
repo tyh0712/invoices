@@ -443,12 +443,12 @@
                         "        </div>\n" +
                         "    </td>\n" +
                         "</tr>";
-                }else if (invoicecreatortimelist[j].status=="B") {
+                }else if (invoicelist[j].status=="B") {
                     var obj="<tr data-id=\"2\">\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicecreatortimelist[j].creatorTime+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicecreatortimelist[j].baseData.title+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicecreatortimelist[j].amount+"</td>\n" +
-                        "    <td class=\"am-hide-sm-only\">"+invoicecreatortimelist[j].uplinkAddress+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[j].creatorTime+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[j].baseData.title+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[j].amount+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+invoicelist[j].uplinkAddress+"</td>\n" +
                         "    <td class=\"am-hide-sm-only\">\n" +
                         "                <span class=\"ele-dot-status ele-dot-status-error\"><span>\n" +
                         "                        <span class=\"ele-dot-text\">已作废</span>\n" +
@@ -485,10 +485,10 @@
                         "    <td>\n" +
                         "        <div class=\"am-btn-toolbar\">\n" +
                         "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
-                        "                <a href=\"is?i=4&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
+                        "                <a href=\"is?i=4&iid="+invoicetitlelist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
                         "                                                   style=\"cursor:pointer\"><span></span>\n" +
                         "                            详情</span></a>\n" +
-                        "                <a href=\"is?i=3&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary am-icon\"\n" +
+                        "                <a href=\"is?i=3&iid="+invoicetitlelist[j].iid+"\"><span class=\"am-text-secondary am-icon\"\n" +
                         "                      style=\"cursor:pointer\"><span></span>\n" +
                         "                        退票</span></a>\n" +
                         "            </div>\n" +
@@ -507,7 +507,7 @@
                         "    <td>\n" +
                         "        <div class=\"am-btn-toolbar\">\n" +
                         "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
-                        "                <a href=\"is?i=4&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
+                        "                <a href=\"is?i=4&iid="+invoicetitlelist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
                         "                                                    style=\"cursor:pointer\"><span></span>\n" +
                         "                                详情</span></a>\n" +
                         "            </div>\n" +
@@ -537,10 +537,10 @@
                         "    <td>\n" +
                         "        <div class=\"am-btn-toolbar\">\n" +
                         "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
-                        "                <a href=\"is?i=4&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
+                        "                <a href=\"is?i=4&iid="+invoiceminlist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
                         "                                                   style=\"cursor:pointer\"><span></span>\n" +
                         "                            详情</span></a>\n" +
-                        "                <a href=\"is?i=3&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary am-icon\"\n" +
+                        "                <a href=\"is?i=3&iid="+invoiceminlist[j].iid+"\"><span class=\"am-text-secondary am-icon\"\n" +
                         "                      style=\"cursor:pointer\"><span></span>\n" +
                         "                        退票</span></a>\n" +
                         "            </div>\n" +
@@ -559,7 +559,7 @@
                         "    <td>\n" +
                         "        <div class=\"am-btn-toolbar\">\n" +
                         "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
-                        "                <a href=\"is?i=4&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
+                        "                <a href=\"is?i=4&iid="+invoiceminlist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
                         "                                                    style=\"cursor:pointer\"><span></span>\n" +
                         "                                详情</span></a>\n" +
                         "            </div>\n" +
@@ -589,10 +589,10 @@
                         "    <td>\n" +
                         "        <div class=\"am-btn-toolbar\">\n" +
                         "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
-                        "                <a href=\"is?i=4&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
+                        "                <a href=\"is?i=4&iid="+invoicemaxlist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
                         "                                                   style=\"cursor:pointer\"><span></span>\n" +
                         "                            详情</span></a>\n" +
-                        "                <a href=\"is?i=3&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary am-icon\"\n" +
+                        "                <a href=\"is?i=3&iid="+invoicemaxlist[j].iid+"\"><span class=\"am-text-secondary am-icon\"\n" +
                         "                      style=\"cursor:pointer\"><span></span>\n" +
                         "                        退票</span></a>\n" +
                         "            </div>\n" +
@@ -611,7 +611,7 @@
                         "    <td>\n" +
                         "        <div class=\"am-btn-toolbar\">\n" +
                         "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
-                        "                <a href=\"is?i=4&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
+                        "                <a href=\"is?i=4&iid="+invoicemaxlist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
                         "                                                    style=\"cursor:pointer\"><span></span>\n" +
                         "                                详情</span></a>\n" +
                         "            </div>\n" +
@@ -694,10 +694,10 @@
                         "    <td>\n" +
                         "        <div class=\"am-btn-toolbar\">\n" +
                         "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
-                        "                <a href=\"is?i=4&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
+                        "                <a href=\"is?i=4&iid="+invoicestatuslist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
                         "                                                   style=\"cursor:pointer\"><span></span>\n" +
                         "                            详情</span></a>\n" +
-                        "                <a href=\"is?i=3&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary am-icon\"\n" +
+                        "                <a href=\"is?i=3&iid="+invoicestatuslist[j].iid+"\"><span class=\"am-text-secondary am-icon\"\n" +
                         "                      style=\"cursor:pointer\"><span></span>\n" +
                         "                        退票</span></a>\n" +
                         "            </div>\n" +
@@ -727,7 +727,7 @@
                         "    <td>\n" +
                         "        <div class=\"am-btn-toolbar\">\n" +
                         "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
-                        "                <a href=\"is?i=4&iid="+invoicelist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
+                        "                <a href=\"is?i=4&iid="+invoicestatuslist[j].iid+"\"><span class=\"am-text-secondary\"\n" +
                         "                                                    style=\"cursor:pointer\"><span></span>\n" +
                         "                                详情</span></a>\n" +
                         "            </div>\n" +
