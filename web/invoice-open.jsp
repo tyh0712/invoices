@@ -544,7 +544,6 @@
                         var val=$(this)[0].getAttribute("value");
                         var num = parseInt(val);
                         oids.splice(isInArray(names,namei)-1,1);
-                        alert(oids);
                         reducecount(num);
                         names.splice(isInArray(names,namei),1);
                     }else {
@@ -555,7 +554,6 @@
                         var orderid = $(this)[0].getAttribute("id");
                         var oid = parseInt(orderid);
                         oids.push(oid);
-                        alert(oids);
                     }
 
             })
