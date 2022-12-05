@@ -387,6 +387,16 @@
 
     }
 
+    function insertCancelAdd () {
+        $.get("as","a=2&enterpriseId="+enterpriseId,function (list) {
+            eval("var list="+list);
+            var i=list.length-1;
+            var x=list[i].eid+1;
+            $("#"+x+"").empty();
+        });
+
+    }
+
     //电子邮箱--编辑保存
     function saveInterfaceParam() {
         var td = event.srcElement; // 通过event.srcElement 获取激活事件的对象 td
@@ -604,8 +614,8 @@
         $("#Type" + key).attr("disabled", true);
         $("#defaultV" + key).attr("disabled", true);
         var div1 = $("#operate" + key);
-        $.get("as","a=3&aid="+key+"&addressee="+$("#Name"+key).val()+ "&phone="+$("#No"+key).val()+ "&area="+$("#Type"+key).val()+ "&addressDetail="+$("#defaultV"+key).val(),function (str) {
-            eval("var str="+str);
+        $.get("as","a=3&aid="+key+"&addressee="+$("#Name"+key).val()+ "&phone="+$("#No"+key).val()+ "&area="+$("#Type"+key).val()+ "&addressDetail="+$("#defaultV"+key).val(),function () {
+
         });
         div1[0].innerHTML = '<a style="cursor:pointer;color:#007bff;"  onclick="editAddress()">编辑</a>&nbsp;&nbsp;<a style="cursor:pointer;color:#007bff;">设为默认</a>';
     }

@@ -355,7 +355,7 @@
                 <div class="am-g tpl-amazeui-form">
 
                     <div class="am-u-sm-12 am-u-md-12">
-                        <form class="am-form am-form-horizontal">
+                        <form class="am-form am-form-horizontal" >
                             <div class="am-form-group">
                                 <div class="am-u-sm-12" style="margin-top: 4px;text-align: center;margin-bottom: 20px;">
                                     <img src="img/u105.png" alt="" style="width: 120px;">
@@ -430,14 +430,12 @@
 <script src="js/app.js"></script>
 <script type="text/javascript">
         function submitvalue(subvalue) {
-            alert("submit")
             var orderno = $("[id='orderno']").val();
             var orderdate = $("[id='orderdate']").val();
             var ordermin = $("[id='ordermin']").val();
             var ordermax = $("[id='ordermax']").val();
 
             $.get("os","o=2&orderno="+orderno+"&orderdate="+orderdate+"&ordermin="+ordermin+"&ordermax="+ordermax+"&index="+subvalue,function (pageHelper2) {
-                alert("getget");
                 eval("var ph="+pageHelper2);
                 $("#doc-modal-list1").empty();
                 $("#ulid").empty();
@@ -501,7 +499,6 @@
                 submitvalue("1");
             });
             $("#ordermin").blur(function () {
-                alert("blur");
                 submitvalue("1");
             });
             $("#ordermax").blur(function () {
@@ -615,7 +612,9 @@
         }
     }
     var enterpriseId = ${sessionScope.enterpriseId};
+
     $(document).ready(function () {
+
         //抬头信息  抬头、税号
         $.get("bs","b=1&enterpriseId="+enterpriseId,function (baseData1) {
             eval("var baseData=" + baseData1);
@@ -637,7 +636,6 @@
         $.get("as","a=6&enterpriseId="+enterpriseId,function (list) {
             eval("var list="+list);
             $('<span id="showAdd">'+list[0].area+''+list[0].addressDetail+'</span>').appendTo($("#deAddress"));
-            getAid(list[0].addressDetail);
             for (var i=0;i<list.length;i++){
                 $('<tr data-id="2"><td><label class="am-radio"><input type="radio" name="addressCho" id="'+i+'" value="'+list[i].area+''+list[i].addressDetail+'" data-am-ucheck checked></label></td><td class="am-hide-sm-only"><label class="am-radio" for="'+i+'">'+list[i].area+''+list[i].addressDetail+'</label></td></tr>').appendTo($("#doc-modal-list3"));
             }
@@ -647,14 +645,10 @@
         $.get("es","e=2&enterpriseId="+enterpriseId,function (list) {
             eval("var list="+list);
             $('<span id="showemail">'+list[0].emailDetail+'</span>').appendTo($("#emailopen"));
-            getEid(list[0].emailDetail);
             for(var i=0;i<list.length;i++){
                 $('<tr data-id="2"><td><label class="am-radio"><input type="radio" name="emailCho" id="'+i+'" value="'+list[i].emailDetail+'" data-am-ucheck checked></label></td><td class="am-hide-sm-only"><label class="am-radio" for="'+i+'">'+list[i].emailDetail+'</label></td></tr>').appendTo($("#doc-modal-list2"));
             }
-
         });
-
-
     });
 
      function chooseAdd() {
@@ -671,16 +665,9 @@
         $.get("es","e=5&emailDetail="+$('[name="emailCho"]:checked').val()+"&enterpriseId="+enterpriseId,function () {
         });
     }
-    function getAid(x) {
-        $.get("as","a=8&address="+x+"&enterpriseId="+enterpriseId,function () {
-        });
-    }
-    function getEid(x) {
-        $.get("es","e=5&emailDetail="+x+"&enterpriseId="+enterpriseId,function () {
-        });
-    }
 
         $(function () {
+
             $('#submitBtn').on('click', function () {
                 baseinfoDiv.style.display = 'none';
                 showDiv.style.display = 'none';
@@ -688,14 +675,10 @@
 
 
                 var uid="${sessionScope.uid}";
+
                 var creatorTime=Date.now();
                 //开票后修改相关订单信息
-                <%--var invcid = "${sessionScope.invid}";--%>
-                /*for (var i=0;i<oids.length;i++){
-                    $.get("os","o=5&invoicingRecordId="+invcid+"&oid="+oids[i],function () {
 
-                    });
-                }*/
 
                 function getRadioValue1() {
                     var obj=document.getElementsByName("radio1");
@@ -726,10 +709,19 @@
                     return result;
                 }
                 var uplinkAddress = randomString(16, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
-                $.get("is","i=2&amount="+acount+"&uid="+uid+"&enterpriseId="+enterpriseId+"&creatorTime="+creatorTime+"&category="+category+"&type="+type+"&status="+status+"&bid="+getBid+"&aid="+4+"&eid="+4+"&uplinkAddress="+uplinkAddress,function () {
+                $.get("is","i=2&amount="+acount+"&uid="+uid+"&enterpriseId="+enterpriseId+"&creatorTime="+creatorTime+"&category="+category+"&type="+type+"&status="+status+"&bid="+getBid+"&aid="+getAid+"&eid="+getEid+"&uplinkAddress="+uplinkAddress,function (iid) {
+                    eval("var iid="+iid);
+                    for (var i=0;i<oids.length;i++){
+                        $.get("os","o=5&invoicingRecordId="+iid+"&oid="+oids[i],function () {
+                        });
+                    }
                 });
+                //开票后修改相关订单信息
+
             });
         });
+
+
 </script>
 
 </body>

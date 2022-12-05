@@ -126,7 +126,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="invoice-open.jsp" class="am-btn am-btn-primary"
+                    <a name="getInvoice" class="am-btn am-btn-primary"
                        style="margin-bottom: 10px;margin-left: 40px;margin-top: 8px;">去开票</a>
                 </div>
             </div>
@@ -377,7 +377,7 @@
     var invoicingmin;
     var invoicingmax;
 
-    $.get("is","i=1&creatortime="+creatortime+"&titlestr="+titlestr+"&invoicingmin="+invoicingmin+"&invoicingmax="+invoicingmax,function (invoicelist) {
+    $.get("is","i=1&creatortime="+creatortime+"&titlestr="+titlestr+"&invoicingmin="+invoicingmin+"&invoicingmax="+invoicingmax+"&enterpriseId="+enterpriseId,function (invoicelist) {
         eval("var invoicelist="+invoicelist);
         for (var j=0;j<invoicelist.length;j++){
             if (invoicelist[j].status=="A"){
@@ -638,7 +638,7 @@
         });
     });
     $("[type=\"button\"]:eq(0)").click(function () {
-        $.get("is","i=1&creatortime="+creatortime+"&titlestr="+titlestr+"&invoicingmin="+invoicingmin+"&invoicingmax="+invoicingmax,function (invoicelist) {
+        $.get("is","i=1&creatortime="+creatortime+"&titlestr="+titlestr+"&invoicingmin="+invoicingmin+"&invoicingmax="+invoicingmax+"&enterpriseId="+enterpriseId,function (invoicelist) {
             $("#doc-modal-list").empty()
             eval("var invoicelist="+invoicelist);
             for (var j=0;j<invoicelist.length;j++){
@@ -751,6 +751,15 @@
                 }
                 $(obj).appendTo($("#doc-modal-list"));
             }
+        });
+    });
+    $("[name='getInvoice']").click(function () {
+        $.get("as","a=6&enterpriseId="+enterpriseId,function (list) {
+            eval("var list1="+list);
+            $.get("es","e=2&enterpriseId="+enterpriseId,function (list) {
+                eval("var list2="+list);
+                location.href="as?a=8&address="+list1[0].addressDetail+"&enterpriseId="+enterpriseId+"&e=5&emailDetail="+list2[0].emailDetail+"";
+            });
         });
     });
 });

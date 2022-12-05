@@ -180,6 +180,25 @@
 
     $(document).ready(function () {
         var enterpriseId = ${sessionScope.enterpriseId};
+        var iid = "${sessionScope.detaillist.iid}";
+        $(function () {
+            // var iid = 1;
+            var sum = 0.00;
+            $.get("os","o=4&invoicingRecordId="+iid,function (list1) {
+                eval("var orderlist="+list1);
+                for (var i=0;i<orderlist.length;i++){
+                    var obj = "<tr data-id=\"2\">\n" +
+                        "    <td class=\"am-hide-sm-only\">"+orderlist[i].no+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+baseData.title+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+orderlist[i].totalAmount+"</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">"+orderlist[i].createTime+"</td>\n" +
+                        "</tr>";
+                    $(obj).appendTo($("#doc-modal-list"));
+                    sum += orderlist[i].totalAmount;
+                }
+                $("[name=sum]").text(sum+"元");
+            });
+        });
         //右上角用户名
         var userName1 = "${sessionScope.userName}";
         $("[name=userName]").text(userName1);
@@ -199,33 +218,14 @@
         $(obj2).appendTo($("[class=\"am-u-sm-9\"]:eq(1)"));
 
 
-        <%--var iid = ${requestScope.iid};--%>
-        var iid = 1;
-        var sum = 0.00;
-        $.get("os","o=4&invoicingRecordId="+iid,function (list1) {
-            eval("var orderlist="+list1);
-            for (var i=0;i<orderlist.length;i++){
-                var obj = "<tr data-id=\"2\">\n" +
-                    "    <td class=\"am-hide-sm-only\">"+orderlist[i].no+"</td>\n" +
-                    "    <td class=\"am-hide-sm-only\">"+baseData.title+"</td>\n" +
-                    "    <td class=\"am-hide-sm-only\">"+orderlist[i].totalAmount+"</td>\n" +
-                    "    <td class=\"am-hide-sm-only\">"+orderlist[i].createTime+"</td>\n" +
-                    "</tr>";
-                $(obj).appendTo($("#doc-modal-list"));
-                sum += orderlist[i].totalAmount;
-            }
-            $("[name=sum]").text(sum+"元");
-        });
-
-
 
         //邮寄地址信息addAndEmail
         $(function () {
-            <%--var aid = ${requestScope.aid};--%>
-            <%--var eid = ${requestScope.eid};--%>
-            var aid=1;
-            var eid=null;
-            if (eid==null){
+            var aid = "${sessionScope.detaillist.address.aid}";
+            var eid = "${sessionScope.detaillist.email.eid}";
+            // var aid=1;
+            // var eid=null;
+            if (eid==1){
                 $.get("as","a=7&aid="+aid,function (address) {
                     eval("var address="+address);
                     $("#addAndEmail").empty();
@@ -234,16 +234,17 @@
                         +address.area+''+address.addressDetail+'</div>').appendTo($("#addAndEmail"));
                 });
             }
-            if (aid==null) {
+            if (aid==1) {
                 $.get("es", "e=4&eid=" + eid, function (email) {
                     eval("var email=" + email);
                     $("#addAndEmail").empty();
                     $('<label class="am-u-sm-3 am-form-label">邮箱' +
                         '</label><div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">'
-                        + emailDetail + '</div>').appendTo($("#addAndEmail"));
+                        + email.emailDetail + '</div>').appendTo($("#addAndEmail"));
                 });
             }
         });
+
     });
 </script>
 </body>

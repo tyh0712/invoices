@@ -273,19 +273,33 @@ public class InvoicingRecordDaoImpl implements IInvoicingRecordDao {
     public InvoicingRecord selectIRByIId(int iid) {
         InvoicingRecord ir=new InvoicingRecord();
         BaseData baseData=new BaseData();
-        Address address=new Address();
-        Email email=new Email();
+        Address address;
+        Email email;
 //        ArrayList<InvoicingRecord> list=new ArrayList<>();
         try {
             con=DBHelper.getcon();
-            String sql="SELECT id,category,`type` from invoicing_record WHERE id=?";
+            String sql="SELECT id,category,`type`,address_id,email_id from invoicing_record WHERE id=?";
             ps=con.prepareStatement(sql);
             ps.setInt(1,iid);
             rs=ps.executeQuery();
             while (rs.next()){
+                address=new Address();
+                email=new Email();
                 ir.setIid(rs.getInt(1));
-                ir.setCategory(rs.getString(2));
-                ir.setType(rs.getString(3));
+                if (rs.getString(2).equals("A")){
+                    ir.setCategory("普通增值税发票");
+                }else {
+                    ir.setCategory("专用增值税发票");
+                }
+                if (rs.getString(3).equals("A")){
+                    ir.setType("电子发票");
+                }else {
+                    ir.setType("纸质发票");
+                }
+                address.setAid(rs.getInt(4));
+                ir.setAddress(address);
+                email.setEid(rs.getInt(5));
+                ir.setEmail(email);
 //                list.add(ir);
             }
         } catch (IOException e) {

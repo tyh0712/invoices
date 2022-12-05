@@ -51,8 +51,6 @@ public class InvoicingRecordServlet extends HttpServlet {
             invoiceStatusList(request, response);
         }else if (i==8){
             invoiceTitleList(request, response);
-        }else if (i==9){
-            invoicingRecordId(request, response);
         }
     }
     @Override
@@ -69,9 +67,8 @@ public class InvoicingRecordServlet extends HttpServlet {
     }
 
     public void invoiceList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        /*int enterpriseId=Integer.parseInt(request.getParameter("enterpriseId"));
-        List<InvoicingRecord> invoicelist=irbi.getIRList(enterpriseId);*/
-        List<InvoicingRecord> invoicelist=irbi.getIRList(2);
+        int enterpriseId=Integer.parseInt(request.getParameter("enterpriseId"));
+        List<InvoicingRecord> invoicelist=irbi.getIRList(enterpriseId);
         String creatortime=request.getParameter("creatortime");
         String titlestr=request.getParameter("titlestr");
         String invoicingmin=request.getParameter("invoicingmin");
@@ -129,8 +126,8 @@ public class InvoicingRecordServlet extends HttpServlet {
         int aid=Integer.parseInt(request.getParameter("aid"));
         int eid=Integer.parseInt(request.getParameter("eid"));
         String uplinkAddress=request.getParameter("uplinkAddress");
-        System.out.println(aid);
-        System.out.println(eid);
+
+
         User user=new User();
         user.setUid(uid);
         user.setEnterpriseId(enterpriseId);
@@ -151,22 +148,15 @@ public class InvoicingRecordServlet extends HttpServlet {
         ir.setAddress(ar);
         ir.setEmail(em);
         ir.setUplinkAddress(uplinkAddress);
-        System.out.println(ir);
-        boolean boo=irbi.invoicingIR(ir);
-        if (boo) {
-            response.sendRedirect("invoice-list.jsp");
-        }else{
-            response.sendRedirect("invoice-list.jsp");
-        }
-    }
-    public void invoicingRecordId(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String uplinkAddress=request.getParameter("uplinkAddress");
+        irbi.invoicingIR(ir);
+
         int iid=irbi.getInvoicingRecordId(uplinkAddress);
-        HttpSession session=request.getSession();
-        session.setAttribute("invid",iid);
-        System.out.println(iid);
-        response.sendRedirect("invoice-open.jsp");
+//        HttpSession session=request.getSession();
+//        session.setAttribute("invid",iid);
+        response.getWriter().print(new Gson().toJson(iid));
+//        response.sendRedirect("invoice-open.jsp");
     }
+
     public void refund(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         InvoicingRecord ir=new InvoicingRecord();
         int iid=Integer.parseInt(request.getParameter("iid"));
@@ -183,7 +173,7 @@ public class InvoicingRecordServlet extends HttpServlet {
     public void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int iid=Integer.parseInt(request.getParameter("iid"));
         InvoicingRecord detaillist=irbi.detailIR(iid);
-        Gson gson=new Gson();
+ //       Gson gson=new Gson();
 //        response.getWriter().print(gson.toJson(detaillist));
         HttpSession session=request.getSession();
         session.setAttribute("detaillist",detaillist);

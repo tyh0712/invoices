@@ -6,10 +6,7 @@ import com.jr.entry.Address;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
@@ -136,10 +133,13 @@ public class AddressServlet extends HttpServlet {
 
     public void getAID(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
-        int aid=abi.queryAidByAdd(request.getParameter("address"),Integer.parseInt(request.getParameter("enterpriseId")));
+        int e=Integer.parseInt(request.getParameter("e"));
+        String emailDetail=request.getParameter("emailDetail");
+        int enterpriseId=Integer.parseInt(request.getParameter("enterpriseId"));
+        int aid=abi.queryAidByAdd(request.getParameter("address"),enterpriseId);
         HttpSession session=request.getSession();
         session.setAttribute("aid",aid);
-        response.sendRedirect("invoice-open.jsp");
+        request.getRequestDispatcher("es?e=5").forward(request,response);
     }
 
     public void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
