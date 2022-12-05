@@ -32,7 +32,8 @@ public interface IEmailBiz {
     public List<Email> queryEmailByEId(int enterpriseId);
 
     //根据邮箱查询主键
-    public int queryEidByDetail(String emailDetail);
+    //public int queryEidByDetail(String emailDetail);
+    int queryEidByDetail(String emailDetail, int enterpriseId);
 
     //详情
     public Email queryEmailByIId(int eid);

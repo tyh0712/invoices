@@ -119,17 +119,18 @@ public class AddressDaoImpl implements IAddressDao {
     }
 
     @Override
-    public int selectAidByAddress(String address) {
+    public int selectAidByAddress(String address,int enterpriseId) {
         Connection con=null;
         PreparedStatement ps=null;
         ResultSet rs=null;
         int aid=0;
         try {
             con=DBHelper.getcon();
-            String sql="SELECT id FROM address WHERE address_detail LIKE \"%\"?\"%\"";
+            String sql="SELECT id FROM address WHERE address_detail LIKE \"%\"?\"%\" AND enterprise_id=?";
             ps=con.prepareStatement(sql);
             address=address.substring(address.length()-5);
             ps.setString(1,address);
+            ps.setInt(2,enterpriseId);
             rs=ps.executeQuery();
             while (rs.next()){
                 aid=rs.getInt(1);

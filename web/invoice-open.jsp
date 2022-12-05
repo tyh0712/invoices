@@ -616,7 +616,7 @@
             }
             var uplinkAddress = randomString(16, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
             $.get("is","i=2&amount="+acount+"&enterpriseId="+enterpriseId+"&uid="+uid+"&creatorTime="+creatorTime+"&category="+category+"&type="+type+"&status="+status+"&bid="+bid+"&aid="+aid+"&eid="+eid+"&uplinkAddress="+uplinkAddress+"",function () {
-            })
+            });
         });
     });
     // 邮寄地址选择按钮
@@ -687,6 +687,8 @@
             for (var i=0;i<list.length;i++){
                 $('<tr data-id="2"><td><label class="am-radio"><input type="radio" name="addressCho" id="'+i+'" value="'+list[i].area+''+list[i].addressDetail+'" data-am-ucheck checked></label></td><td class="am-hide-sm-only"><label class="am-radio" for="'+i+'">'+list[i].area+''+list[i].addressDetail+'</label></td></tr>').appendTo($("#doc-modal-list3"));
             }
+            $.get("as","a=8&address="+list[0].addressDetail+"&enterpriseId="+enterpriseId,function () {
+            });
         });
 
         //去开票--邮箱选择
@@ -697,22 +699,25 @@
                 $('<tr data-id="2"><td><label class="am-radio"><input type="radio" name="emailCho" id="'+i+'" value="'+list[i].emailDetail+'" data-am-ucheck checked></label></td><td class="am-hide-sm-only"><label class="am-radio" for="'+i+'">'+list[i].emailDetail+'</label></td></tr>').appendTo($("#doc-modal-list2"));
 
             }
+            $.get("es","e=5&emailDetail="+list[0].emailDetail+"&enterpriseId="+enterpriseId,function () {
+            });
         });
+
+
     });
 
      function chooseAdd() {
          $("#deAddress").empty();
          $('<span>'+$('[name="addressCho"]:checked').val()+'</span>').appendTo($("#deAddress"));
-         $.get("as","a=6&address="+$('[name="addressCho"]:checked').val(),function () {
-         })
+         $.get("as","a=8&address="+$('[name="addressCho"]:checked').val()+"&enterpriseId="+enterpriseId,function () {
+         });
     }
 
     //邮箱选择事件
     function chooseEmail() {
         $("#emailopen").empty();
         $('<span>'+$('[name="emailCho"]:checked').val()+'</span>').appendTo($("#emailopen"));
-        $.get("es","e=5&emailDetail="+$('[name="emailCho"]:checked').val(),function () {
-
+        $.get("es","e=5&emailDetail="+$('[name="emailCho"]:checked').val()+"&enterpriseId="+enterpriseId,function () {
         });
     }
 </script>

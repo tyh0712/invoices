@@ -40,11 +40,14 @@ public interface IAddressDao {
     //返回：List<Address> 与企业ID有关的邮箱的展示，加个默认的排序
     public List<Address> selectAddByEId(int enterpriseId);
 
+
+
     //根据主键（开票记录表）查询邮寄地址
     //传入：int 开票记录表主键
     //返回：Address对象
     public Address selectAddByIId(int iid);
 
     //根据地址查询主键
-    int selectAidByAddress(String address);
+    int selectAidByAddress(String address, int enterpriseId);
+    //int selectAidByAddress(String address);
 }

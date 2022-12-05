@@ -168,13 +168,14 @@ public class EmailDaoImpl implements IEmailDao {
     }
 
     @Override
-    public int selectEidByDetail(String emailDetail) {
+    public int selectEidByDetail(String emailDetail, int enterpriseId) {
         int  num =0;
         try {
             con = DBHelper.getcon();
-            String sql = "select id from email where email_detail=?";
+            String sql = "select id from email where email_detail=? and enterprise_id=?";
             ps = con.prepareStatement(sql);
             ps.setString(1,emailDetail);
+            ps.setInt(2,enterpriseId);
             rs = ps.executeQuery();
             if (rs.next()){
                 num = rs.getInt(1);

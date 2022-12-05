@@ -148,11 +148,10 @@ public class EmailServlet extends HttpServlet {
     }
 
     public void getEID(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        int eid = ebi.queryEidByDetail(request.getParameter("emailDetail"));
+        int eid = ebi.queryEidByDetail(request.getParameter("emailDetail"),Integer.parseInt(request.getParameter("enterpriseId")));
         HttpSession session = request.getSession();
-        System.out.println(eid);
+        session.setAttribute("eid",eid);
         response.sendRedirect("invoice-open.jsp");
-        response.getWriter().print(new Gson().toJson(list.get(0)));
     }
 
 
