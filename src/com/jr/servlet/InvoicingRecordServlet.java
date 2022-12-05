@@ -152,7 +152,7 @@ public class InvoicingRecordServlet extends HttpServlet {
         String uplinkAddress=request.getParameter("uplinkAddress");
         int iid=irbi.getInvoicingRecordId(uplinkAddress);
         HttpSession session=request.getSession();
-        session.setAttribute("iid",iid);
+        session.setAttribute("invid",iid);
         System.out.println(iid);
         response.sendRedirect("invoice-open.jsp");
     }

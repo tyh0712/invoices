@@ -220,6 +220,7 @@ public class OrderServlet extends HttpServlet {
         int invoicingRecordId = Integer.parseInt(request.getParameter("invoicingRecordId"));
         boolean boo = orderBiz.openOrder(oid,invoicingRecordId);
         if (boo){
+            System.out.println("ok");
             //开票成功此处应该无变化
         }
     }
