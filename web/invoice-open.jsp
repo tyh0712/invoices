@@ -679,7 +679,7 @@
             $("[name=email2]").text(email.emailDetail);
         });
         //去开票--邮箱选择
-        $.get("es","e=5&enterpriseId="+enterpriseId,function (list) {
+        $.get("es","e=2&enterpriseId="+enterpriseId,function (list) {
             eval("var list="+list);
             $('<span id="showemail">'+list[0].emailDetail+'</span>').appendTo($("#emailopen"));
             for(var i=0;i<list.length;i++){
@@ -698,7 +698,9 @@
     function chooseEmail() {
         $("#emailopen").empty();
         $('<span>'+$('[name="emailCho"]:checked').val()+'</span>').appendTo($("#emailopen"));
+        $.get("es","e=5&emailDetail="+$('[name="emailCho"]:checked').val(),function () {
 
+        });
     }
 </script>
 
