@@ -442,7 +442,7 @@
                 for (var i=0;i<ph.pageList.length;i++){
                     var obj = "<tr data-id='2'>\n" +
                         "    <td>\n" +
-                        "        <input type='checkbox' name="+(i+4)+" class='checkbox-acount' value="+ph.pageList[i].totalAmount+">\n" +
+                        "        <input type='checkbox' id="+ph.pageList[i].oid+" name="+(i+4)+" class='checkbox-acount' value="+ph.pageList[i].totalAmount+">\n" +
                         "    </td>\n" +
                         "    <td class='am-hide-sm-only'>"+ph.pageList[i].no +"</td>\n" +
                         "    <td class='am-hide-sm-only'>"+ph.pageList[i].totalAmount+"</td>\n" +
@@ -487,6 +487,8 @@
             return -1;
         }
 
+        var oids = [];//存储选中的订单的id，以备后续使用
+
         $(document).ready(function () {
             $("#orderno").blur(function () {
                 submitvalue(null);
@@ -506,7 +508,7 @@
                 for (var i=0;i<ph.pageList.length;i++){
                     var obj = "<tr data-id='2'>\n" +
                         "    <td>\n" +
-                        "        <input type='checkbox' name="+(i+1)+" class='checkbox-acount' value="+ph.pageList[i].totalAmount+">\n" +
+                        "        <input type='checkbox' id="+ph.pageList[i].oid+" name="+(i+1)+" class='checkbox-acount' value="+ph.pageList[i].totalAmount+">\n" +
                         "    </td>\n" +
                         "    <td class='am-hide-sm-only'>"+ph.pageList[i].no +"</td>\n" +
                         "    <td class='am-hide-sm-only'>"+ph.pageList[i].totalAmount+"</td>\n" +
@@ -541,6 +543,8 @@
                     if (isInArray(names,namei)!=-1){
                         var val=$(this)[0].getAttribute("value");
                         var num = parseInt(val);
+                        oids.splice(isInArray(names,namei)-1,1);
+                        alert(oids);
                         reducecount(num);
                         names.splice(isInArray(names,namei),1);
                     }else {
@@ -548,12 +552,15 @@
                         var num = parseInt(val);
                         sumacount(num);
                         names.push(namei);
+                        var orderid = $(this)[0].getAttribute("id");
+                        var oid = parseInt(orderid);
+                        oids.push(oid);
+                        alert(oids);
                     }
 
             })
 
         });
-
 
     var baseinfoDiv = document.getElementById('baseinfoDiv')
     var showDiv = document.getElementById('showDiv')

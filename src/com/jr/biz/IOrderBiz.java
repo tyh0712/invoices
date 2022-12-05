@@ -25,6 +25,9 @@ public interface IOrderBiz {
     //退票 实现其中开票状态的修改  refund
     public boolean refundOrder(int invoicingRecordId);
 
+    //开票，修改状态为A，并且添加相关开票表的主键 --open
+    public boolean openOrder(int oid,int invoicingRecordId);
+
     //详情 实现发票详情页中与此发票有关的订单显示  detail
     public List<Order> detailOrder(int invoicingRecordId);
 }

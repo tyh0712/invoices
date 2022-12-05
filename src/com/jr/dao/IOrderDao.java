@@ -36,10 +36,14 @@ public interface IOrderDao {
 
     Map<Integer, Object> getObj(int judge, Object... objs);
 
-    //根据开票记录表主键修改开票状态为（未开票）
+    //根据开票记录表主键修改开票状态为（未开票）--退票
     //传入：int 开票记录表主键
     //返回：int 受影响行数
     public int updateOrderStatus(int invoicingRecordId);
+
+    //开票--传入选择的订单的oid--进行修改---订单状态 B-》A
+    //并且添加相关开票表主键
+    public int updateOrderOpen(int oid,int invoicingRecordId);
 
     //根据开票记录表主键查询全部
     //传入：int 开票记录表主键
