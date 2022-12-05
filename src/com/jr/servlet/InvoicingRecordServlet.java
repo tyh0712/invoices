@@ -129,8 +129,6 @@ public class InvoicingRecordServlet extends HttpServlet {
         int aid=Integer.parseInt(request.getParameter("aid"));
         int eid=Integer.parseInt(request.getParameter("eid"));
         String uplinkAddress=request.getParameter("uplinkAddress");
-        System.out.println(aid);
-        System.out.println(eid);
         User user=new User();
         user.setUid(uid);
         user.setEnterpriseId(enterpriseId);
@@ -151,7 +149,6 @@ public class InvoicingRecordServlet extends HttpServlet {
         ir.setAddress(ar);
         ir.setEmail(em);
         ir.setUplinkAddress(uplinkAddress);
-        System.out.println(ir);
         boolean boo=irbi.invoicingIR(ir);
         if (boo) {
             response.sendRedirect("invoice-list.jsp");
