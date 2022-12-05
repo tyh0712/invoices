@@ -51,6 +51,8 @@ public class InvoicingRecordServlet extends HttpServlet {
             invoiceStatusList(request, response);
         }else if (i==8){
             invoiceTitleList(request, response);
+        }else if (i==9){
+            invoicingRecordId(request, response);
         }
     }
     @Override

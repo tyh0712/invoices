@@ -236,7 +236,6 @@ public class InvoicingRecordDaoImpl implements IInvoicingRecordDao {
                     invoicingRecord.getAddress().getAid(),
                     invoicingRecord.getEmail().getEid(),
                     invoicingRecord.getUplinkAddress());
-            System.out.println(i);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SQLException e) {
