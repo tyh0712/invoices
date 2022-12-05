@@ -216,6 +216,12 @@ public class OrderDaoImpl implements IOrderDao {
     }
 
     @Override
+    public int updateOrderOpen(int oid, int invoicingRecordId) {
+        String sql = "update `order` set invoicing_status='A',invoicing_record_id=?  where id=?";
+        return um.upd(sql,invoicingRecordId,oid);
+    }
+
+    @Override
     public List<Order> selectOrderByIId(int invoicingRecordId) {
         Order order;
         List<Order> list = new ArrayList<>();

@@ -166,4 +166,28 @@ public class EmailDaoImpl implements IEmailDao {
         }
         return email;
     }
+
+    @Override
+    public int selectEidByDetail(String emailDetail) {
+        int  num =0;
+        try {
+            con = DBHelper.getcon();
+            String sql = "select id from email where email_detail=?";
+            ps = con.prepareStatement(sql);
+            ps.setString(1,emailDetail);
+            rs = ps.executeQuery();
+            if (rs.next()){
+                num = rs.getInt(1);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }finally {
+            DBHelper.close(rs,ps,con);
+        }
+        return num;
+    }
 }

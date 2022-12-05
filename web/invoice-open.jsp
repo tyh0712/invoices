@@ -429,119 +429,139 @@
 <script src="js/amazeui.min.js"></script>
 <script src="js/app.js"></script>
 <script type="text/javascript">
-    function submitvalue(subvalue) {
-        var orderno = $("[id='orderno']").val();
-        var orderdate = $("[id='orderdate']").val();
-        var ordermin = $("[id='ordermin']").val();
-        var ordermax = $("[id='ordermax']").val();
-        $.get("os","o=2&orderno="+orderno+"&orderdate="+orderdate+"&ordermin="+ordermin+"&ordermax="+ordermax+"&index="+subvalue,function (pageHelper2) {
-            eval("var ph="+pageHelper2);
-            $("#doc-modal-list1").empty();
-            $("#ulid").empty();
-            for (var i=0;i<ph.pageList.length;i++){
-                var obj = "<tr data-id='2'>\n" +
-                    "    <td>\n" +
-                    "        <input type='checkbox' name="+(i+4)+" class='checkbox-acount' value="+ph.pageList[i].totalAmount+">\n" +
-                    "    </td>\n" +
-                    "    <td class='am-hide-sm-only'>"+ph.pageList[i].no +"</td>\n" +
-                    "    <td class='am-hide-sm-only'>"+ph.pageList[i].totalAmount+"</td>\n" +
-                    "    <td class='am-hide-sm-only'>"+ph.pageList[i].createTime+"</td>\n" +
-                    "</tr>";
-                $(obj).appendTo($("#doc-modal-list1"));
-            }
-            var objherd = "<li class=\"am-disabled\">\n" +
-                "  <a href=\"#\">«</a>\n" +
-                "  </li>";
-            var objlast = "   <li>\n" +
-                "   <a href=\"#\">»</a>\n" +
-                "    </li>";
-            $(objherd).appendTo($("[id='ulid']"));
-            for(var i=1;i<=ph.totalPage;i++){
-                var obj="<li class=\"am-active\">\n" +
-                    "  <a class='ahref' value='"+i+"'>"+i+"</a>\n" +
-                    "   </li>";
-                $(obj).appendTo($("[id='ulid']"));
-            }
-            $(objlast).appendTo($("[id='ulid']"));
-        });
-    }
-    var acount =0;//这是计算的选中的订单的总金额
-    function sumacount(val){
-        acount +=val;
-    }
-    function reducecount(val){
-        acount -=val;
-    }
-    var names = [];//存储checkbox的name属性
-    names.push(-1);//让数组初始不为空；
-    function isInArray(arr,value){//判断数组中是否存在某元素
-        for(var i = 0; i < arr.length; i++){
-            if(value === arr[i]){
-                return i;
-            }
+        function submitvalue(subvalue) {
+            var orderno = $("[id='orderno']").val();
+            var orderdate = $("[id='orderdate']").val();
+            var ordermin = $("[id='ordermin']").val();
+            var ordermax = $("[id='ordermax']").val();
+
+            $.get("os","o=2&orderno="+orderno+"&orderdate="+orderdate+"&ordermin="+ordermin+"&ordermax="+ordermax+"&index="+subvalue,function (pageHelper2) {
+                eval("var ph="+pageHelper2);
+                $("#doc-modal-list1").empty();
+                $("#ulid").empty();
+                for (var i=0;i<ph.pageList.length;i++){
+                    var obj = "<tr data-id='2'>\n" +
+                        "    <td>\n" +
+                        "        <input type='checkbox' name="+(i+4)+" class='checkbox-acount' value="+ph.pageList[i].totalAmount+">\n" +
+                        "    </td>\n" +
+                        "    <td class='am-hide-sm-only'>"+ph.pageList[i].no +"</td>\n" +
+                        "    <td class='am-hide-sm-only'>"+ph.pageList[i].totalAmount+"</td>\n" +
+                        "    <td class='am-hide-sm-only'>"+ph.pageList[i].createTime+"</td>\n" +
+                        "</tr>";
+                    $(obj).appendTo($("#doc-modal-list1"));
+                }
+
+                var objherd = "<li class=\"am-disabled\">\n" +
+                    "  <a href=\"#\">«</a>\n" +
+                    "  </li>";
+
+                var objlast = "   <li>\n" +
+                    "   <a href=\"#\">»</a>\n" +
+                    "    </li>";
+                $(objherd).appendTo($("[id='ulid']"));
+                for(var i=1;i<=ph.totalPage;i++){
+                    var obj="<li class=\"am-active\">\n" +
+                        "  <a class='ahref' value='"+i+"'>"+i+"</a>\n" +
+                        "   </li>";
+                    $(obj).appendTo($("[id='ulid']"));
+                }
+                $(objlast).appendTo($("[id='ulid']"));
+            });
+
         }
-        return -1;
-    }
-    $(document).ready(function () {
-        $("#orderno").blur(function () {
-            submitvalue(null);
-        });
-        $("#orderdate").blur(function () {
-            submitvalue(null);
-        });
-        $("#ordermin").blur(function () {
-            submitvalue(null);
-        });
-        $("#ordermax").blur(function () {
-            submitvalue(null);
-        });
-        $.get("os","o=2&orderno=undefined&orderdate=undefined&ordermin=undefined&ordermax=undefined",function (pageHelper1) {
-            eval("var ph="+pageHelper1);
-            for (var i=0;i<ph.pageList.length;i++){
-                var obj = "<tr data-id='2'>\n" +
-                    "    <td>\n" +
-                    "        <input type='checkbox' name="+(i+1)+" class='checkbox-acount' value="+ph.pageList[i].totalAmount+">\n" +
-                    "    </td>\n" +
-                    "    <td class='am-hide-sm-only'>"+ph.pageList[i].no +"</td>\n" +
-                    "    <td class='am-hide-sm-only'>"+ph.pageList[i].totalAmount+"</td>\n" +
-                    "    <td class='am-hide-sm-only'>"+ph.pageList[i].createTime+"</td>\n" +
-                    "</tr>";
-                $(obj).appendTo($("#doc-modal-list1"));
+        var acount =0;//这是计算的选中的订单的总金额
+        function sumacount(val){
+            acount +=val;
+        }
+        function reducecount(val){
+            acount -=val;
+        }
+        var names = [];//存储checkbox的name属性
+        names.push(-1);//让数组初始不为空；
+        function isInArray(arr,value){//判断数组中是否存在某元素
+            for(var i = 0; i < arr.length; i++){
+                if(value === arr[i]){
+                    return i;
+                }
             }
-            var objherd = "<li class=\"am-disabled\">\n" +
-                "  <a href=\"#\">«</a>\n" +
-                "  </li>";
-            var objlast = "   <li>\n" +
-                "   <a href=\"#\">»</a>\n" +
-                "    </li>";
-            $(objherd).appendTo($("[id='ulid']"));
-            for(var i=1;i<=ph.totalPage;i++){
-                var obj="<li class=\"am-active\">\n" +
-                    "  <a class='ahref' value='"+i+"'>"+i+"</a>\n" +
-                    "   </li>";
-                $(obj).appendTo($("[id='ulid']"));
-            }
-            $(objlast).appendTo($("[id='ulid']"));
-        });
-        $(document).on("click","[class='ahref']",function () {
-            var val=$(this)[0].getAttribute("value");
-            submitvalue(val);
-        });
-        $(document).on("click","[class='checkbox-acount']",function () {
-            var namei = $(this)[0].getAttribute("name");
-            if (isInArray(names,namei)!=-1){
+            return -1;
+        }
+
+        var oids = [];//存储选中的订单的id，以备后续使用
+
+
+        $(document).ready(function () {
+            $("#orderno").blur(function () {
+                submitvalue(null);
+            });
+            $("#orderdate").blur(function () {
+                submitvalue(null);
+            });
+            $("#ordermin").blur(function () {
+                submitvalue(null);
+            });
+            $("#ordermax").blur(function () {
+                submitvalue(null);
+            });
+
+            $.get("os","o=2&orderno=undefined&orderdate=undefined&ordermin=undefined&ordermax=undefined",function (pageHelper1) {
+                eval("var ph="+pageHelper1);
+                for (var i=0;i<ph.pageList.length;i++){
+                    var obj = "<tr data-id='2'>\n" +
+                        "    <td>\n" +
+                        "        <input type='checkbox' name="+(i+1)+" class='checkbox-acount' value="+ph.pageList[i].totalAmount+">\n" +
+                        "    </td>\n" +
+                        "    <td class='am-hide-sm-only'>"+ph.pageList[i].no +"</td>\n" +
+                        "    <td class='am-hide-sm-only'>"+ph.pageList[i].totalAmount+"</td>\n" +
+                        "    <td class='am-hide-sm-only'>"+ph.pageList[i].createTime+"</td>\n" +
+                        "</tr>";
+                    $(obj).appendTo($("#doc-modal-list1"));
+                }
+                var objherd = "<li class=\"am-disabled\">\n" +
+                    "  <a href=\"#\">«</a>\n" +
+                    "  </li>";
+
+                var objlast = "   <li>\n" +
+                    "   <a href=\"#\">»</a>\n" +
+                    "    </li>";
+                $(objherd).appendTo($("[id='ulid']"));
+                for(var i=1;i<=ph.totalPage;i++){
+                    var obj="<li class=\"am-active\">\n" +
+                        "  <a class='ahref' value='"+i+"'>"+i+"</a>\n" +
+                        "   </li>";
+                    $(obj).appendTo($("[id='ulid']"));
+                }
+                $(objlast).appendTo($("[id='ulid']"));
+            });
+
+            $(document).on("click","[class='ahref']",function () {
                 var val=$(this)[0].getAttribute("value");
-                var num = parseInt(val);
-                reducecount(num);
-                names.splice(isInArray(names,namei),1);
-            }else {
-                var val=$(this)[0].getAttribute("value");
-                var num = parseInt(val);
-                sumacount(num);
-                names.push(namei);
-            }
-        })
-    });
+                submitvalue(val);
+            });
+
+            $(document).on("click","[class='checkbox-acount']",function () {
+                    var namei = $(this)[0].getAttribute("name");
+                    if (isInArray(names,namei)!=-1){
+                        var val=$(this)[0].getAttribute("value");
+                        var num = parseInt(val);
+                        oids.splice(isInArray(names,namei)-1,1);
+                        reducecount(num);
+                        names.splice(isInArray(names,namei),1);
+                    }else {
+                        var val=$(this)[0].getAttribute("value");
+                        var num = parseInt(val);
+                        sumacount(num);
+                        names.push(namei);
+                        var orderid = $(this)[0].getAttribute("id");
+                        var oid = parseInt(orderid);
+                        oids.push(oid);
+                    }
+
+            });
+
+        });
+
+
     var baseinfoDiv = document.getElementById('baseinfoDiv')
     var showDiv = document.getElementById('showDiv')
     var resultDiv = document.getElementById('resultDiv')
@@ -674,7 +694,7 @@
             $("[name=email2]").text(email.emailDetail);
         });
         //去开票--邮箱选择
-        $.get("es","e=5&enterpriseId="+enterpriseId,function (list) {
+        $.get("es","e=2&enterpriseId="+enterpriseId,function (list) {
             eval("var list="+list);
             $('<span id="showemail">'+list[0].emailDetail+'</span>').appendTo($("#emailopen"));
             for(var i=0;i<list.length;i++){
@@ -695,7 +715,9 @@
     function chooseEmail() {
         $("#emailopen").empty();
         $('<span>'+$('[name="emailCho"]:checked').val()+'</span>').appendTo($("#emailopen"));
+        $.get("es","e=5&emailDetail="+$('[name="emailCho"]:checked').val(),function () {
 
+        });
     }
 </script>
 

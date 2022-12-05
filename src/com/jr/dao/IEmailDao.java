@@ -44,4 +44,7 @@ public interface IEmailDao {
     //传入：int 电子邮件表主键
     //返回：Email对象
     public Email selectEmailByIId(int eid);
+
+    //根据电子邮箱查询主键
+    public int selectEidByDetail(String emailDetail);
 }

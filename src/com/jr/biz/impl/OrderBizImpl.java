@@ -40,6 +40,11 @@ public class OrderBizImpl implements IOrderBiz {
     }
 
     @Override
+    public boolean openOrder(int oid, int invoicingRecordId) {
+        return odi.updateOrderOpen(oid,invoicingRecordId)==1?true:false;
+    }
+
+    @Override
     public List<Order> detailOrder(int invoicingRecordId) {
         return odi.selectOrderByIId(invoicingRecordId);
     }

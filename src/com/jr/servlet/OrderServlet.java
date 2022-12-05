@@ -43,6 +43,8 @@ public class OrderServlet extends HttpServlet {
             refund(request,response);
         }else if (o==4){
             detail(request,response);
+        }else if (o==5){
+            open(request,response);
         }
     }
 
@@ -67,6 +69,7 @@ public class OrderServlet extends HttpServlet {
         response.getWriter().println(new Gson().toJson(list));
     }
 
+    //搜索框+分页+确认勾选数据
     public void invoice(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
@@ -205,6 +208,19 @@ public class OrderServlet extends HttpServlet {
         boolean boo = orderBiz.refundOrder(iid);
         if (boo){
             //退票成功此处应该无变化
+        }
+    }
+
+    public void open(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf-8");
+
+        int oid = Integer.parseInt(request.getParameter("oid"));
+        int invoicingRecordId = Integer.parseInt(request.getParameter("invoicingRecordId"));
+        boolean boo = orderBiz.openOrder(oid,invoicingRecordId);
+        if (boo){
+            //开票成功此处应该无变化
         }
     }
 

@@ -3,12 +3,14 @@ package com.jr.servlet;
 import com.google.gson.Gson;
 import com.jr.biz.impl.EmailBizImpl;
 import com.jr.entry.Email;
+import com.mysql.cj.Session;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -36,7 +38,7 @@ public class EmailServlet extends HttpServlet {
         }else if (e==4){//详情--邮箱显示
             detail(request,response);
         }else if(e==5){//去开票--选择邮箱
-            message(request, response);
+            getEID(request,response);
         }else if(e==6){//发票抬头及地址信息--编辑--电子邮箱--新增
             addEmail(request, response);
         }else if(e==7){//发票抬头及地址信息--编辑--电子邮箱--编辑邮箱
@@ -141,6 +143,15 @@ public class EmailServlet extends HttpServlet {
         int enterpriseId = Integer.parseInt(request.getParameter("enterpriseId"));
         List<Email> list = ebi.queryEmailByEId(enterpriseId);
         response.getWriter().println(new Gson().toJson(list.get(0)));
+
+
+    }
+
+    public void getEID(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        int eid = ebi.queryEidByDetail(request.getParameter("emailDetail"));
+        HttpSession session = request.getSession();
+        System.out.println(eid);
+        response.sendRedirect("invoice-open.jsp");
     }
 
 

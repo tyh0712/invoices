@@ -456,7 +456,7 @@
         $("#Type" + key).attr("disabled", false);
         $("#defaultV" + key).attr("disabled", false);
         $("#edit"+key+"").empty();
-        $('<a style="cursor:pointer;color:#007bff;"  onclick="saveInterfaceParam();">保存</a>&nbsp;&nbsp;<a style="cursor:pointer;color:#007bff;"  onclick="updateCancel();">取消</a>').appendTo($("#edit"+key+""));
+        $('<a style="cursor:pointer;color:#007bff;"  onclick="saveInterfaceParam();">保存</a>&nbsp;&nbsp;<a style="cursor:pointer;color:#007bff;"  onclick=" ();">取消</a>').appendTo($("#edit"+key+""));
         // var div1 = $("#operate" + key);
         // div1[0].innerHTML = '<a style="cursor:pointer;color:#007bff;"  onclick="saveInterfaceParam();">保存</a>&nbsp;&nbsp;<a style="cursor:pointer;color:#007bff;"  onclick="saveInterfaceParam();">取消</a>';
     }
