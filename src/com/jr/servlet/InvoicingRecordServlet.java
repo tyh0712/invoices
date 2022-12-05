@@ -129,6 +129,8 @@ public class InvoicingRecordServlet extends HttpServlet {
         int aid=Integer.parseInt(request.getParameter("aid"));
         int eid=Integer.parseInt(request.getParameter("eid"));
         String uplinkAddress=request.getParameter("uplinkAddress");
+        System.out.println(aid);
+        System.out.println(eid);
         ir.setAmount(amount);
         ir.getUser().setEnterpriseId(enterpriseId);
         ir.getUser().setUid(uid);

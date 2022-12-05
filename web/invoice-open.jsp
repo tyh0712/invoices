@@ -430,12 +430,14 @@
 <script src="js/app.js"></script>
 <script type="text/javascript">
         function submitvalue(subvalue) {
+            alert("submit")
             var orderno = $("[id='orderno']").val();
             var orderdate = $("[id='orderdate']").val();
             var ordermin = $("[id='ordermin']").val();
             var ordermax = $("[id='ordermax']").val();
 
             $.get("os","o=2&orderno="+orderno+"&orderdate="+orderdate+"&ordermin="+ordermin+"&ordermax="+ordermax+"&index="+subvalue,function (pageHelper2) {
+                alert("getget");
                 eval("var ph="+pageHelper2);
                 $("#doc-modal-list1").empty();
                 $("#ulid").empty();
@@ -466,6 +468,7 @@
                     $(obj).appendTo($("[id='ulid']"));
                 }
                 $(objlast).appendTo($("[id='ulid']"));
+
             });
 
         }
@@ -492,16 +495,17 @@
 
         $(document).ready(function () {
             $("#orderno").blur(function () {
-                submitvalue(null);
+                submitvalue("1");
             });
             $("#orderdate").blur(function () {
-                submitvalue(null);
+                submitvalue("1");
             });
             $("#ordermin").blur(function () {
-                submitvalue(null);
+                alert("blur");
+                submitvalue("1");
             });
             $("#ordermax").blur(function () {
-                submitvalue(null);
+                submitvalue("1");
             });
 
             $.get("os","o=2&orderno=undefined&orderdate=undefined&ordermin=undefined&ordermax=undefined",function (pageHelper1) {
@@ -613,8 +617,7 @@
             }
             var uplinkAddress = randomString(16, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
             $.get("is","i=2&amount="+acount+"&enterpriseId="+enterpriseId+"&uid="+uid+"&creatorTime="+creatorTime+"&category="+category+"&type="+type+"&status="+status+"&bid="+bid+"&aid="+aid+"&eid="+eid+"&uplinkAddress="+uplinkAddress+"",function () {
-            })
-
+            });
         });
     });
     // 邮寄地址选择按钮
@@ -685,15 +688,10 @@
             for (var i=0;i<list.length;i++){
                 $('<tr data-id="2"><td><label class="am-radio"><input type="radio" name="addressCho" id="'+i+'" value="'+list[i].area+''+list[i].addressDetail+'" data-am-ucheck checked></label></td><td class="am-hide-sm-only"><label class="am-radio" for="'+i+'">'+list[i].area+''+list[i].addressDetail+'</label></td></tr>').appendTo($("#doc-modal-list3"));
             }
-        })
-    });
-
-    $(function () {
-        //去开票--邮箱显示
-        $.get("es","e=3&enterpriseId="+enterpriseId,function (email2) {
-            eval("var email="+email2);
-            $("[name=email2]").text(email.emailDetail);
+            $.get("as","a=8&address="+list[0].addressDetail+"&enterpriseId="+enterpriseId,function () {
+            });
         });
+
         //去开票--邮箱选择
         $.get("es","e=2&enterpriseId="+enterpriseId,function (list) {
             eval("var list="+list);
@@ -702,22 +700,25 @@
                 $('<tr data-id="2"><td><label class="am-radio"><input type="radio" name="emailCho" id="'+i+'" value="'+list[i].emailDetail+'" data-am-ucheck checked></label></td><td class="am-hide-sm-only"><label class="am-radio" for="'+i+'">'+list[i].emailDetail+'</label></td></tr>').appendTo($("#doc-modal-list2"));
 
             }
+            $.get("es","e=5&emailDetail="+list[0].emailDetail+"&enterpriseId="+enterpriseId,function () {
+            });
         });
+
+
     });
 
      function chooseAdd() {
          $("#deAddress").empty();
          $('<span>'+$('[name="addressCho"]:checked').val()+'</span>').appendTo($("#deAddress"));
-         $.get("as","a=6&address="+$('[name="addressCho"]:checked').val(),function () {
-         })
+         $.get("as","a=8&address="+$('[name="addressCho"]:checked').val()+"&enterpriseId="+enterpriseId,function () {
+         });
     }
 
     //邮箱选择事件
     function chooseEmail() {
         $("#emailopen").empty();
         $('<span>'+$('[name="emailCho"]:checked').val()+'</span>').appendTo($("#emailopen"));
-        $.get("es","e=5&emailDetail="+$('[name="emailCho"]:checked').val(),function () {
-
+        $.get("es","e=5&emailDetail="+$('[name="emailCho"]:checked').val()+"&enterpriseId="+enterpriseId,function () {
         });
     }
 </script>

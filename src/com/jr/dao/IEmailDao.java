@@ -46,5 +46,7 @@ public interface IEmailDao {
     public Email selectEmailByIId(int eid);
 
     //根据电子邮箱查询主键
-    public int selectEidByDetail(String emailDetail);
+    //public int selectEidByDetail(String emailDetail);
+    int selectEidByDetail(String emailDetail, int enterpriseId);
+
 }

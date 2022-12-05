@@ -42,6 +42,8 @@ public class AddressServlet extends HttpServlet {
             invoice(request,response);
         }else if (a==7){
             detail(request,response);
+        }else if (a==8){
+            getAID(request,response);
         }
     }
 
@@ -134,7 +136,7 @@ public class AddressServlet extends HttpServlet {
 
     public void getAID(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
-        int aid=abi.queryAidByAdd(request.getParameter("address"));
+        int aid=abi.queryAidByAdd(request.getParameter("address"),Integer.parseInt(request.getParameter("enterpriseId")));
         HttpSession session=request.getSession();
         session.setAttribute("aid",aid);
         response.sendRedirect("invoice-open.jsp");

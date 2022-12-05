@@ -74,14 +74,12 @@ public class OrderServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
-
         int count =0;
         String orderno = request.getParameter("orderno");
         String orderdate = request.getParameter("orderdate");
         String ordermin = request.getParameter("ordermin");
         String ordermax = request.getParameter("ordermax");
         String index = request.getParameter("index");
-
         if (orderno.equals("")){
             count++;
         }
@@ -94,7 +92,6 @@ public class OrderServlet extends HttpServlet {
         if (ordermax.equals("")){
             count++;
         }
-        System.out.println(count);
         PageHelper ph = null;
         if ((orderno.equals("undefined") && orderdate.equals("undefined") &&ordermin.equals("undefined") && ordermax.equals("undefined") )|| count==4){
             List<Order> list = orderBiz.invoicingOrder(0,0,ph,"B");
@@ -109,12 +106,10 @@ public class OrderServlet extends HttpServlet {
             pageHelper.setPageList(list1);
             response.getWriter().println(new Gson().toJson(pageHelper));
         }else if (count==3 && !orderdate.equals("")){
-            System.out.println("datetime");
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             try {
                 Date date = sdf.parse(orderdate);
                 Timestamp createTime = new Timestamp(date.getTime());
-                System.out.println(createTime);
                 List<Order> list = orderBiz.invoicingOrder(0,0,ph,"B",createTime);
                 PageHelper pageHelper = page(list.size(),index);
                 List<Order> list1 = orderBiz.invoicingOrder(0,1,pageHelper,"B",createTime);
@@ -128,15 +123,16 @@ public class OrderServlet extends HttpServlet {
             double min = Double.parseDouble(ordermin);
             List<Order> list = orderBiz.invoicingOrder(1,0,ph,"B",min);
             PageHelper pageHelper = page(list.size(),index);
-            List<Order> list1 = orderBiz.invoicingOrder(0,1,pageHelper,"B",min);
+            List<Order> list1 = orderBiz.invoicingOrder(1,1,pageHelper,"B",min);
             pageHelper.setPageList(list1);
+            System.out.println(pageHelper + "-------min-------");
             response.getWriter().println(new Gson().toJson(pageHelper));
         }else if (count==3 && !ordermax.equals("")){
             int judge = 2;
             double max = Double.parseDouble(ordermax);
             List<Order> list = orderBiz.invoicingOrder(2,0,ph,"B",max);
             PageHelper pageHelper = page(list.size(),index);
-            List<Order> list1 = orderBiz.invoicingOrder(0,1,pageHelper,"B",max);
+            List<Order> list1 = orderBiz.invoicingOrder(2,1,pageHelper,"B",max);
             pageHelper.setPageList(list1);
             response.getWriter().println(new Gson().toJson(pageHelper));
         }
