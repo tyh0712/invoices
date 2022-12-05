@@ -219,17 +219,19 @@ public class InvoicingRecordDaoImpl implements IInvoicingRecordDao {
         int i=0;
         try {
             con= DBHelper.getcon();
-            String sql="INSERT INTO invoicing_record VALUES(null,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql="INSERT INTO invoicing_record(amount,enterprise_id,creator_id,create_time,category,`type`,`status`,base_data_id,address_id,email_id,uplink_address)  VALUES(?,?,?,?,?,?,?,?,?,?,?)";
             ps=con.prepareStatement(sql);
-            User user=new User();
-            BaseData baseData=new BaseData();
-            Address address=new Address();
-            Email email=new Email();
-            i=um.upd(sql,invoicingRecord.getIid(),invoicingRecord.getAmount(),
-                    user.getUid(),user.getEnterpriseId(),
-                    invoicingRecord.getCreatorTime(),invoicingRecord.getCategory(),invoicingRecord.getType(),
-                    invoicingRecord.getStatus(),baseData.getBid(),address.getAid(),
-                    email.getEid(),invoicingRecord.getUplinkAddress());
+            i=um.upd(sql, invoicingRecord.getAmount(),
+                    invoicingRecord.getUser().getUid(),
+                    invoicingRecord.getUser().getEnterpriseId(),
+                    invoicingRecord.getCreatorTime(),
+                    invoicingRecord.getCategory(),
+                    invoicingRecord.getType(),
+                    invoicingRecord.getStatus(),
+                    invoicingRecord.getBaseData().getBid(),
+                    invoicingRecord.getAddress().getAid(),
+                    invoicingRecord.getEmail().getEid(),
+                    invoicingRecord.getUplinkAddress());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -265,10 +267,6 @@ public class InvoicingRecordDaoImpl implements IInvoicingRecordDao {
     @Override
     public InvoicingRecord selectIRByIId(int iid) {
         InvoicingRecord ir=new InvoicingRecord();
-        BaseData baseData=new BaseData();
-        Address address=new Address();
-        Email email=new Email();
-//        ArrayList<InvoicingRecord> list=new ArrayList<>();
         try {
             con=DBHelper.getcon();
             String sql="SELECT id,category,`type` from invoicing_record WHERE id=?";
@@ -279,7 +277,6 @@ public class InvoicingRecordDaoImpl implements IInvoicingRecordDao {
                 ir.setIid(rs.getInt(1));
                 ir.setCategory(rs.getString(2));
                 ir.setType(rs.getString(3));
-//                list.add(ir);
             }
         } catch (IOException e) {
             e.printStackTrace();

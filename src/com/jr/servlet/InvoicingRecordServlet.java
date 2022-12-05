@@ -2,7 +2,7 @@ package com.jr.servlet;
 
 import com.google.gson.Gson;
 import com.jr.biz.impl.InvoicingRecordBizImpl;
-import com.jr.entry.InvoicingRecord;
+import com.jr.entry.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -129,32 +129,38 @@ public class InvoicingRecordServlet extends HttpServlet {
         int aid=Integer.parseInt(request.getParameter("aid"));
         int eid=Integer.parseInt(request.getParameter("eid"));
         String uplinkAddress=request.getParameter("uplinkAddress");
-        System.out.println(aid);
-        System.out.println(eid);
+        User user=new User();
+        user.setUid(uid);
+        user.setEnterpriseId(enterpriseId);
+        BaseData bd=new BaseData();
+        bd.setBid(bid);
+        Address ar=new Address();
+        ar.setAid(aid);
+        Email em=new Email();
+        em.setEid(eid);
+
         ir.setAmount(amount);
-        ir.getUser().setEnterpriseId(enterpriseId);
-        ir.getUser().setUid(uid);
+        ir.setUser(user);
         ir.setCreatorTime(creatorTime);
         ir.setCategory(category);
         ir.setType(type);
         ir.setStatus(status);
-        ir.getBaseData().setBid(bid);
-        ir.getAddress().setAid(aid);
-        ir.getEmail().setEid(eid);
+        ir.setBaseData(bd);
+        ir.setAddress(ar);
+        ir.setEmail(em);
         ir.setUplinkAddress(uplinkAddress);
         boolean boo=irbi.invoicingIR(ir);
         if (boo) {
-
-
+            response.sendRedirect("invoice-list.jsp");
         }else{
-
+            response.sendRedirect("invoice-list.jsp");
         }
     }
     public void invoicingRecordId(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String uplinkAddress=request.getParameter("uplinkAddress");
         int iid=irbi.getInvoicingRecordId(uplinkAddress);
         HttpSession session=request.getSession();
-        session.setAttribute("iid",iid);
+        session.setAttribute("invid",iid);
         System.out.println(iid);
         response.sendRedirect("invoice-open.jsp");
     }
