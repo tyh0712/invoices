@@ -2,6 +2,7 @@ package com.jr.biz;
 
 import com.jr.dao.impl.UserDaoImpl;
 import com.jr.entry.Order;
+import com.jr.util.PageHelper;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public interface IOrderBiz {
     //开票  invoicing
 //    public List<Order> invoicingOrder(String invoicingStatus);
 //    List<Order> invoicingOrder(String invoicingStatus, Object... objs);
-    List<Order> invoicingOrder(int judge, String invoicingStatus, Object... objs);
+    List<Order> invoicingOrder(int judge, int limit, PageHelper pageHelper, String invoicingStatus, Object... objs);
 
     //退票 实现其中开票状态的修改  refund
     public boolean refundOrder(int invoicingRecordId);
