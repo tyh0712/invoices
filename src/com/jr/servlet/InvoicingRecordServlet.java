@@ -140,7 +140,7 @@ public class InvoicingRecordServlet extends HttpServlet {
         ir.setUplinkAddress(uplinkAddress);
         boolean boo=irbi.invoicingIR(ir);
         if (boo) {
-            response.sendRedirect("invoice-open.jsp?id=\"resultDiv\"");
+            response.sendRedirect("invoice-list.jsp");
         }
     }
 
@@ -150,25 +150,21 @@ public class InvoicingRecordServlet extends HttpServlet {
         ir.setIid(iid);
         boolean boo=irbi.refundIR(ir.getIid());
         if (boo){
-//            response.sendRedirect("invoice-open.jsp");
+            response.sendRedirect("invoice-list.jsp");
         }else{
-//            response.sendRedirect("invoice-open.jsp");
+            response.sendRedirect("invoice-list.jsp");
         }
     }
 
     public void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int iid=Integer.parseInt(request.getParameter("iid"));
-        InvoicingRecord invoicingRecord=new InvoicingRecord();
-        invoicingRecord.setIid(iid);
-        List<InvoicingRecord> detaillist=irbi.detailIR(invoicingRecord);
-        System.out.println(iid);
-        System.out.println(detaillist);
-        /*Gson gson=new Gson();
-        response.getWriter().print(gson.toJson(detaillist));*/
+        InvoicingRecord detaillist=irbi.detailIR(iid);
+        Gson gson=new Gson();
+//        response.getWriter().print(gson.toJson(detaillist));
         HttpSession session=request.getSession();
         session.setAttribute("detaillist",detaillist);
-        response.getWriter().print(new Gson().toJson(detaillist));
-
+        System.out.println(detaillist.toString());
+//        response.getWriter().print(new Gson().toJson(detaillist));
         response.sendRedirect("invoice-detail.jsp");
     }
 }
