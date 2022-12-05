@@ -131,9 +131,13 @@ public class OrderDaoImpl implements IOrderDao {
                 objs1.put(i+1,objs[i]);
             }
             else if (objs[i] instanceof Timestamp) {
-                System.out.println(objs[i]);
-                str.put(i+1,"create_time=?\"%\"");
-                objs1.put(i+1,objs[i]);
+                System.out.println(objs[i] + "======");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String date = sdf.format(objs[i]);
+                System.out.println(date);
+                str.put(i+1,"create_time=?");
+                String date1 = date+"%";
+                objs1.put(i+1,date1);
             }
             else if (objs[i] instanceof Double) {
                 if (judge==1){

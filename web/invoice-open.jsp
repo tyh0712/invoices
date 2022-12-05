@@ -111,7 +111,7 @@
                 <span class="am-input-group-btn">
                   <span style="font-size: 14px;margin-right: 8px;margin-left: 8px;">生成日期</span>
                 </span>
-                            <input id="orderdate" type="text" class="am-form-field" data-am-datepicker placeholder="&nbsp;&nbsp;请选择日期"
+                            <input id="ordertime" type="text" class="am-form-field" data-am-datepicker placeholder="&nbsp;&nbsp;请选择日期"
                                    style="border: 1px solid #c2cad8;width: 68%;border-radius: 3px;">
                         </div>
                     </div>
@@ -430,21 +430,19 @@
 <script src="js/app.js"></script>
 <script type="text/javascript">
         function submitvalue(subvalue) {
-            alert("submit")
             var orderno = $("[id='orderno']").val();
-            var orderdate = $("[id='orderdate']").val();
+            var ordertime = $("#ordertime").val();
             var ordermin = $("[id='ordermin']").val();
             var ordermax = $("[id='ordermax']").val();
 
-            $.get("os","o=2&orderno="+orderno+"&orderdate="+orderdate+"&ordermin="+ordermin+"&ordermax="+ordermax+"&index="+subvalue,function (pageHelper2) {
-                alert("getget");
+            $.get("os","o=2&orderno="+orderno+"&orderdate="+ordertime+"&ordermin="+ordermin+"&ordermax="+ordermax+"&index="+subvalue,function (pageHelper2) {
                 eval("var ph="+pageHelper2);
                 $("#doc-modal-list1").empty();
                 $("#ulid").empty();
                 for (var i=0;i<ph.pageList.length;i++){
                     var obj = "<tr data-id='2'>\n" +
                         "    <td>\n" +
-                        "        <input type='checkbox' name="+(i+4)+" class='checkbox-acount' value="+ph.pageList[i].totalAmount+">\n" +
+                        "        <input type='checkbox' id="+ph.pageList[0].oid+" name="+(i+4)+" class='checkbox-acount' value="+ph.pageList[i].totalAmount+">\n" +
                         "    </td>\n" +
                         "    <td class='am-hide-sm-only'>"+ph.pageList[i].no +"</td>\n" +
                         "    <td class='am-hide-sm-only'>"+ph.pageList[i].totalAmount+"</td>\n" +
@@ -497,11 +495,10 @@
             $("#orderno").blur(function () {
                 submitvalue("1");
             });
-            $("#orderdate").blur(function () {
+            $("#ordertime").blur(function () {
                 submitvalue("1");
             });
             $("#ordermin").blur(function () {
-                alert("blur");
                 submitvalue("1");
             });
             $("#ordermax").blur(function () {
@@ -513,7 +510,7 @@
                 for (var i=0;i<ph.pageList.length;i++){
                     var obj = "<tr data-id='2'>\n" +
                         "    <td>\n" +
-                        "        <input type='checkbox' name="+(i+1)+" class='checkbox-acount' value="+ph.pageList[i].totalAmount+">\n" +
+                        "        <input type='checkbox' id="+ph.pageList[0].oid+" name="+(i+1)+" class='checkbox-acount' value="+ph.pageList[i].totalAmount+">\n" +
                         "    </td>\n" +
                         "    <td class='am-hide-sm-only'>"+ph.pageList[i].no +"</td>\n" +
                         "    <td class='am-hide-sm-only'>"+ph.pageList[i].totalAmount+"</td>\n" +

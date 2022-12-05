@@ -111,9 +111,11 @@ public class OrderServlet extends HttpServlet {
                 Date date = sdf.parse(orderdate);
                 Timestamp createTime = new Timestamp(date.getTime());
                 List<Order> list = orderBiz.invoicingOrder(0,0,ph,"B",createTime);
+                System.out.println(list);
                 PageHelper pageHelper = page(list.size(),index);
                 List<Order> list1 = orderBiz.invoicingOrder(0,1,pageHelper,"B",createTime);
                 pageHelper.setPageList(list1);
+                System.out.println(list1);
                 response.getWriter().println(new Gson().toJson(pageHelper));
             } catch (ParseException e) {
                 e.printStackTrace();
