@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 
 <head>
@@ -120,8 +121,7 @@
                         <form class="am-form am-form-horizontal">
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-form-label">发票种类</label>
-                                <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                    普通增值税发票
+                                <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="category1">
                                 </div>
                             </div>
                         </form>
@@ -131,8 +131,7 @@
                         <form class="am-form am-form-horizontal">
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-form-label">发票类型</label>
-                                <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;">
-                                    电子发票
+                                <div class="am-u-sm-9" style="margin-top: 4px;font-size: 16px;" name="type1">
                                 </div>
                             </div>
                         </form>
@@ -181,8 +180,9 @@
 <script src="js/amazeui.min.js"></script>
 <script src="js/app.js"></script>
 <script>
-    var enterpriseId = ${sessionScope.enterpriseId};
+
     $(document).ready(function () {
+        var enterpriseId = ${sessionScope.enterpriseId};
         //右上角用户名
         var userName1 = "${sessionScope.userName}";
         $("[name=userName]").text(userName1);
@@ -194,10 +194,15 @@
             $("[name=title1]").text(baseData.title);
             $("[name=taxNo1]").text(baseData.taxNo);
         });
+        var x='${sessionScope.detaillist["category"]}';
+        var y='${sessionScope.detaillist["type"]}';
+        var obj1="<span>"+x+"</span>";
+        $(obj1).appendTo($("[class=\"am-u-sm-9\"]:eq(0)"));
+        var obj2="<span>"+y+"</span>";
+        $(obj2).appendTo($("[class=\"am-u-sm-9\"]:eq(1)"));
 
 
-        <%--var iid = ${requestScope.iid};--%>
-        var iid = 1;
+        var iid = ${sessionScope.detaillist["iid"]};
         var sum = 0.00;
         $.get("os","o=4&invoicingRecordId="+iid,function (list1) {
             eval("var orderlist="+list1);
@@ -213,6 +218,8 @@
             }
             $("[name=sum]").text(sum+"元");
         });
+
+
 
         //邮寄地址信息addAndEmail
         $(function () {
@@ -238,16 +245,6 @@
                         + emailDetail + '</div>').appendTo($("#addAndEmail"));
                 });
             }
-        });
-
-
-        var eid = ${sessionScope.eid};
-        $(function () {
-
-            $.get("es","e=4&eid="+eid,function (email3) {
-                eval("var email="+email3);
-                $("[name=email3]").text(email.emailDetail);
-            });
         });
 
 
