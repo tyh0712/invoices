@@ -1,8 +1,10 @@
 package com.jr.dao;
 
 import com.jr.entry.Order;
+import com.jr.util.PageHelper;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Auther:唐一涵
@@ -27,7 +29,12 @@ public interface IOrderDao {
     //返回：List<Order> 没开票的订单集合
 //    public List<Order> selectOrderByStatus(String invoicingStatus);
 //    List<Order> selectOrderByStatus(String invoicingStatus, Object... objs);
-    List<Order> selectOrderByStatus(int judge, String invoicingStatus, Object... objs);
+//    List<Order> selectOrderByStatus(int judge, String invoicingStatus, Object... objs);
+    List<Order> selectOrderByStatus(int judge, int limit, PageHelper pageHelper, String invoicingStatus, Object... objs);
+
+    String getSql(int judge, Object... objs);
+
+    Map<Integer, Object> getObj(int judge, Object... objs);
 
     //根据开票记录表主键修改开票状态为（未开票）
     //传入：int 开票记录表主键

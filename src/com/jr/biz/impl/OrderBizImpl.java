@@ -3,6 +3,7 @@ package com.jr.biz.impl;
 import com.jr.biz.IOrderBiz;
 import com.jr.dao.impl.OrderDaoImpl;
 import com.jr.entry.Order;
+import com.jr.util.PageHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +30,8 @@ public class OrderBizImpl implements IOrderBiz {
     }
 
     @Override
-    public List<Order> invoicingOrder(int judge,String invoicingStatus,Object...objs) {
-        return odi.selectOrderByStatus(judge,invoicingStatus,objs);
+    public List<Order> invoicingOrder(int judge, int limit, PageHelper pageHelper, String invoicingStatus, Object...objs) {
+        return odi.selectOrderByStatus(judge,limit,pageHelper,invoicingStatus,objs);
     }
 
     @Override

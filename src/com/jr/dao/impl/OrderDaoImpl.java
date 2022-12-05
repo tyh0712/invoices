@@ -4,7 +4,9 @@ import com.jr.dao.IOrderDao;
 import com.jr.entry.InvoicingRecord;
 import com.jr.entry.Order;
 import com.jr.util.DBHelper;
+import com.jr.util.PageHelper;
 
+import javax.sound.midi.Soundbank;
 import java.io.IOException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -69,67 +71,26 @@ public class OrderDaoImpl implements IOrderDao {
     }
 
     @Override
-    public List<Order> selectOrderByStatus(int judge, String invoicingStatus, Object... objs) {
+    public List<Order> selectOrderByStatus(int judge, int limit, PageHelper pageHelper, String invoicingStatus, Object... objs) {
         Order order;
         List<Order> list = new ArrayList<>();
         try {
             con = DBHelper.getcon();
-            Map<Integer,String> str=new TreeMap<>();
-            Map<Integer,Object> objs1=new TreeMap<>();
-            String str1=null;
-            String str4="invoicing_status=?";
-            int x=0;
-            for (int i=0;i<objs.length;i++) {
-                if (objs[i] instanceof String) {
-                    str.put(i+1,"no=?");
-                    objs1.put(i+1,objs[i]);
-                }
-                else if (objs[i] instanceof Date) {
-                    str.put(i+1,"create_time=?");
-                    objs1.put(i+1,objs[i]);
-                }
-                else if (objs[i] instanceof Double) {
-                    if (judge==1){
-                        str.put(i+1,"total_amount>?");
-                        objs1.put(i+1,objs[i]);
-
-                    }else if (judge==2){
-                        str.put(i+1,"total_amount<?");
-                        objs1.put(i+1,objs[i]);
-
-                    }else{
-                        if (x==0){
-                            str.put(i+1,"total_amount>?");
-                        }
-                        objs1.put(i+1,objs[i]);
-                        if (x!=0){
-                            if ((double)objs1.get(i+1)<(double)objs1.get(x)){
-                                objs1.put(i+1,objs[x-1]);
-                                objs1.put(x,objs[i]);
-                                str.put(i+1,"total_amount<?");
-                            }else {
-                                str.put(i+1,"total_amount<?");
-                            }
-                        }x=i+1;
-                    }
-                }
-            }
-            if (str.size()==0){
-                str1=str4;
-            }else {
-                for (int i=1;i<=str.size();i++){
-                    if (i==1){
-                        str1=str4+" AND "+str.get(1);
-                    }else {
-                        str1=str1+" AND "+str.get(i);
-                    }
-                }
+            String str1=getSql(judge,objs);
+            Map<Integer,Object> objs1=getObj(judge,objs);
+            if (limit==1){
+                str1=str1+"LIMIT ?,?";
             }
             String sql="select * from `order` where "+str1+"";
             ps = con.prepareStatement(sql);
             ps.setString(1,invoicingStatus);
-            for (int i=1;i<=objs1.size();i++){
+            int size=objs1.size();
+            for (int i=1;i<=size;i++){
                 ps.setObject(i+1,objs1.get(i));
+            }
+            if (limit==1){
+                ps.setInt(size+2,pageHelper.getStartNum());
+                ps.setInt(size+3,pageHelper.getPageSize());
             }
             rs = ps.executeQuery();
             while (rs.next()){
@@ -154,6 +115,98 @@ public class OrderDaoImpl implements IOrderDao {
             e.printStackTrace();
         }
         return list;
+    }
+
+
+    @Override
+    public String getSql(int judge, Object... objs){
+        Map<Integer,String> str=new TreeMap<>();
+        Map<Integer,Object> objs1=new TreeMap<>();
+        String str1=null;
+        String str4="invoicing_status=?";
+        int x=0;
+        for (int i=0;i<objs.length;i++) {
+            if (objs[i] instanceof String) {
+                str.put(i+1,"no=?");
+                objs1.put(i+1,objs[i]);
+            }
+            else if (objs[i] instanceof Timestamp) {
+                System.out.println(objs[i]);
+                str.put(i+1,"create_time=?\"%\"");
+                objs1.put(i+1,objs[i]);
+            }
+            else if (objs[i] instanceof Double) {
+                if (judge==1){
+                    str.put(i+1,"total_amount>?");
+                    objs1.put(i+1,objs[i]);
+
+                }else if (judge==2){
+                    str.put(i+1,"total_amount<?");
+                    objs1.put(i+1,objs[i]);
+
+                }else{
+                    if (x==0){
+                        str.put(i+1,"total_amount>?");
+                    }
+                    objs1.put(i+1,objs[i]);
+                    if (x!=0){
+                        if ((double)objs1.get(i+1)<(double)objs1.get(x)){
+                            objs1.put(i+1,objs[x-1]);
+                            objs1.put(x,objs[i]);
+                            str.put(i+1,"total_amount<?");
+                        }else {
+                            str.put(i+1,"total_amount<?");
+                        }
+                    }x=i+1;
+                }
+            }else {
+                System.out.println("null========================");
+            }
+        }
+        if (str.size()==0){
+            str1=str4;
+        }else {
+            for (int i=1;i<=str.size();i++){
+                if (i==1){
+                    str1=str4+" AND "+str.get(1);
+                }else {
+                    str1=str1+" AND "+str.get(i);
+                }
+            }
+        }
+        return str1;
+    }
+
+    @Override
+    public Map<Integer, Object> getObj(int judge, Object... objs){
+        Map<Integer,Object> objs1=new TreeMap<>();
+        int x=0;
+        for (int i=0;i<objs.length;i++) {
+            if (objs[i] instanceof String) {
+                objs1.put(i+1,objs[i]);
+            }
+            else if (objs[i] instanceof Date) {
+                objs1.put(i+1,objs[i]);
+            }
+            else if (objs[i] instanceof Double) {
+                if (judge==1){
+                    objs1.put(i+1,objs[i]);
+
+                }else if (judge==2){
+                    objs1.put(i+1,objs[i]);
+
+                }else{
+                    objs1.put(i+1,objs[i]);
+                    if (x!=0){
+                        if ((double)objs1.get(i+1)<(double)objs1.get(x)){
+                            objs1.put(i+1,objs[x-1]);
+                            objs1.put(x,objs[i]);
+                        }
+                    }x=i+1;
+                }
+            }
+        }
+        return objs1;
     }
 
     @Override
