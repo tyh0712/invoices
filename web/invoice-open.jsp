@@ -189,14 +189,14 @@
                                         <div class="am-u-sm-3" style="margin-top: 4px;font-size: 16px;"
                                              onclick="selectCategory('ordinary')">
                                             <label class="am-radio">
-                                                <input type="radio" name="radio1" value="普通增值税发票" data-am-ucheck checked>
+                                                <input type="radio" name="radio1" value="A" data-am-ucheck checked>
                                                 普通增值税发票
                                             </label>
                                         </div>
                                         <div class="am-u-sm-6" style="margin-top: 4px;font-size: 16px;"
                                              onclick="selectCategory('appropriative')">
                                             <label class="am-radio">
-                                                <input type="radio" name="radio1" value="增值税专用发票" data-am-ucheck> 增值税专用发票
+                                                <input type="radio" name="radio1" value="B" data-am-ucheck> 增值税专用发票
                                             </label>
                                         </div>
                                     </div>
@@ -209,13 +209,13 @@
                                         <div class="am-u-sm-3" style="margin-top: 4px;font-size: 16px;"
                                              onclick="selectType('ele')">
                                             <label class="am-radio">
-                                                <input type="radio" name="radio2" value="电子发票" data-am-ucheck checked> 电子发票
+                                                <input type="radio" name="radio2" value="A" data-am-ucheck checked> 电子发票
                                             </label>
                                         </div>
                                         <div class="am-u-sm-6" style="margin-top: 4px;font-size: 16px;"
                                              onclick="selectType('paper')">
                                             <label class="am-radio">
-                                                <input type="radio" name="radio2" value="纸质发票" data-am-ucheck> 纸质发票
+                                                <input type="radio" name="radio2" value="B" data-am-ucheck> 纸质发票
                                             </label>
                                         </div>
                                     </div>
@@ -571,55 +571,7 @@
     var resultDiv = document.getElementById('resultDiv')
     resultDiv.style.display = 'none';
     // 提交按钮
-    $(function () {
-        $('#submitBtn').on('click', function () {
-            baseinfoDiv.style.display = 'none';
-            showDiv.style.display = 'none';
-            resultDiv.style.display = 'block';
 
-
-            var uid="${sessionScope.uid}";
-            var creatorTime=Date.now();
-            //开票后修改相关订单信息
-            var invcid = "${sessionScope.invid}";
-            for (var i=0;i<oids.length;i++){
-                $.get("os","o=5&invoicingRecordId="+invcid+"&oid="+oids[i],function () {
-
-                });
-            }
-
-            function getRadioValue1() {
-                var obj=document.getElementsByName("radio1");
-                for (var i=0;i<obj.length;i++){
-                    if (obj[i].checked) {
-                        return obj[i].value;
-                    }
-                }
-            }
-            function getRadioValue2() {
-                var obj=document.getElementsByName("radio2");
-                for (var i=0;i<obj.length;i++){
-                    if (obj[i].checked) {
-                        return obj[i].value;
-                    }
-                }
-            }
-            var category=getRadioValue1();
-            var type =getRadioValue2();
-            var status="A";
-            var bid="${sessionScope.baseData.bid}";
-            var aid="${sessionScope.aid}";
-            var eid="${sessionScope.eid}";
-            function randomString(length, chars) {
-                var result = '';
-                for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
-                return result;
-            }
-            var uplinkAddress = randomString(16, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
-            $.get("is","i=2&amount="+acount+"&enterpriseId="+enterpriseId+"&uid="+uid+"&creatorTime="+creatorTime+"&category="+category+"&type="+type+"&status="+status+"&bid="+bid+"&aid="+aid+"&eid="+eid+"&uplinkAddress="+uplinkAddress+"",function () {
-            });
-        });
-    });
     // 邮寄地址选择按钮
     $(function () {
         $('#selectAddress').on('click', function () {
@@ -685,23 +637,21 @@
         $.get("as","a=6&enterpriseId="+enterpriseId,function (list) {
             eval("var list="+list);
             $('<span id="showAdd">'+list[0].area+''+list[0].addressDetail+'</span>').appendTo($("#deAddress"));
+            getAid(list[0].addressDetail);
             for (var i=0;i<list.length;i++){
                 $('<tr data-id="2"><td><label class="am-radio"><input type="radio" name="addressCho" id="'+i+'" value="'+list[i].area+''+list[i].addressDetail+'" data-am-ucheck checked></label></td><td class="am-hide-sm-only"><label class="am-radio" for="'+i+'">'+list[i].area+''+list[i].addressDetail+'</label></td></tr>').appendTo($("#doc-modal-list3"));
             }
-            $.get("as","a=8&address="+list[0].addressDetail+"&enterpriseId="+enterpriseId,function () {
-            });
         });
 
         //去开票--邮箱选择
         $.get("es","e=2&enterpriseId="+enterpriseId,function (list) {
             eval("var list="+list);
             $('<span id="showemail">'+list[0].emailDetail+'</span>').appendTo($("#emailopen"));
+            getEid(list[0].emailDetail);
             for(var i=0;i<list.length;i++){
                 $('<tr data-id="2"><td><label class="am-radio"><input type="radio" name="emailCho" id="'+i+'" value="'+list[i].emailDetail+'" data-am-ucheck checked></label></td><td class="am-hide-sm-only"><label class="am-radio" for="'+i+'">'+list[i].emailDetail+'</label></td></tr>').appendTo($("#doc-modal-list2"));
-
             }
-            $.get("es","e=5&emailDetail="+list[0].emailDetail+"&enterpriseId="+enterpriseId,function () {
-            });
+
         });
 
 
@@ -721,6 +671,65 @@
         $.get("es","e=5&emailDetail="+$('[name="emailCho"]:checked').val()+"&enterpriseId="+enterpriseId,function () {
         });
     }
+    function getAid(x) {
+        $.get("as","a=8&address="+x+"&enterpriseId="+enterpriseId,function () {
+        });
+    }
+    function getEid(x) {
+        $.get("es","e=5&emailDetail="+x+"&enterpriseId="+enterpriseId,function () {
+        });
+    }
+
+        $(function () {
+            $('#submitBtn').on('click', function () {
+                baseinfoDiv.style.display = 'none';
+                showDiv.style.display = 'none';
+                resultDiv.style.display = 'block';
+
+
+                var uid="${sessionScope.uid}";
+                var creatorTime=Date.now();
+                //开票后修改相关订单信息
+                <%--var invcid = "${sessionScope.invid}";--%>
+                /*for (var i=0;i<oids.length;i++){
+                    $.get("os","o=5&invoicingRecordId="+invcid+"&oid="+oids[i],function () {
+
+                    });
+                }*/
+
+                function getRadioValue1() {
+                    var obj=document.getElementsByName("radio1");
+                    for (var i=0;i<obj.length;i++){
+                        if (obj[i].checked) {
+                            return obj[i].value;
+                        }
+                    }
+                }
+                function getRadioValue2() {
+                    var obj=document.getElementsByName("radio2");
+                    for (var i=0;i<obj.length;i++){
+                        if (obj[i].checked) {
+                            return obj[i].value;
+                        }
+                    }
+                }
+                var category=getRadioValue1();
+                var type =getRadioValue2();
+                var status="A";
+                var getBid="${sessionScope.baseData.bid}";
+                var getAid="${sessionScope.aid}";
+                var getEid="${sessionScope.eid}";
+
+                function randomString(length, chars) {
+                    var result = '';
+                    for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+                    return result;
+                }
+                var uplinkAddress = randomString(16, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+                $.get("is","i=2&amount="+acount+"&uid="+uid+"&enterpriseId="+enterpriseId+"&creatorTime="+creatorTime+"&category="+category+"&type="+type+"&status="+status+"&bid="+getBid+"&aid="+4+"&eid="+4+"&uplinkAddress="+uplinkAddress,function () {
+                });
+            });
+        });
 </script>
 
 </body>

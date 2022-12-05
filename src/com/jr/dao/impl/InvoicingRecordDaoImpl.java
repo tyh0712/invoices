@@ -219,17 +219,24 @@ public class InvoicingRecordDaoImpl implements IInvoicingRecordDao {
         int i=0;
         try {
             con= DBHelper.getcon();
-            String sql="INSERT INTO invoicing_record VALUES(null,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql="INSERT INTO invoicing_record(amount,enterprise_id,creator_id,create_time,category,`type`,`status`,base_data_id,address_id,email_id,uplink_address)  VALUES(?,?,?,?,?,?,?,?,?,?,?)";
             ps=con.prepareStatement(sql);
             User user=new User();
             BaseData baseData=new BaseData();
             Address address=new Address();
             Email email=new Email();
-            i=um.upd(sql,invoicingRecord.getIid(),invoicingRecord.getAmount(),
-                    user.getUid(),user.getEnterpriseId(),
-                    invoicingRecord.getCreatorTime(),invoicingRecord.getCategory(),invoicingRecord.getType(),
-                    invoicingRecord.getStatus(),baseData.getBid(),address.getAid(),
-                    email.getEid(),invoicingRecord.getUplinkAddress());
+            i=um.upd(sql, invoicingRecord.getAmount(),
+                    invoicingRecord.getUser().getUid(),
+                    invoicingRecord.getUser().getEnterpriseId(),
+                    invoicingRecord.getCreatorTime(),
+                    invoicingRecord.getCategory(),
+                    invoicingRecord.getType(),
+                    invoicingRecord.getStatus(),
+                    invoicingRecord.getBaseData().getBid(),
+                    invoicingRecord.getAddress().getAid(),
+                    invoicingRecord.getEmail().getEid(),
+                    invoicingRecord.getUplinkAddress());
+            System.out.println(i);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SQLException e) {
