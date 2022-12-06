@@ -41,6 +41,8 @@ public class AddressServlet extends HttpServlet {
             detail(request,response);
         }else if (a==8){
             getAID(request,response);
+        }else if (a==9){
+            selectAID(request,response);
         }
     }
 
@@ -101,7 +103,6 @@ public class AddressServlet extends HttpServlet {
         String str="失败";
         if (boo){
             showAll(request,response);
-            System.out.println("success");
         }
     }
 
@@ -117,7 +118,6 @@ public class AddressServlet extends HttpServlet {
         String str="失败";
         if (boo){
             showAll(request,response);
-            System.out.println("success");
         }else {
             response.getWriter().print(new Gson().toJson(str));
         }
@@ -133,13 +133,20 @@ public class AddressServlet extends HttpServlet {
 
     public void getAID(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
-        int e=Integer.parseInt(request.getParameter("e"));
-        String emailDetail=request.getParameter("emailDetail");
         int enterpriseId=Integer.parseInt(request.getParameter("enterpriseId"));
         int aid=abi.queryAidByAdd(request.getParameter("address"),enterpriseId);
         HttpSession session=request.getSession();
         session.setAttribute("aid",aid);
         request.getRequestDispatcher("es?e=5").forward(request,response);
+    }
+
+    public void selectAID(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+        int enterpriseId=Integer.parseInt(request.getParameter("enterpriseId"));
+        int aid=abi.queryAidByAdd(request.getParameter("address"),enterpriseId);
+        HttpSession session=request.getSession();
+        session.setAttribute("aid",aid);
+        response.sendRedirect("invoice-open.jsp");
     }
 
     public void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

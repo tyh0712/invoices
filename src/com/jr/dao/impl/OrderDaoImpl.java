@@ -131,10 +131,8 @@ public class OrderDaoImpl implements IOrderDao {
                 objs1.put(i+1,objs[i]);
             }
             else if (objs[i] instanceof Timestamp) {
-                System.out.println(objs[i] + "======");
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String date = sdf.format(objs[i]);
-                System.out.println(date);
                 str.put(i+1,"create_time=?");
                 String date1 = date+"%";
                 objs1.put(i+1,date1);
@@ -212,13 +210,13 @@ public class OrderDaoImpl implements IOrderDao {
         }
         return objs1;
     }
-
+    //退票
     @Override
     public int updateOrderStatus(int invoicingRecordId) {
         String sql = "update `order` set invoicing_status='B' where invoicing_record_id=?";
         return um.upd(sql,invoicingRecordId);
     }
-
+    //开票
     @Override
     public int updateOrderOpen(int oid, int invoicingRecordId) {
         String sql = "update `order` set invoicing_status='A',invoicing_record_id=?  where id=?";

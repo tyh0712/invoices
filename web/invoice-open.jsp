@@ -442,7 +442,7 @@
                 for (var i=0;i<ph.pageList.length;i++){
                     var obj = "<tr data-id='2'>\n" +
                         "    <td>\n" +
-                        "        <input type='checkbox' id="+ph.pageList[0].oid+" name="+(i+4)+" class='checkbox-acount' value="+ph.pageList[i].totalAmount+">\n" +
+                        "        <input type='checkbox' id="+ph.pageList[i].oid+" name="+(i+4)+" class='checkbox-acount' value="+ph.pageList[i].totalAmount+">\n" +
                         "    </td>\n" +
                         "    <td class='am-hide-sm-only'>"+ph.pageList[i].no +"</td>\n" +
                         "    <td class='am-hide-sm-only'>"+ph.pageList[i].totalAmount+"</td>\n" +
@@ -510,7 +510,7 @@
                 for (var i=0;i<ph.pageList.length;i++){
                     var obj = "<tr data-id='2'>\n" +
                         "    <td>\n" +
-                        "        <input type='checkbox' id="+ph.pageList[0].oid+" name="+(i+1)+" class='checkbox-acount' value="+ph.pageList[i].totalAmount+">\n" +
+                        "        <input type='checkbox' id="+ph.pageList[i].oid+" name="+(i+1)+" class='checkbox-acount' value="+ph.pageList[i].totalAmount+">\n" +
                         "    </td>\n" +
                         "    <td class='am-hide-sm-only'>"+ph.pageList[i].no +"</td>\n" +
                         "    <td class='am-hide-sm-only'>"+ph.pageList[i].totalAmount+"</td>\n" +
@@ -654,7 +654,7 @@
      function chooseAdd() {
          $("#deAddress").empty();
          $('<span>'+$('[name="addressCho"]:checked').val()+'</span>').appendTo($("#deAddress"));
-         $.get("as","a=8&address="+$('[name="addressCho"]:checked').val()+"&enterpriseId="+enterpriseId,function () {
+         $.get("as","a=9&address="+$('[name="addressCho"]:checked').val()+"&enterpriseId="+enterpriseId,function () {
          });
     }
 

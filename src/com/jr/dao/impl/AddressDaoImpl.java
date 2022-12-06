@@ -77,7 +77,6 @@ public class AddressDaoImpl implements IAddressDao {
     public int insertAddress(Address address) {
         String sql="INSERT INTO address () VALUES (null,?,?,?,?,?,'B')";
         int i=um.upd(sql,address.getEnterpriseId(),address.getAddressee(),address.getPhone(),address.getArea(),address.getAddressDetail());
-        System.out.println(i);
         return i;
     }
 

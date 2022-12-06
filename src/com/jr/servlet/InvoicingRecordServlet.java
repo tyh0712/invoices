@@ -51,8 +51,6 @@ public class InvoicingRecordServlet extends HttpServlet {
             invoiceStatusList(request, response);
         }else if (i==8){
             invoiceTitleList(request, response);
-        }else if (i==9){
-            invoicingRecordId(request, response);
         }
     }
     @Override
@@ -82,7 +80,8 @@ public class InvoicingRecordServlet extends HttpServlet {
     }
     public void invoiceStatusList(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String status=request.getParameter("status");
-        List<InvoicingRecord> invoicestatuslist=irbi.selectStatusList(2,status);
+        int enterpriseId=Integer.parseInt(request.getParameter("enterpriseId"));
+        List<InvoicingRecord> invoicestatuslist=irbi.selectStatusList(enterpriseId,status);
         Gson gson=new Gson();
         response.getWriter().print(gson.toJson(invoicestatuslist));
 
@@ -90,26 +89,23 @@ public class InvoicingRecordServlet extends HttpServlet {
 
     public void invoiceTitleList(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String titlestr=request.getParameter("titlestr");
-        List<InvoicingRecord> invoicetitlelist=irbi.selectIRByTitle(2,titlestr);
+        int enterpriseId=Integer.parseInt(request.getParameter("enterpriseId"));
+        List<InvoicingRecord> invoicetitlelist=irbi.selectIRByTitle(enterpriseId,titlestr);
         Gson gson=new Gson();
         response.getWriter().print(gson.toJson(invoicetitlelist));
 
     }
     public void invoiceMinList(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        /*int enterpriseId=Integer.parseInt(request.getParameter("enterpriseId"));
-        int amount=Integer.parseInt(request.getParameter("amount"));
-        List<InvoicingRecord> invoiceMinlist=irbi.getIRAmountMinList(enterpriseId,amount);*/
+        int enterpriseId=Integer.parseInt(request.getParameter("enterpriseId"));
         int invoicingmin=Integer.parseInt(request.getParameter("invoicingmin"));
-        List<InvoicingRecord> invoiceminlist=irbi.getIRAmountMinList(2,invoicingmin);
+        List<InvoicingRecord> invoiceminlist=irbi.getIRAmountMinList(enterpriseId,invoicingmin);
         Gson gson=new Gson();
         response.getWriter().print(gson.toJson(invoiceminlist));
     }
     public void invoiceMaxList(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        /*int enterpriseId=Integer.parseInt(request.getParameter("enterpriseId"));
-        int amount=Integer.parseInt(request.getParameter("amount"));
-        List<InvoicingRecord> invoiceMaxlist=irbi.getIRAmountMinList(enterpriseId,amount);*/
+        int enterpriseId=Integer.parseInt(request.getParameter("enterpriseId"));
         int invoicingmax=Integer.parseInt(request.getParameter("invoicingmax"));
-        List<InvoicingRecord> invoicemaxlist=irbi.getIRAmountMaxList(2,invoicingmax);
+        List<InvoicingRecord> invoicemaxlist=irbi.getIRAmountMaxList(enterpriseId,invoicingmax);
         Gson gson=new Gson();
         response.getWriter().print(gson.toJson(invoicemaxlist));
     }
@@ -166,8 +162,9 @@ public class InvoicingRecordServlet extends HttpServlet {
         ir.setIid(iid);
         boolean boo=irbi.refundIR(ir.getIid());
         if (boo){
-            response.sendRedirect("invoice-list.jsp");
+            request.getRequestDispatcher("os?o=3").forward(request,response);
         }else{
+            request.getRequestDispatcher("os?o=3").forward(request,response);
             response.sendRedirect("invoice-list.jsp");
         }
     }

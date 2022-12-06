@@ -36,12 +36,12 @@ public class OrderBizImpl implements IOrderBiz {
 
     @Override
     public boolean refundOrder(int invoicingRecordId) {
-        return odi.updateOrderStatus(invoicingRecordId)==1?true:false;
+        return odi.updateOrderStatus(invoicingRecordId)==0?false:true;
     }
 
     @Override
     public boolean openOrder(int oid, int invoicingRecordId) {
-        return odi.updateOrderOpen(oid,invoicingRecordId)==1?true:false;
+        return odi.updateOrderOpen(oid,invoicingRecordId)==0?false:true;
     }
 
     @Override

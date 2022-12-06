@@ -111,11 +111,9 @@ public class OrderServlet extends HttpServlet {
                 Date date = sdf.parse(orderdate);
                 Timestamp createTime = new Timestamp(date.getTime());
                 List<Order> list = orderBiz.invoicingOrder(0,0,ph,"B",createTime);
-                System.out.println(list);
                 PageHelper pageHelper = page(list.size(),index);
                 List<Order> list1 = orderBiz.invoicingOrder(0,1,pageHelper,"B",createTime);
                 pageHelper.setPageList(list1);
-                System.out.println(list1);
                 response.getWriter().println(new Gson().toJson(pageHelper));
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -127,7 +125,6 @@ public class OrderServlet extends HttpServlet {
             PageHelper pageHelper = page(list.size(),index);
             List<Order> list1 = orderBiz.invoicingOrder(1,1,pageHelper,"B",min);
             pageHelper.setPageList(list1);
-            System.out.println(pageHelper + "-------min-------");
             response.getWriter().println(new Gson().toJson(pageHelper));
         }else if (count==3 && !ordermax.equals("")){
             int judge = 2;
@@ -204,9 +201,8 @@ public class OrderServlet extends HttpServlet {
 
         int iid = Integer.parseInt(request.getParameter("iid"));
         boolean boo = orderBiz.refundOrder(iid);
-        if (boo){
+            response.sendRedirect("invoice-list.jsp");
             //退票成功此处应该无变化
-        }
     }
 
     public void open(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -218,7 +214,6 @@ public class OrderServlet extends HttpServlet {
         int invoicingRecordId = Integer.parseInt(request.getParameter("invoicingRecordId"));
         boolean boo = orderBiz.openOrder(oid,invoicingRecordId);
         if (boo){
-            System.out.println("ok");
             //开票成功此处应该无变化
         }
     }
